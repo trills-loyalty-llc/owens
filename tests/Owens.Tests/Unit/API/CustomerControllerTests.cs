@@ -9,7 +9,7 @@ using Owens.API.Controllers;
 using Owens.Contracts.Customers;
 using Owens.Contracts.Customers.Common;
 
-namespace Owens.Tests.API
+namespace Owens.Tests.Unit.API
 {
     /// <summary>
     /// Tests for the <see cref="CustomerController"/> class.
