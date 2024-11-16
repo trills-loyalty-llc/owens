@@ -15,3 +15,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with: 
             dotnet-version: 8.x
+
+      - name: Restore
+        uses: dotnet restore
+
+      - name: Format
+        uses: dotnet format --no-restore
+
+      - name: Build Project
+        uses: dotnet build --no-restore -c Release
