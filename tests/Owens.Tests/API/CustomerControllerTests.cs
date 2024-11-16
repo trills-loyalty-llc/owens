@@ -2,8 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Owens.API.Controllers;
+using Owens.Contracts.Customers;
+using Owens.Contracts.Customers.Common;
 
 namespace Owens.Tests.API
 {
@@ -20,9 +24,13 @@ namespace Owens.Tests.API
         [TestMethod]
         public async Task Get_HasCorrectResponseType()
         {
-            var controller = new CustomerController();
+            var sender = new Mock<ISender>();
+            sender.Setup(x => x.Send(It.IsAny<GetCustomerByIdRequest>(), CancellationToken.None))
+                .ReturnsAsync(new CustomerResponse(Guid.NewGuid()));
 
-            var result = await controller.Get();
+            var controller = new CustomerController(sender.Object);
+
+            var result = await controller.Get(CancellationToken.None);
 
             Assert.IsInstanceOfType<OkObjectResult>(result);
         }

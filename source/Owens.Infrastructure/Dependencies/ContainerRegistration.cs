@@ -1,5 +1,5 @@
-﻿// <copyright file="ContainerRegistration.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="ContainerRegistration.cs" company="Trills Loyalty LLC">
+// Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using Microsoft.Extensions.DependencyInjection;
