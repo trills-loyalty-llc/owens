@@ -3,4 +3,7 @@
     <PackageReference Include="AspNetCoreAnalyzers" Version="0.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Owens.Infrastructure\Owens.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

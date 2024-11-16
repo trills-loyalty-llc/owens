@@ -2,6 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Infrastructure.Dependencies;
+
 namespace Owens.API
 {
     /// <summary>
@@ -21,6 +23,7 @@ namespace Owens.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.RegisterDependencies();
 
             var app = builder.Build();
 
