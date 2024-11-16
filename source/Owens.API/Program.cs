@@ -4,9 +4,17 @@
 
 namespace Owens.API
 {
+    /// <summary>
+    /// Entry class for the application.
+    /// </summary>
     public class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Static method for application initialization.
+        /// </summary>
+        /// <param name="args">A params of command line arguments.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +36,7 @@ namespace Owens.API
 
             app.MapControllers();
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
