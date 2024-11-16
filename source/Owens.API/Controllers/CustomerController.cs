@@ -25,7 +25,7 @@ namespace Owens.API.Controllers
         [HttpGet("", Name = "customer-details")]
         public Task<IActionResult> Get()
         {
-            var result = this.Ok(Guid.NewGuid());
+            var result = Ok(Guid.NewGuid());
 
             return Task.FromResult<IActionResult>(result);
         }
