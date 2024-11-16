@@ -1,9 +1,13 @@
+// <copyright file="CustomerController.cs" company="Trills Loyalty LLC">
+// Copyright (c) Trills Loyalty LLC. All rights reserved.
+// </copyright>
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Owens.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("customer")]
     public class CustomerController : ControllerBase
     {
         public CustomerController()
@@ -13,7 +17,7 @@ namespace Owens.API.Controllers
         [HttpGet("", Name = "customer-details")]
         public Task<IActionResult> Get()
         {
-            var result = Ok(Guid.NewGuid());
+            var result = this.Ok(Guid.NewGuid());
 
             return Task.FromResult<IActionResult>(result);
         }
