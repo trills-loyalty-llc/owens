@@ -29,4 +29,4 @@ jobs:
         run: dotnet test --no-restore --no-build --verbosity normal -c Release
 
       - name: Publish
-        run: dotnet publish --no-restore -c Release
+        run: dotnet publish --no-restore -c Release source/Owens.API/Owens.API.csproj
