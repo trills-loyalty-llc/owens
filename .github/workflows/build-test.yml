@@ -17,10 +17,10 @@ jobs:
             dotnet-version: 8.x
 
       - name: Restore
-        uses: dotnet restore
+        run: dotnet restore
 
       - name: Format
-        uses: dotnet format --no-restore
+        run: dotnet format --no-restore
 
       - name: Build Project
-        uses: dotnet build --no-restore -c Release
+        run: dotnet build --no-restore -c Release
