@@ -1,13 +1,13 @@
-﻿// <copyright file="Customer.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="Member.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-namespace Owens.Domain.Customers
+namespace Owens.Domain.Members
 {
     /// <summary>
     /// A customer represents an individual person who interacts with the loyalty platform.
     /// </summary>
-    public class Customer
+    public class Member
     {
         /// <summary>
         /// Gets the identifier.

@@ -1,18 +1,18 @@
-﻿// <copyright file="GetCustomerByIdHandlerTests.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="GetMemberByIdHandlerTests.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Owens.Application.Customers.GetById;
-using Owens.Contracts.Customers;
+using Owens.Application.Members.GetById;
+using Owens.Contracts.Member;
 
 namespace Owens.Tests.Integration.Application.Customers
 {
     /// <summary>
-    /// Tests for the <see cref="GetCustomerByIdHandler"/> class.
+    /// Tests for the <see cref="GetMemberByIdHandler"/> class.
     /// </summary>
     [TestClass]
-    public class GetCustomerByIdHandlerTests
+    public class GetMemberByIdHandlerTests
     {
         /// <summary>
         /// Successful path has the correct response.
@@ -21,9 +21,9 @@ namespace Owens.Tests.Integration.Application.Customers
         [TestMethod]
         public async Task Handle_Success_HasCorrectResponseAsync()
         {
-            var handler = new GetCustomerByIdHandler();
+            var handler = new GetMemberByIdHandler();
 
-            var result = await handler.Handle(new GetCustomerByIdRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetMemberByIdRequest(), CancellationToken.None);
 
             Assert.IsNotNull(result);
         }

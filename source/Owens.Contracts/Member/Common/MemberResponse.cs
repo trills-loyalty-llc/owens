@@ -1,19 +1,19 @@
-﻿// <copyright file="CustomerResponse.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="MemberResponse.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-namespace Owens.Contracts.Customers.Common
+namespace Owens.Contracts.Member.Common
 {
     /// <summary>
     /// Standard response class for a customer.
     /// </summary>
-    public class CustomerResponse
+    public class MemberResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomerResponse"/> class.
+        /// Initializes a new instance of the <see cref="MemberResponse"/> class.
         /// </summary>
         /// <param name="id">The response identifier.</param>
-        public CustomerResponse(Guid id)
+        public MemberResponse(Guid id)
         {
             Id = id;
         }
