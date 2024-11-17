@@ -6,9 +6,9 @@ The main purpose of Owens is to serve as the primary loyalty hub to drive both c
 
 ## Domain Terminology
 
-Client - A client is a business that uses our services to serve customers.
+Tenant - A tenant is a business that uses our services to serve customers that we refer to as members.
 
-Customer - An individual person that helps to drive value and revenue for our clients. Both clients and customers interact with our services-however, customers are unaware that clients use as a loyalty provider.
+Member - An individual person that helps to drive value and revenue for our tenants. Both tenants and members interact with our services-however, members are unaware that tenants use as a loyalty provider. Please note, that a single person may have membership with multiple tenants, but their membership is unique for each tenant. As an example, Alice Jones may be a member of both theme park A and zoo B tenants.
 
 ## Setup
 

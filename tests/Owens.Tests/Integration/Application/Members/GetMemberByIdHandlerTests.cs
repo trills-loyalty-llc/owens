@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Owens.Application.Members.GetById;
 using Owens.Contracts.Member;
 
-namespace Owens.Tests.Integration.Application.Customers
+namespace Owens.Tests.Integration.Application.Members
 {
     /// <summary>
     /// Tests for the <see cref="GetMemberByIdHandler"/> class.
