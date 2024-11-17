@@ -4,6 +4,7 @@
 
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Owens.API.Controllers;
 using Owens.Contracts.Customers;
@@ -15,7 +16,7 @@ namespace Owens.Tests.Unit.API
     /// Tests for the <see cref="CustomerController"/> class.
     /// </summary>
     [TestClass]
-    public sealed class CustomerControllerTests
+    public class CustomerControllerTests
     {
         /// <summary>
         /// Customer details has correct response type.

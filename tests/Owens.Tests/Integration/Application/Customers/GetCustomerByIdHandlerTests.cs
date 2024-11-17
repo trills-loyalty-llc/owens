@@ -2,6 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Owens.Application.Customers.GetById;
 using Owens.Contracts.Customers;
 
