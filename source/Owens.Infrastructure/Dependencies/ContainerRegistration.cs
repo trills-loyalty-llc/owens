@@ -2,7 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Owens.Infrastructure.DataAccess.Common;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -18,6 +20,8 @@ namespace Owens.Infrastructure.Dependencies
         public static void RegisterDependencies(this IServiceCollection services)
         {
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(AssemblyConstants.Infrastructure, AssemblyConstants.Application));
+
+            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(string.Empty));
         }
     }
 }
