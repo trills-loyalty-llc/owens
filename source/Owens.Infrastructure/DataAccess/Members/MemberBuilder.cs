@@ -14,7 +14,7 @@ namespace Owens.Infrastructure.DataAccess.Members
         /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<Member> builder)
         {
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(member => member.Id).ValueGeneratedNever();
         }
     }
 }

@@ -2,8 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Infrastructure.Authentication;
 using Owens.Infrastructure.Dependencies;
+using Owens.Infrastructure.Identity.Models;
 using Scalar.AspNetCore;
 
 namespace Owens.API
@@ -35,6 +35,7 @@ namespace Owens.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllers();
 

@@ -8,15 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Owens.Domain.Common;
-using Owens.Domain.Members;
-using Owens.Domain.Tenants;
-using Owens.Infrastructure.Authentication;
-using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.Identity.DataAccess;
+using Owens.Infrastructure.Identity.Models;
 
 namespace Owens.Infrastructure.Dependencies
 {
     /// <summary>
-    /// Registration class for IdentityController.
+    /// Registration class for MemberController.
     /// </summary>
     public static class AuthenticationRegistration
     {
@@ -27,13 +25,8 @@ namespace Owens.Infrastructure.Dependencies
         /// <param name="tokenConfiguration">An instance of the <see cref="TokenConfiguration"/> class.</param>
         public static void AddAuthenticationDependencies(this IServiceCollection services, TokenConfiguration tokenConfiguration)
         {
-            services.AddIdentity<Member, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<ApplicationContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddIdentityCore<Tenant>()
-                .AddRoles<IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<ApplicationContext>()
+            services.AddIdentity<User, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

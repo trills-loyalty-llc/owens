@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-namespace Owens.Infrastructure.Authentication
+namespace Owens.Infrastructure.Identity.Models
 {
     /// <summary>
     /// Container for all JWT related properties.

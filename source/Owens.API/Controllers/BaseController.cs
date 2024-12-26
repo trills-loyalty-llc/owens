@@ -4,6 +4,7 @@
 
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Owens.Infrastructure.ErrorHandling;
 
 namespace Owens.API.Controllers
 {
@@ -39,7 +40,7 @@ namespace Owens.API.Controllers
             }
             catch (Exception exception)
             {
-                await _mediator.Publish(exception, cancellationToken);
+                await _mediator.Publish(new GlobalExceptionOccurred(exception), cancellationToken);
 
                 return BadRequest();
             }

@@ -2,14 +2,22 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Domain.Common;
+using ClearDomain.GuidPrimary;
 
 namespace Owens.Domain.Members
 {
-    /// <summary>
-    /// A customer represents an individual person who interacts with the loyalty platform.
-    /// </summary>
-    public class Member : IdentityEntity
+    /// <inheritdoc />
+    public class Member : AggregateRoot
     {
+        /// <inheritdoc />
+        public Member()
+        {
+        }
+
+        /// <inheritdoc />
+        public Member(Guid id)
+            : base(id)
+        {
+        }
     }
 }

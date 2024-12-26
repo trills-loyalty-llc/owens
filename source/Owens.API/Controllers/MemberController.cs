@@ -1,8 +1,9 @@
-// <copyright file="IdentityController.cs" company="Trills Loyalty LLC">
+// <copyright file="MemberController.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Owens.Contracts.Members.Register;
 
@@ -10,11 +11,11 @@ namespace Owens.API.Controllers
 {
     /// <inheritdoc />
     [ApiController]
-    [Route("identity")]
-    public class IdentityController : BaseController
+    [Route("member")]
+    public class MemberController : BaseController
     {
         /// <inheritdoc />
-        public IdentityController(IMediator mediator)
+        public MemberController(IMediator mediator)
             : base(mediator)
         {
         }
@@ -25,7 +26,8 @@ namespace Owens.API.Controllers
         /// <param name="request">An instance of the <see cref="RegisterMemberRequest"/> class.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpPost("", Name = "register-member")]
+        [AllowAnonymous]
+        [HttpPost("", Name = "register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterMember(RegisterMemberRequest request, CancellationToken cancellationToken)
         {

@@ -2,6 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Application.Common.Interfaces;
 using Owens.Domain.Members;
 
 namespace Owens.Application.Members.Common
@@ -10,13 +11,7 @@ namespace Owens.Application.Members.Common
     /// Interface for interacting with <see cref="Member"/> persistence.
     /// </summary>
     public interface IMemberRepository
+        : IAddObject<Member>
     {
-        /// <summary>
-        /// Adds a member to persistence.
-        /// </summary>
-        /// <param name="member">A <see cref="Member"/>.</param>
-        /// <param name="password">The password for the member.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task AddMember(Member member, string password);
     }
 }

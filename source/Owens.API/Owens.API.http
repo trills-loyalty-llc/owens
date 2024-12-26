@@ -1,6 +1,12 @@
-@Owens.API_HostAddress = http://localhost:5108
+@Owens.API_HostAddress = https://localhost:7004
 
-GET {{Owens.API_HostAddress}}/weatherforecast/
+GET {{Owens.API_HostAddress}}/member/register
 Accept: application/json
+
+{
+  "userName": "mjbradvica",
+  "email": "mike@mike.com",
+  "password": "SuperSecret123!"
+}
 
 ###

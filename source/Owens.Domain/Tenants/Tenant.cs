@@ -2,12 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Identity;
+using ClearDomain.GuidPrimary;
 
 namespace Owens.Domain.Tenants
 {
     /// <inheritdoc />
-    public class Tenant : IdentityUser<Guid>
+    public class Tenant : AggregateRoot
     {
     }
 }

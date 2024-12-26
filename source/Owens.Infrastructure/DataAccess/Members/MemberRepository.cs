@@ -2,35 +2,20 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Identity;
+using MediatR;
 using Owens.Application.Members.Common;
 using Owens.Domain.Members;
+using Owens.Infrastructure.DataAccess.Common;
 
 namespace Owens.Infrastructure.DataAccess.Members
 {
-    /// <inheritdoc />
-    public class MemberRepository : IMemberRepository
+    /// <inheritdoc cref="IMemberRepository" />
+    public class MemberRepository : BaseRepository<Member>, IMemberRepository
     {
-        private readonly UserManager<Member> _userManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MemberRepository"/> class.
-        /// </summary>
-        /// <param name="userManager">An instance of the <see cref="UserManager{TUser}"/> class.</param>
-        public MemberRepository(UserManager<Member> userManager)
+        /// <inheritdoc />
+        public MemberRepository(IPublisher publisher, ApplicationContext applicationContext)
+            : base(publisher, applicationContext)
         {
-            _userManager = userManager;
-        }
-
-        /// <inheritdoc/>
-        public async Task AddMember(Member member, string password)
-        {
-            var result = await _userManager.CreateAsync(member, password);
-
-            if (!result.Succeeded)
-            {
-                throw new Exception(nameof(member));
-            }
         }
     }
 }
