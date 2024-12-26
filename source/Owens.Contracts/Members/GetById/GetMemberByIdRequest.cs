@@ -3,12 +3,11 @@
 // </copyright>
 
 using MediatR;
-using Owens.Contracts.Member.Common;
 
-namespace Owens.Contracts.Member
+namespace Owens.Contracts.Members.GetById
 {
     /// <inheritdoc />
-    public class GetMemberByIdRequest : IRequest<MemberResponse>
+    public class GetMemberByIdRequest : IRequest<GetMemberByIdResponse>
     {
     }
 }

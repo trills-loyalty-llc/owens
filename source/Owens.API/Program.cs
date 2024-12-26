@@ -2,33 +2,35 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Infrastructure.Authentication;
 using Owens.Infrastructure.Dependencies;
+using Scalar.AspNetCore;
 
 namespace Owens.API
 {
     /// <summary>
-    /// Entry class for the application.
+    /// Entry class for application.
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// Static method for application initialization.
+        /// Entry point for the application.
         /// </summary>
-        /// <param name="args">A params of command line arguments.</param>
+        /// <param name="args">A list of command arguments.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.RegisterDependencies();
+            builder.Services.AddOpenApi();
+            builder.Services.RegisterDependencies(builder.Configuration);
+            builder.Services.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
 
             var app = builder.Build();
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            app.MapOpenApi();
+            app.MapScalarApiReference();
 
             app.UseHttpsRedirection();
 

@@ -3,21 +3,17 @@
 // </copyright>
 
 using MediatR;
-using Owens.Contracts.Member;
-using Owens.Contracts.Member.Common;
-using Owens.Domain.Members;
+using Owens.Contracts.Members.GetById;
 
 namespace Owens.Application.Members.GetById
 {
     /// <inheritdoc />
-    public class GetMemberByIdHandler : IRequestHandler<GetMemberByIdRequest, MemberResponse>
+    public class GetMemberByIdHandler : IRequestHandler<GetMemberByIdRequest, GetMemberByIdResponse>
     {
         /// <inheritdoc />
-        public Task<MemberResponse> Handle(GetMemberByIdRequest request, CancellationToken cancellationToken)
+        public Task<GetMemberByIdResponse> Handle(GetMemberByIdRequest request, CancellationToken cancellationToken)
         {
-            var customer = new Member();
-
-            return Task.FromResult(new MemberResponse(customer.Id));
+            return Task.FromResult(new GetMemberByIdResponse(Guid.NewGuid()));
         }
     }
 }

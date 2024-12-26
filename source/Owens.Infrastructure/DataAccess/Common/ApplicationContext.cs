@@ -10,7 +10,7 @@ using Owens.Infrastructure.Dependencies;
 namespace Owens.Infrastructure.DataAccess.Common
 {
     /// <inheritdoc />
-    internal sealed class ApplicationContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+    public sealed class ApplicationContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationContext"/> class.
@@ -25,6 +25,8 @@ namespace Owens.Infrastructure.DataAccess.Common
         /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.ApplyConfigurationsFromAssembly(AssemblyConstants.Infrastructure);
         }
     }

@@ -3,8 +3,11 @@
 // </copyright>
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Owens.Application.Members.Common;
 using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.DataAccess.Members;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -17,11 +20,14 @@ namespace Owens.Infrastructure.Dependencies
         /// Common method to register all application dependencies.
         /// </summary>
         /// <param name="services">An instance of the <see cref="IServiceCollection"/> interface.</param>
-        public static void RegisterDependencies(this IServiceCollection services)
+        /// <param name="configuration">An instance of the <see cref="IConfiguration"/> interface.</param>
+        public static void RegisterDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(AssemblyConstants.Infrastructure, AssemblyConstants.Application));
+            services.AddMediatR(serviceConfiguration => serviceConfiguration.RegisterServicesFromAssemblies(AssemblyConstants.Infrastructure, AssemblyConstants.Application));
 
-            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(string.Empty));
+            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Database")));
+
+            services.AddTransient<IMemberRepository, MemberRepository>();
         }
     }
 }

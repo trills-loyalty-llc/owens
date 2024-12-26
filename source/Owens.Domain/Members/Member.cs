@@ -2,16 +2,14 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Domain.Common;
+
 namespace Owens.Domain.Members
 {
     /// <summary>
     /// A customer represents an individual person who interacts with the loyalty platform.
     /// </summary>
-    public class Member
+    public class Member : IdentityEntity
     {
-        /// <summary>
-        /// Gets the identifier.
-        /// </summary>
-        public Guid Id { get; } = Guid.NewGuid();
     }
 }
