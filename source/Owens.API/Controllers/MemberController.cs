@@ -16,7 +16,10 @@ namespace Owens.API.Controllers
     [Route("member")]
     public class MemberController : MediatorBuddyApi
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberController"/> class.
+        /// </summary>
+        /// <param name="mediator">An instance of the <see cref="IMediator"/> interface.</param>
         public MemberController(IMediator mediator)
             : base(mediator)
         {

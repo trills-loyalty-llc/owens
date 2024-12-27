@@ -51,6 +51,10 @@ namespace Owens.Tests.Integration.Common
                    "Server=.\\SQLExpress;Database=Owens.Identity.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
+        /// <summary>
+        /// Gets the Identity Context.
+        /// </summary>
+        /// <returns>A <see cref="IdentityContext"/> instance.</returns>
         public static IdentityContext GetTestIdentityContext()
         {
             return GetProvider().GetRequiredService<IdentityContext>();

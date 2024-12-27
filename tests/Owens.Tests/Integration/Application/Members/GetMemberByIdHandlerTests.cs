@@ -21,6 +21,8 @@ namespace Owens.Tests.Integration.Application.Members
             var handler = IntegrationHelpers.GetHandler<GetMemberByIdRequest, GetMemberByIdResponse>();
 
             var result = await handler.Handle(new GetMemberByIdRequest(), CancellationToken.None);
+
+            Assert.IsNotNull(result.Response);
         }
     }
 }
