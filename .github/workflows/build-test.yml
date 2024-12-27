@@ -30,6 +30,7 @@ jobs:
         with:
           connection-string-env-var: SQL_SERVER_CONNECTION_STRING
           catalog: Owens.Identity.Tests
+          extra-params: "TrustServerCertificate=true;"
 
       - name: Run Tests
         run: dotnet test --no-restore --no-build -c Release --verbosity normal /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch
