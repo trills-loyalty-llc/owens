@@ -63,6 +63,18 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
+        /// Gets the identity context options.
+        /// </summary>
+        /// <returns>A <see cref="DbContextOptions"/> instance.</returns>
+        public static DbContextOptions<IdentityContext> GetIdentityOptions()
+        {
+            var builder = new DbContextOptionsBuilder<IdentityContext>();
+            builder.UseSqlServer(GetIdentityConnectionString());
+
+            return builder.Options;
+        }
+
+        /// <summary>
         /// Gets the Identity Context.
         /// </summary>
         /// <returns>A <see cref="IdentityContext"/> instance.</returns>

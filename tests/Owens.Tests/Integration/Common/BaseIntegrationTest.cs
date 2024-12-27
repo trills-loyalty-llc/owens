@@ -2,6 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.Identity.DataAccess;
+
 namespace Owens.Tests.Integration.Common
 {
     /// <summary>
@@ -14,14 +17,14 @@ namespace Owens.Tests.Integration.Common
         /// </summary>
         protected BaseIntegrationTest()
         {
-            using (var context = IntegrationHelpers.GetTestApplicationContext())
+            using (var context = new IdentityContext(IntegrationHelpers.GetIdentityOptions()))
             {
                 context.Database.EnsureDeleted();
 
                 context.Database.EnsureCreated();
             }
 
-            using (var context = IntegrationHelpers.GetTestIdentityContext())
+            using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
             {
                 context.Database.EnsureDeleted();
 
