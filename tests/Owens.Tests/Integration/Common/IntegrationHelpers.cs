@@ -37,7 +37,7 @@ namespace Owens.Tests.Integration.Common
         /// <returns>A connection string.</returns>
         public static string GetApplicationConnectionString()
         {
-            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING_APPLICATION") ??
+            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING") ??
                    "Server=.\\SQLExpress;Database=Owens.Application.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
@@ -47,7 +47,7 @@ namespace Owens.Tests.Integration.Common
         /// <returns>A connection string.</returns>
         public static string GetIdentityConnectionString()
         {
-            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING_IDENTITY") ??
+            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING") ??
                    "Server=.\\SQLExpress;Database=Owens.Identity.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
