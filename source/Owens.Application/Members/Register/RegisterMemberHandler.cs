@@ -3,14 +3,14 @@
 // </copyright>
 
 using ChainStrategy;
-using MediatR;
+using MediatorBuddy;
 using Owens.Application.Members.Register.RegistrationChain;
 using Owens.Contracts.Members.Register;
 
 namespace Owens.Application.Members.Register
 {
     /// <inheritdoc />
-    public class RegisterMemberHandler : IRequestHandler<RegisterMemberRequest, RegisterMemberResponse>
+    public class RegisterMemberHandler : EnvelopeHandler<RegisterMemberRequest, RegisterMemberResponse>
     {
         private readonly IChainFactory _chainFactory;
 
@@ -24,13 +24,18 @@ namespace Owens.Application.Members.Register
         }
 
         /// <inheritdoc/>
-        public async Task<RegisterMemberResponse> Handle(RegisterMemberRequest request, CancellationToken cancellationToken)
+        public override async Task<IEnvelope<RegisterMemberResponse>> Handle(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
             var payload = RegisterMemberPayload.FromRequest(request);
 
             var result = await _chainFactory.Execute(payload, cancellationToken);
 
-            return new RegisterMemberResponse(Guid.NewGuid());
+            if (result.IsFaulted)
+            {
+                return OperationCouldNotBeCompleted();
+            }
+
+            return Success(new RegisterMemberResponse(Guid.NewGuid()));
         }
     }
 }

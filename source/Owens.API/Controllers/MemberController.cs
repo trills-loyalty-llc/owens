@@ -2,6 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy.AspNet;
+using MediatorBuddy.AspNet.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +14,7 @@ namespace Owens.API.Controllers
     /// <inheritdoc />
     [ApiController]
     [Route("member")]
-    public class MemberController : BaseController
+    public class MemberController : MediatorBuddyApi
     {
         /// <inheritdoc />
         public MemberController(IMediator mediator)
@@ -31,7 +33,10 @@ namespace Owens.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterMember(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
-            return await ExecuteAction(request, response => Created(new Uri($"{response.Id}", UriKind.Relative), response), cancellationToken);
+            return await ExecuteRequest(
+                request,
+                ResponseOptions.CreatedResponse<RegisterMemberResponse>(response => new Uri($"{response.Id}", UriKind.Relative)),
+                cancellationToken);
         }
     }
 }

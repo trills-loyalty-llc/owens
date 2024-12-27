@@ -2,18 +2,18 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatR;
+using MediatorBuddy;
 using Owens.Contracts.Members.GetById;
 
 namespace Owens.Application.Members.GetById
 {
     /// <inheritdoc />
-    public class GetMemberByIdHandler : IRequestHandler<GetMemberByIdRequest, GetMemberByIdResponse>
+    public class GetMemberByIdHandler : EnvelopeHandler<GetMemberByIdRequest, GetMemberByIdResponse>
     {
-        /// <inheritdoc />
-        public Task<GetMemberByIdResponse> Handle(GetMemberByIdRequest request, CancellationToken cancellationToken)
+        /// <inheritdoc/>
+        public override Task<IEnvelope<GetMemberByIdResponse>> Handle(GetMemberByIdRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new GetMemberByIdResponse(Guid.NewGuid()));
+            return Task.FromResult(Success(new GetMemberByIdResponse(Guid.NewGuid())));
         }
     }
 }

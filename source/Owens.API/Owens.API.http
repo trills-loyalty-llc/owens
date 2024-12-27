@@ -1,7 +1,7 @@
 @Owens.API_HostAddress = https://localhost:7004
 
-GET {{Owens.API_HostAddress}}/member/register
-Accept: application/json
+POST {{Owens.API_HostAddress}}/member
+Content-Type: application/json
 
 {
   "userName": "mjbradvica",
