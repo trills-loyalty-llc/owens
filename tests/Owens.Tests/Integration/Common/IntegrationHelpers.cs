@@ -58,7 +58,11 @@ namespace Owens.Tests.Integration.Common
         /// <returns>A <see cref="IdentityContext"/> instance.</returns>
         public static IdentityContext GetTestIdentityContext()
         {
-            return GetProvider().GetRequiredService<IdentityContext>();
+            var context = GetProvider().GetRequiredService<IdentityContext>();
+
+            context.Database.EnsureCreated();
+
+            return context;
         }
 
         /// <summary>
@@ -67,7 +71,11 @@ namespace Owens.Tests.Integration.Common
         /// <returns>A <see cref="ApplicationContext"/> instance.</returns>
         public static ApplicationContext GetTestApplicationContext()
         {
-            return GetProvider().GetRequiredService<ApplicationContext>();
+            var context = GetProvider().GetRequiredService<ApplicationContext>();
+
+            context.Database.EnsureCreated();
+
+            return context;
         }
 
         private static IServiceProvider GetProvider()
