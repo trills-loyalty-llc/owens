@@ -25,20 +25,19 @@ namespace Owens.Application.Members.Register.RegistrationChain
         }
 
         /// <inheritdoc/>
-        public override async Task<RegisterMemberPayload> DoWork(RegisterMemberPayload payload, CancellationToken cancellationToken)
+        public override Task<RegisterMemberPayload> DoWork(RegisterMemberPayload payload, CancellationToken cancellationToken)
         {
             var member = new Member();
 
-            var result = await _memberRepository.AddObject(member, cancellationToken);
+            // var result = await _memberRepository.AddObject(member, cancellationToken);
 
-            if (!result)
-            {
-                payload.Faulted();
-            }
-
+            // if (!result)
+            // {
+            //    payload.Faulted();
+            // }
             payload.AppendMemberId(member.Id);
 
-            return payload;
+            return Task.FromResult(payload);
         }
     }
 }

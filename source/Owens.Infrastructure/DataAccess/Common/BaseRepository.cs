@@ -19,7 +19,6 @@ namespace Owens.Infrastructure.DataAccess.Common
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly IPublisher _publisher;
-        private readonly ApplicationContext _applicationContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TAggregateRoot}"/> class.
@@ -29,19 +28,24 @@ namespace Owens.Infrastructure.DataAccess.Common
         protected BaseRepository(IPublisher publisher, ApplicationContext applicationContext)
         {
             _publisher = publisher;
-            _applicationContext = applicationContext;
+            ApplicationContext = applicationContext;
         }
+
+        /// <summary>
+        /// Gets the application context.
+        /// </summary>
+        protected ApplicationContext ApplicationContext { get; }
 
         /// <inheritdoc/>
         public async Task<bool> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken)
         {
-            await _applicationContext.Set<TAggregateRoot>().AddAsync(aggregateRoot, cancellationToken);
+            await ApplicationContext.Set<TAggregateRoot>().AddAsync(aggregateRoot, cancellationToken);
 
-            var result = await _applicationContext.SaveChangesAsync(cancellationToken);
+            var result = await ApplicationContext.SaveChangesAsync(cancellationToken);
 
             if (result > 0)
             {
-                await PublishEvent(new List<IAggregateRoot> { aggregateRoot }, cancellationToken);
+                await PublishEvents(new List<IAggregateRoot> { aggregateRoot }, cancellationToken);
 
                 return true;
             }
@@ -52,12 +56,18 @@ namespace Owens.Infrastructure.DataAccess.Common
         /// <inheritdoc/>
         public async Task<TAggregateRoot?> GetObjectById(Guid id, CancellationToken cancellationToken)
         {
-            return await _applicationContext
+            return await ApplicationContext
                 .Set<TAggregateRoot>()
                 .FirstOrDefaultAsync(aggregateRoot => aggregateRoot.Id == id, cancellationToken);
         }
 
-        private async Task PublishEvent(IEnumerable<IAggregateRoot> aggregateRoots, CancellationToken cancellationToken)
+        /// <summary>
+        /// Publishes all events from a list of <see cref="IAggregateRoot"/> objects.
+        /// </summary>
+        /// <param name="aggregateRoots">A list of <see cref="IAggregateRoot"/>.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        protected async Task PublishEvents(IEnumerable<IAggregateRoot> aggregateRoots, CancellationToken cancellationToken)
         {
             foreach (var aggregateRoot in aggregateRoots)
             {

@@ -2,40 +2,40 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ChainStrategy;
 using MediatorBuddy;
-using Owens.Application.Members.Register.RegistrationChain;
+using Owens.Application.Members.Common;
 using Owens.Contracts.Members.Register;
+using Owens.Domain.Members;
 
 namespace Owens.Application.Members.Register
 {
     /// <inheritdoc />
     public class RegisterMemberHandler : EnvelopeHandler<RegisterMemberRequest, RegisterMemberResponse>
     {
-        private readonly IChainFactory _chainFactory;
+        private readonly IMemberRepository _memberRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterMemberHandler"/> class.
         /// </summary>
-        /// <param name="chainFactory">An instance of the <see cref="IChainFactory"/> interface.</param>
-        public RegisterMemberHandler(IChainFactory chainFactory)
+        /// <param name="memberRepository">An instance of the <see cref="IMemberRepository"/>.</param>
+        public RegisterMemberHandler(IMemberRepository memberRepository)
         {
-            _chainFactory = chainFactory;
+            _memberRepository = memberRepository;
         }
 
         /// <inheritdoc/>
         public override async Task<IEnvelope<RegisterMemberResponse>> Handle(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
-            var payload = RegisterMemberPayload.FromRequest(request);
+            var member = new Member();
 
-            var result = await _chainFactory.Execute(payload, cancellationToken);
+            var result = await _memberRepository.AddMember(member, request.Email, request.UserName, request.Password, cancellationToken);
 
-            if (result.IsFaulted)
+            if (!result)
             {
                 return OperationCouldNotBeCompleted();
             }
 
-            return Success(new RegisterMemberResponse(Guid.NewGuid()));
+            return Success(new RegisterMemberResponse(member.Id));
         }
     }
 }

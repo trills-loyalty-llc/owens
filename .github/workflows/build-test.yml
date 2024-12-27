@@ -29,7 +29,7 @@ jobs:
         uses: Particular/install-sql-server-action@v1.2.0
         with:
           connection-string-env-var: SQL_SERVER_CONNECTION_STRING
-          catalog: Owens.Identity.Tests
+          catalog: Owens.Tests
           extra-params: "TrustServerCertificate=true;"
 
       - name: Run Tests

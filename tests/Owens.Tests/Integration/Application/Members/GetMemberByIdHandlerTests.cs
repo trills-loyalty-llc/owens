@@ -3,11 +3,13 @@
 // </copyright>
 
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Owens.Application.Members.GetById;
 using Owens.Contracts.Members.GetById;
 using Owens.Domain.Members;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
+using Owens.Infrastructure.Identity.Models;
 using Owens.Tests.Integration.Common;
 
 namespace Owens.Tests.Integration.Application.Members
@@ -37,7 +39,8 @@ namespace Owens.Tests.Integration.Application.Members
                 var handler = new GetMemberByIdHandler(
                     new MemberRepository(
                         IntegrationHelpers.GetService<IPublisher>(),
-                        context));
+                        context,
+                        IntegrationHelpers.GetService<UserManager<User>>()));
 
                 var response = await handler.Handle(new GetMemberByIdRequest(id), CancellationToken.None);
 

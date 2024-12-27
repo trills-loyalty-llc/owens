@@ -2,11 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ChainStrategy;
 using Moq;
+using Owens.Application.Members.Common;
 using Owens.Application.Members.Register;
 using Owens.Application.Members.Register.RegistrationChain;
 using Owens.Contracts.Members.Register;
+using Owens.Domain.Members;
 
 namespace Owens.Tests.Application.Members
 {
@@ -16,7 +17,7 @@ namespace Owens.Tests.Application.Members
     [TestClass]
     public class RegisterMemberHandlerTests
     {
-        private readonly Mock<IChainFactory> _chainFactory;
+        private readonly Mock<IMemberRepository> _memberRepository;
         private readonly RegisterMemberHandler _handler;
 
         /// <summary>
@@ -24,8 +25,8 @@ namespace Owens.Tests.Application.Members
         /// </summary>
         public RegisterMemberHandlerTests()
         {
-            _chainFactory = new Mock<IChainFactory>();
-            _handler = new RegisterMemberHandler(_chainFactory.Object);
+            _memberRepository = new Mock<IMemberRepository>();
+            _handler = new RegisterMemberHandler(_memberRepository.Object);
         }
 
         /// <summary>
@@ -38,8 +39,8 @@ namespace Owens.Tests.Application.Members
             var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
             payload.Faulted();
 
-            _chainFactory.Setup(x => x.Execute(It.IsAny<RegisterMemberPayload>(), CancellationToken.None))
-                .ReturnsAsync(payload);
+            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
+                .ReturnsAsync(false);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 
@@ -55,8 +56,8 @@ namespace Owens.Tests.Application.Members
         {
             var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
 
-            _chainFactory.Setup(x => x.Execute(It.IsAny<RegisterMemberPayload>(), CancellationToken.None))
-                .ReturnsAsync(payload);
+            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
+                .ReturnsAsync(true);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 

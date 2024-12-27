@@ -3,7 +3,6 @@
 // </copyright>
 
 using Owens.Infrastructure.DataAccess.Common;
-using Owens.Infrastructure.Identity.DataAccess;
 
 namespace Owens.Tests.Integration.Common
 {
@@ -17,13 +16,6 @@ namespace Owens.Tests.Integration.Common
         /// </summary>
         protected BaseIntegrationTest()
         {
-            using (var context = new IdentityContext(IntegrationHelpers.GetIdentityOptions()))
-            {
-                context.Database.EnsureDeleted();
-
-                context.Database.EnsureCreated();
-            }
-
             using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
             {
                 context.Database.EnsureDeleted();

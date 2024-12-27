@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Owens.Domain.Common;
-using Owens.Infrastructure.Identity.DataAccess;
+using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 
 namespace Owens.Infrastructure.Dependencies
@@ -26,7 +26,7 @@ namespace Owens.Infrastructure.Dependencies
         public static void AddAuthenticationDependencies(this IServiceCollection services, TokenConfiguration tokenConfiguration)
         {
             services.AddIdentity<User, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<IdentityContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Dependencies;
-using Owens.Infrastructure.Identity.DataAccess;
 using Owens.Infrastructure.Identity.Models;
 
 namespace Owens.Tests.Integration.Common
@@ -31,26 +30,6 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
-        /// Gets the application connection string.
-        /// </summary>
-        /// <returns>A connection string.</returns>
-        public static string GetApplicationConnectionString()
-        {
-            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING") ??
-                   "Server=.\\SQLExpress;Database=Owens.Application.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
-        }
-
-        /// <summary>
-        /// Gets the identity connection string.
-        /// </summary>
-        /// <returns>A connection string.</returns>
-        public static string GetIdentityConnectionString()
-        {
-            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING") ??
-                   "Server=.\\SQLExpress;Database=Owens.Identity.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
-        }
-
-        /// <summary>
         /// Gets the application context options.
         /// </summary>
         /// <returns>A <see cref="DbContextOptions"/> instance.</returns>
@@ -63,33 +42,13 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
-        /// Gets the identity context options.
+        /// Gets the application connection string.
         /// </summary>
-        /// <returns>A <see cref="DbContextOptions"/> instance.</returns>
-        public static DbContextOptions<IdentityContext> GetIdentityOptions()
+        /// <returns>A connection string.</returns>
+        private static string GetApplicationConnectionString()
         {
-            var builder = new DbContextOptionsBuilder<IdentityContext>();
-            builder.UseSqlServer(GetIdentityConnectionString());
-
-            return builder.Options;
-        }
-
-        /// <summary>
-        /// Gets the Identity Context.
-        /// </summary>
-        /// <returns>A <see cref="IdentityContext"/> instance.</returns>
-        public static IdentityContext GetTestIdentityContext()
-        {
-            return GetProvider().GetRequiredService<IdentityContext>();
-        }
-
-        /// <summary>
-        /// Gets the Application Context.
-        /// </summary>
-        /// <returns>A <see cref="ApplicationContext"/> instance.</returns>
-        public static ApplicationContext GetTestApplicationContext()
-        {
-            return GetProvider().GetRequiredService<ApplicationContext>();
+            return Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_STRING") ??
+                   "Server=.\\SQLExpress;Database=Owens.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
         private static IServiceProvider GetProvider()
@@ -101,12 +60,12 @@ namespace Owens.Tests.Integration.Common
                 var configuration = new ConfigurationBuilder()
                     .AddInMemoryCollection(new List<KeyValuePair<string, string?>>
                     {
-                        new KeyValuePair<string, string?>("ConnectionStrings:Application", GetApplicationConnectionString()),
-                        new KeyValuePair<string, string?>("ConnectionStrings:Identity", GetIdentityConnectionString()),
+                        new KeyValuePair<string, string?>("ConnectionStrings:Database", GetApplicationConnectionString()),
                     })
                     .Build();
 
                 collection.RegisterDependencies(configuration);
+                collection.AddLogging();
                 collection.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
 
                 var provider = collection.BuildServiceProvider();

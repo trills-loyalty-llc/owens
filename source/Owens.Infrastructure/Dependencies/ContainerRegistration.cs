@@ -31,8 +31,7 @@ namespace Owens.Infrastructure.Dependencies
             services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Application);
 
             // Data Access
-            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Application")));
-            services.AddDbContext<IdentityContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Identity")));
+            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Database")));
 
             services.AddTransient<IMemberRepository, MemberRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
