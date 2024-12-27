@@ -2,12 +2,14 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy;
 using Moq;
 using Owens.Application.Members.Common;
 using Owens.Application.Members.Register;
 using Owens.Application.Members.Register.RegistrationChain;
 using Owens.Contracts.Members.Register;
 using Owens.Domain.Members;
+using Owens.Domain.Users;
 
 namespace Owens.Tests.Application.Members
 {
@@ -39,12 +41,12 @@ namespace Owens.Tests.Application.Members
             var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
             payload.Faulted();
 
-            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
+            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
                 .ReturnsAsync(false);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 
-            Assert.IsNull(result.Response);
+            Assert.AreNotEqual(ApplicationStatus.Success, result.Status);
         }
 
         /// <summary>
@@ -56,12 +58,12 @@ namespace Owens.Tests.Application.Members
         {
             var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
 
-            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
+            _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
                 .ReturnsAsync(true);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 
-            Assert.IsNotNull(result.Response);
+            Assert.AreEqual(ApplicationStatus.Success, result.Status);
         }
     }
 }

@@ -4,8 +4,8 @@
 
 using MediatorBuddy;
 using Owens.Application.Members.Common;
+using Owens.Application.Users.Common;
 using Owens.Contracts.Members.Register;
-using Owens.Domain.Members;
 
 namespace Owens.Application.Members.Register
 {
@@ -26,16 +26,20 @@ namespace Owens.Application.Members.Register
         /// <inheritdoc/>
         public override async Task<IEnvelope<RegisterMemberResponse>> Handle(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
-            var member = new Member();
+            var member = MemberFactory.Member(request);
 
-            var result = await _memberRepository.AddMember(member, request.Email, request.UserName, request.Password, cancellationToken);
+            var userInformation = UserFactory.UserInformation(request);
+
+            var result = await _memberRepository.AddMember(member, userInformation, cancellationToken);
 
             if (!result)
             {
                 return OperationCouldNotBeCompleted();
             }
 
-            return Success(new RegisterMemberResponse(member.Id));
+            var response = MemberFactory.RegisterMemberResponse(member);
+
+            return Success(response);
         }
     }
 }

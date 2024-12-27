@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Owens.Application.Members.Common;
 using Owens.Domain.Members;
+using Owens.Domain.Users;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 
@@ -30,16 +31,11 @@ namespace Owens.Infrastructure.DataAccess.Members
         }
 
         /// <inheritdoc/>
-        public async Task<bool> AddMember(Member member, string email, string username, string password, CancellationToken cancellationToken)
+        public async Task<bool> AddMember(Member member, UserInformation userInformation, CancellationToken cancellationToken)
         {
-            var user = new User
-            {
-                Id = member.Id,
-                UserName = username,
-                Email = email,
-            };
+            var user = User.FromInformation(member.Id, userInformation);
 
-            await _userManager.CreateAsync(user, password);
+            await _userManager.CreateAsync(user, userInformation.Password);
 
             await ApplicationContext.Members.AddAsync(member, cancellationToken);
 

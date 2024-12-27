@@ -3,6 +3,7 @@
 // </copyright>
 
 using Microsoft.AspNetCore.Identity;
+using Owens.Domain.Users;
 
 namespace Owens.Infrastructure.Identity.Models
 {
@@ -25,6 +26,17 @@ namespace Owens.Infrastructure.Identity.Models
         {
             Id = id;
             Email = email;
+        }
+
+        /// <summary>
+        /// Instantiates a User object.
+        /// </summary>
+        /// <param name="id">The user identifier.</param>
+        /// <param name="userInformation">A <see cref="UserInformation"/> object.</param>
+        /// <returns>A <see cref="User"/> object.</returns>
+        public static User FromInformation(Guid id, UserInformation userInformation)
+        {
+            return new User(id, userInformation.Email, userInformation.Username);
         }
     }
 }

@@ -5,7 +5,7 @@
 using System.Text.RegularExpressions;
 using Owens.Domain.Members;
 
-namespace Owens.Domain.Common
+namespace Owens.Infrastructure.Identity.Models
 {
     /// <summary>
     /// Requirements for <see cref="Member"/> passwords.

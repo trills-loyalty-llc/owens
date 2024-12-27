@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Owens.Domain.Common;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 
