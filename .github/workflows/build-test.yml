@@ -29,7 +29,7 @@ jobs:
         uses: Particular/install-sql-server-action@v1.2.0
         with:
           connection-string-env-var: SQL_SERVER_CONNECTION_STRING
-          catalog: Owens.Application.Tests
+          catalog: Owens.Identity.Tests
 
       - name: Run Tests
         run: dotnet test --no-restore --no-build -c Release --verbosity normal /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch
