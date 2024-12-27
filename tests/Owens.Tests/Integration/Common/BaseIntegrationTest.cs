@@ -2,8 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.Diagnostics;
-
 namespace Owens.Tests.Integration.Common
 {
     /// <summary>
@@ -16,26 +14,18 @@ namespace Owens.Tests.Integration.Common
         /// </summary>
         protected BaseIntegrationTest()
         {
-            try
+            using (var context = IntegrationHelpers.GetTestApplicationContext())
             {
-                using (var context = IntegrationHelpers.GetTestApplicationContext())
-                {
-                    context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
 
-                    context.Database.EnsureCreated();
-                }
-
-                using (var context = IntegrationHelpers.GetTestIdentityContext())
-                {
-                    context.Database.EnsureDeleted();
-
-                    context.Database.EnsureCreated();
-                }
+                context.Database.EnsureCreated();
             }
-            catch (Exception exception)
+
+            using (var context = IntegrationHelpers.GetTestIdentityContext())
             {
-                Debug.Write(exception);
-                throw;
+                context.Database.EnsureDeleted();
+
+                context.Database.EnsureCreated();
             }
         }
     }

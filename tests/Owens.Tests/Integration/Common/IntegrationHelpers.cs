@@ -4,6 +4,7 @@
 
 using MediatorBuddy;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Infrastructure.DataAccess.Common;
@@ -33,6 +34,17 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
+        /// Gets a registered service.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns>An instance of the service requested.</returns>
+        public static TService GetService<TService>()
+            where TService : class
+        {
+            return GetProvider().GetRequiredService<TService>();
+        }
+
+        /// <summary>
         /// Gets the application connection string.
         /// </summary>
         /// <returns>A connection string.</returns>
@@ -52,17 +64,21 @@ namespace Owens.Tests.Integration.Common
                    "Server=.\\SQLExpress;Database=Owens.Identity.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
+        public static DbContextOptions<ApplicationContext> GetApplicationOptions()
+        {
+            var builder = new DbContextOptionsBuilder<ApplicationContext>();
+            builder.UseSqlServer(GetApplicationConnectionString());
+
+            return builder.Options;
+        }
+
         /// <summary>
         /// Gets the Identity Context.
         /// </summary>
         /// <returns>A <see cref="IdentityContext"/> instance.</returns>
         public static IdentityContext GetTestIdentityContext()
         {
-            var context = GetProvider().GetRequiredService<IdentityContext>();
-
-            context.Database.EnsureCreated();
-
-            return context;
+            return GetProvider().GetRequiredService<IdentityContext>();
         }
 
         /// <summary>
@@ -71,11 +87,7 @@ namespace Owens.Tests.Integration.Common
         /// <returns>A <see cref="ApplicationContext"/> instance.</returns>
         public static ApplicationContext GetTestApplicationContext()
         {
-            var context = GetProvider().GetRequiredService<ApplicationContext>();
-
-            context.Database.EnsureCreated();
-
-            return context;
+            return GetProvider().GetRequiredService<ApplicationContext>();
         }
 
         private static IServiceProvider GetProvider()

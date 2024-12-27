@@ -4,6 +4,7 @@
 
 using ClearDomain.GuidPrimary;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Owens.Application.Common.Interfaces;
 
 namespace Owens.Infrastructure.DataAccess.Common
@@ -13,7 +14,8 @@ namespace Owens.Infrastructure.DataAccess.Common
     /// </summary>
     /// <typeparam name="TAggregateRoot">The type of the aggregate root.</typeparam>
     public abstract class BaseRepository<TAggregateRoot> :
-        IAddObject<TAggregateRoot>
+        IAddObject<TAggregateRoot>,
+        IGetObjectById<TAggregateRoot>
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly IPublisher _publisher;
@@ -45,6 +47,14 @@ namespace Owens.Infrastructure.DataAccess.Common
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        public async Task<TAggregateRoot?> GetObjectById(Guid id, CancellationToken cancellationToken)
+        {
+            return await _applicationContext
+                .Set<TAggregateRoot>()
+                .FirstOrDefaultAsync(aggregateRoot => aggregateRoot.Id == id, cancellationToken);
         }
 
         private async Task PublishEvent(IEnumerable<IAggregateRoot> aggregateRoots, CancellationToken cancellationToken)

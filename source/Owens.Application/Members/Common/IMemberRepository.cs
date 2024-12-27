@@ -11,7 +11,7 @@ namespace Owens.Application.Members.Common
     /// Interface for interacting with <see cref="Member"/> persistence.
     /// </summary>
     public interface IMemberRepository
-        : IAddObject<Member>
+        : IAddObject<Member>, IGetObjectById<Member>
     {
     }
 }

@@ -2,8 +2,11 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Moq;
+using Owens.Application.Members.Common;
 using Owens.Application.Members.GetById;
 using Owens.Contracts.Members.GetById;
+using Owens.Domain.Members;
 
 namespace Owens.Tests.Application.Members
 {
@@ -13,6 +16,7 @@ namespace Owens.Tests.Application.Members
     [TestClass]
     public class GetMemberByIdHandlerTests
     {
+        private readonly Mock<IMemberRepository> _memberRepository;
         private readonly GetMemberByIdHandler _handler;
 
         /// <summary>
@@ -20,7 +24,8 @@ namespace Owens.Tests.Application.Members
         /// </summary>
         public GetMemberByIdHandlerTests()
         {
-            _handler = new GetMemberByIdHandler();
+            _memberRepository = new Mock<IMemberRepository>();
+            _handler = new GetMemberByIdHandler(_memberRepository.Object);
         }
 
         /// <summary>
@@ -30,7 +35,10 @@ namespace Owens.Tests.Application.Members
         [TestMethod]
         public async Task Handle_Success_IsCorrect()
         {
-            var result = await _handler.Handle(new GetMemberByIdRequest(), CancellationToken.None);
+            _memberRepository.Setup(x => x.GetObjectById(It.IsAny<Guid>(), CancellationToken.None))
+                .ReturnsAsync(new Member());
+
+            var result = await _handler.Handle(new GetMemberByIdRequest(Guid.NewGuid()), CancellationToken.None);
 
             Assert.IsNotNull(result.Response);
         }

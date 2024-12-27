@@ -3,11 +3,17 @@
 // </copyright>
 
 using MediatorBuddy;
+using Owens.Contracts.Common;
 
 namespace Owens.Contracts.Members.GetById
 {
-    /// <inheritdoc />
-    public class GetMemberByIdRequest : IEnvelopeRequest<GetMemberByIdResponse>
+    /// <inheritdoc cref="IEnvelopeRequest" />
+    public class GetMemberByIdRequest : EntityRequest, IEnvelopeRequest<GetMemberByIdResponse>
     {
+        /// <inheritdoc />
+        public GetMemberByIdRequest(Guid id)
+            : base(id)
+        {
+        }
     }
 }

@@ -2,7 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatR;
+using Owens.Application.Members.GetById;
 using Owens.Contracts.Members.GetById;
+using Owens.Domain.Members;
+using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.DataAccess.Members;
 using Owens.Tests.Integration.Common;
 
 namespace Owens.Tests.Integration.Application.Members
@@ -18,11 +23,26 @@ namespace Owens.Tests.Integration.Application.Members
         [TestMethod]
         public async Task Handle_Success_IsCorrectAsync()
         {
-            var handler = IntegrationHelpers.GetHandler<GetMemberByIdRequest, GetMemberByIdResponse>();
+            var id = Guid.NewGuid();
 
-            var result = await handler.Handle(new GetMemberByIdRequest(), CancellationToken.None);
+            await using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
+            {
+                await context.Members.AddAsync(new Member(id));
 
-            Assert.IsNotNull(result.Response);
+                await context.SaveChangesAsync();
+            }
+
+            await using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
+            {
+                var handler = new GetMemberByIdHandler(
+                    new MemberRepository(
+                        IntegrationHelpers.GetService<IPublisher>(),
+                        context));
+
+                var response = await handler.Handle(new GetMemberByIdRequest(id), CancellationToken.None);
+
+                Assert.AreEqual(id, response.Response.Id);
+            }
         }
     }
 }
