@@ -2,8 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.EntityFrameworkCore;
-using Owens.Infrastructure.DataAccess.Common;
+using System.Diagnostics;
 
 namespace Owens.Tests.Integration.Common
 {
@@ -19,10 +18,7 @@ namespace Owens.Tests.Integration.Common
         {
             try
             {
-                var applicationBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-                applicationBuilder.UseSqlServer(IntegrationHelpers.GetApplicationConnectionString());
-
-                using (var context = new ApplicationContext(applicationBuilder.Options))
+                using (var context = IntegrationHelpers.GetTestApplicationContext())
                 {
                     context.Members.RemoveRange(context.Members);
 
@@ -38,7 +34,7 @@ namespace Owens.Tests.Integration.Common
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                Debug.Write(exception);
                 throw;
             }
         }

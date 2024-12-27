@@ -6,6 +6,7 @@ using MediatorBuddy;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Identity.DataAccess;
 using Owens.Infrastructure.Identity.Models;
@@ -58,6 +59,15 @@ namespace Owens.Tests.Integration.Common
         public static IdentityContext GetTestIdentityContext()
         {
             return GetProvider().GetRequiredService<IdentityContext>();
+        }
+
+        /// <summary>
+        /// Gets the Application Context.
+        /// </summary>
+        /// <returns>A <see cref="ApplicationContext"/> instance.</returns>
+        public static ApplicationContext GetTestApplicationContext()
+        {
+            return GetProvider().GetRequiredService<ApplicationContext>();
         }
 
         private static IServiceProvider GetProvider()
