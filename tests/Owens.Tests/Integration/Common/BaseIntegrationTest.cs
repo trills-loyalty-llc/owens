@@ -17,21 +17,29 @@ namespace Owens.Tests.Integration.Common
         /// </summary>
         protected BaseIntegrationTest()
         {
-            var applicationBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            applicationBuilder.UseSqlServer(IntegrationHelpers.GetApplicationConnectionString());
-
-            using (var context = new ApplicationContext(applicationBuilder.Options))
+            try
             {
-                context.Members.RemoveRange(context.Members);
+                var applicationBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+                applicationBuilder.UseSqlServer(IntegrationHelpers.GetApplicationConnectionString());
 
-                context.SaveChanges();
+                using (var context = new ApplicationContext(applicationBuilder.Options))
+                {
+                    context.Members.RemoveRange(context.Members);
+
+                    context.SaveChanges();
+                }
+
+                using (var context = IntegrationHelpers.GetTestIdentityContext())
+                {
+                    context.Users.RemoveRange(context.Users);
+
+                    context.SaveChanges();
+                }
             }
-
-            using (var context = IntegrationHelpers.GetTestIdentityContext())
+            catch (Exception exception)
             {
-                context.Users.RemoveRange(context.Users);
-
-                context.SaveChanges();
+                Console.WriteLine(exception);
+                throw;
             }
         }
     }
