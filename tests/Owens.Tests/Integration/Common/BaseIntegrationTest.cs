@@ -20,16 +20,16 @@ namespace Owens.Tests.Integration.Common
             {
                 using (var context = IntegrationHelpers.GetTestApplicationContext())
                 {
-                    context.Members.RemoveRange(context.Members);
+                    context.Database.EnsureDeleted();
 
-                    context.SaveChanges();
+                    context.Database.EnsureCreated();
                 }
 
                 using (var context = IntegrationHelpers.GetTestIdentityContext())
                 {
-                    context.Users.RemoveRange(context.Users);
+                    context.Database.EnsureDeleted();
 
-                    context.SaveChanges();
+                    context.Database.EnsureCreated();
                 }
             }
             catch (Exception exception)
