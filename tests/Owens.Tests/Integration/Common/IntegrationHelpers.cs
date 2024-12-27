@@ -2,8 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatorBuddy;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,18 +18,6 @@ namespace Owens.Tests.Integration.Common
     public static class IntegrationHelpers
     {
         private static IServiceProvider? _serviceProvider;
-
-        /// <summary>
-        /// Attempts to resolve an <see cref="IEnvelopeHandler{TRequest,TResponse}"/> instance.
-        /// </summary>
-        /// <typeparam name="TRequest">The type of the request object.</typeparam>
-        /// <typeparam name="TResponse">The type of the response object.</typeparam>
-        /// <returns>An instance of the <see cref="IEnvelopeHandler{TRequest,TResponse}"/> interface.</returns>
-        public static IRequestHandler<TRequest, IEnvelope<TResponse>> GetHandler<TRequest, TResponse>()
-            where TRequest : IRequest<IEnvelope<TResponse>>
-        {
-            return GetProvider().GetRequiredService<IRequestHandler<TRequest, IEnvelope<TResponse>>>();
-        }
 
         /// <summary>
         /// Gets a registered service.
@@ -64,6 +50,10 @@ namespace Owens.Tests.Integration.Common
                    "Server=.\\SQLExpress;Database=Owens.Identity.Tests;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
         }
 
+        /// <summary>
+        /// Gets the application context options.
+        /// </summary>
+        /// <returns>A <see cref="DbContextOptions"/> instance.</returns>
         public static DbContextOptions<ApplicationContext> GetApplicationOptions()
         {
             var builder = new DbContextOptionsBuilder<ApplicationContext>();
