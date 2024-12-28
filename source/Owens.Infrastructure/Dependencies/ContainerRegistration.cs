@@ -6,11 +6,9 @@ using ChainStrategy.Registration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Owens.Application.Common.Interfaces;
 using Owens.Application.Members.Common;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
-using Owens.Infrastructure.Identity.DataAccess;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -34,7 +32,6 @@ namespace Owens.Infrastructure.Dependencies
             services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Database")));
 
             services.AddTransient<IMemberRepository, MemberRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }

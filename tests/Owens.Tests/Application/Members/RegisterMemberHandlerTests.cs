@@ -6,7 +6,6 @@ using MediatorBuddy;
 using Moq;
 using Owens.Application.Members.Common;
 using Owens.Application.Members.Register;
-using Owens.Application.Members.Register.RegistrationChain;
 using Owens.Contracts.Members.Register;
 using Owens.Domain.Members;
 using Owens.Domain.Users;
@@ -38,9 +37,6 @@ namespace Owens.Tests.Application.Members
         [TestMethod]
         public async Task Handle_Failure_IsCorrect()
         {
-            var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
-            payload.Faulted();
-
             _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
                 .ReturnsAsync(false);
 
@@ -56,8 +52,6 @@ namespace Owens.Tests.Application.Members
         [TestMethod]
         public async Task Handle_Success_IsCorrect()
         {
-            var payload = RegisterMemberPayload.FromRequest(new RegisterMemberRequest());
-
             _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
                 .ReturnsAsync(true);
 
