@@ -32,6 +32,9 @@ namespace Owens.Infrastructure.Dependencies
             services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Database")));
 
             services.AddTransient<IMemberRepository, MemberRepository>();
+
+            // Time
+            services.AddSingleton(_ => TimeProvider.System);
         }
     }
 }

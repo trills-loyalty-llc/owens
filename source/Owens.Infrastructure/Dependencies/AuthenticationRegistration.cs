@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
+using Owens.Infrastructure.Identity.Services;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -59,6 +60,8 @@ namespace Owens.Infrastructure.Dependencies
                         ClockSkew = TimeSpan.Zero,
                     };
                 });
+
+            services.AddTransient<ITokenService, TokenService>();
         }
     }
 }
