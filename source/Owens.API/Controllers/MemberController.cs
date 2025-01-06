@@ -33,7 +33,7 @@ namespace Owens.API.Controllers
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [AllowAnonymous]
         [HttpPost("", Name = "register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType<RegisterMemberResponse>(StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterMember(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
             return await ExecuteRequest(

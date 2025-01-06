@@ -24,6 +24,6 @@ namespace Owens.Contracts.Common
         /// Gets the entity identifier.
         /// </summary>
         [Required]
-        public Guid Id { get; }
+        public Guid Id { get; init; }
     }
 }

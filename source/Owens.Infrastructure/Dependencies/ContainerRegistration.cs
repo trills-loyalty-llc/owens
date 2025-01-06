@@ -35,6 +35,12 @@ namespace Owens.Infrastructure.Dependencies
 
             // Time
             services.AddSingleton(_ => TimeProvider.System);
+
+            // Health Checks
+            services.AddHealthChecks()
+                .AddDbContextCheck<ApplicationContext>()
+                .AddApplicationLifecycleHealthCheck()
+                .AddResourceUtilizationHealthCheck();
         }
     }
 }

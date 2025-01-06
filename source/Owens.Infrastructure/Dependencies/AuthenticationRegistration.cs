@@ -61,6 +61,7 @@ namespace Owens.Infrastructure.Dependencies
                     };
                 });
 
+            services.AddSingleton(_ => tokenConfiguration);
             services.AddTransient<ITokenService, TokenService>();
         }
     }
