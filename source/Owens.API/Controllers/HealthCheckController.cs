@@ -28,12 +28,16 @@ namespace Owens.API.Controllers
         /// <summary>
         /// Gets the current status of the application.
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpGet("", Name = "HealthCheck")]
         [ProducesResponseType<HealthReport>(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetHealthStatusAsync()
+        public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken)
         {
-            return await ExecuteRequest(new HealthCheckRequest(), ResponseOptions.OkObjectResponse<HealthCheckResponse>());
+            return await ExecuteRequest(
+                new HealthCheckRequest(),
+                ResponseOptions.OkObjectResponse<HealthCheckResponse>(),
+                cancellationToken);
         }
     }
 }

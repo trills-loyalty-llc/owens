@@ -2,6 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,18 @@ namespace Owens.Tests.Integration.Common
             where TService : class
         {
             return GetProvider().GetRequiredService<TService>();
+        }
+
+        /// <summary>
+        /// Gets a request handler for a specified type.
+        /// </summary>
+        /// <typeparam name="TRequest">The request type.</typeparam>
+        /// <typeparam name="TResponse">The request response.</typeparam>
+        /// <returns>A <see cref="IEnvelopeHandler{TRequest,TResponse}"/>.</returns>
+        public static IRequestHandler<TRequest, IEnvelope<TResponse>> GetEnvelopeHandler<TRequest, TResponse>()
+            where TRequest : IEnvelopeRequest<TResponse>
+        {
+            return GetProvider().GetRequiredService<IRequestHandler<TRequest, IEnvelope<TResponse>>>();
         }
 
         /// <summary>

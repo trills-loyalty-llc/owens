@@ -10,7 +10,7 @@ using Owens.Contracts.Members.Register;
 using Owens.Domain.Members;
 using Owens.Domain.Users;
 
-namespace Owens.Tests.Application.Members
+namespace Owens.Tests.Unit.Application.Members
 {
     /// <summary>
     /// Tests for the <see cref="RegisterMemberHandler"/> class.

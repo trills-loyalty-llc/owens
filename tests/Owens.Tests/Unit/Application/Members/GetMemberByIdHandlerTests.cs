@@ -2,13 +2,14 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy;
 using Moq;
 using Owens.Application.Members.Common;
 using Owens.Application.Members.GetById;
 using Owens.Contracts.Members.GetById;
 using Owens.Domain.Members;
 
-namespace Owens.Tests.Application.Members
+namespace Owens.Tests.Unit.Application.Members
 {
     /// <summary>
     /// Tests for the <see cref="GetMemberByIdHandler"/> class.
@@ -40,7 +41,7 @@ namespace Owens.Tests.Application.Members
 
             var result = await _handler.Handle(new GetMemberByIdRequest(Guid.NewGuid()), CancellationToken.None);
 
-            Assert.IsNotNull(result.Response);
+            Assert.AreEqual(ApplicationStatus.Success, result.Status);
         }
     }
 }

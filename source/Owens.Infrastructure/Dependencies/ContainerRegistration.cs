@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Application.Members.Common;
+using Owens.Infrastructure.Common.HealthChecks;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
 
@@ -41,6 +42,8 @@ namespace Owens.Infrastructure.Dependencies
                 .AddDbContextCheck<ApplicationContext>()
                 .AddApplicationLifecycleHealthCheck()
                 .AddResourceUtilizationHealthCheck();
+
+            services.AddTransient<IHealthCheckService, HealthCheckManager>();
         }
     }
 }
