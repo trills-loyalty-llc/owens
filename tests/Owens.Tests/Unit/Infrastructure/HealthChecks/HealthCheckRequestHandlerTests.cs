@@ -7,13 +7,14 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Moq;
 using Owens.Infrastructure.Common.HealthChecks;
 using Owens.Infrastructure.HealthChecks;
-using Owens.Tests.Integration.Common;
 
-namespace Owens.Tests.Integration.Infrastructure.HealthChecks
+namespace Owens.Tests.Unit.Infrastructure.HealthChecks
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Tests for the <see cref="HealthCheckRequestHandler"/> class.
+    /// </summary>
     [TestClass]
-    public class HealthCheckRequestHandlerTests : BaseIntegrationTest
+    public class HealthCheckRequestHandlerTests
     {
         private readonly Mock<IHealthCheckService> _healthCheckService;
 

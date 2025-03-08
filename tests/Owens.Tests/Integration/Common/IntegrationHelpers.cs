@@ -56,6 +56,20 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
+        /// Clears all database tables.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ClearTablesAsync()
+        {
+            await using (var context = new ApplicationContext(GetApplicationOptions()))
+            {
+                context.Members.RemoveRange(context.Members);
+
+                await context.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
         /// Gets the application connection string.
         /// </summary>
         /// <returns>A connection string.</returns>
