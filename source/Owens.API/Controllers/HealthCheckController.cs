@@ -2,11 +2,10 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatorBuddy.AspNet;
-using MediatorBuddy.AspNet.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Owens.API.Common;
 using Owens.Infrastructure.HealthChecks;
 
 namespace Owens.API.Controllers
@@ -14,7 +13,7 @@ namespace Owens.API.Controllers
     /// <inheritdoc />
     [ApiController]
     [Route("health-check")]
-    public class HealthCheckController : MediatorBuddyApi
+    public class HealthCheckController : BaseController
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthCheckController"/> class.
@@ -28,12 +27,13 @@ namespace Owens.API.Controllers
         /// <summary>
         /// Gets the current status of the application.
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpGet("", Name = "HealthCheck")]
         [ProducesResponseType<HealthReport>(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetHealthStatusAsync()
+        public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken = default)
         {
-            return await ExecuteRequest(new HealthCheckRequest(), ResponseOptions.OkObjectResponse<HealthCheckResponse>());
+            return await HandleOkObject(new HealthCheckRequest(), cancellationToken);
         }
     }
 }

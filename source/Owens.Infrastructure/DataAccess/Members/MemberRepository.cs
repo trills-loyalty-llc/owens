@@ -2,10 +2,10 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.GuidPrimary;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Owens.Application.Members.Common;
+using Owens.Domain.Common;
 using Owens.Domain.Members;
 using Owens.Domain.Users;
 using Owens.Infrastructure.DataAccess.Common;

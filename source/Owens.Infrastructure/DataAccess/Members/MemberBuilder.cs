@@ -2,19 +2,18 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Owens.Domain.Members;
+using Owens.Infrastructure.DataAccess.Common;
 
 namespace Owens.Infrastructure.DataAccess.Members
 {
     /// <inheritdoc />
-    public class MemberBuilder : IEntityTypeConfiguration<Member>
+    public class MemberBuilder : EntityTypeConfigurationBase<Member>
     {
-        /// <inheritdoc/>
-        public void Configure(EntityTypeBuilder<Member> builder)
+        /// <inheritdoc />
+        protected override void ConfigureRoot(EntityTypeBuilder<Member> builder)
         {
-            builder.Property(member => member.Id).ValueGeneratedNever();
         }
     }
 }

@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.GuidPrimary;
+using Owens.Domain.Common;
 
 namespace Owens.Domain.Members
 {

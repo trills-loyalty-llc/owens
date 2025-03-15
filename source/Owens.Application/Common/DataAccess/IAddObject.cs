@@ -2,9 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.GuidPrimary;
+using Owens.Domain.Common;
 
-namespace Owens.Application.Common.Interfaces
+namespace Owens.Application.Common.DataAccess
 {
     /// <summary>
     /// Interface for adding an object to the persistence.
