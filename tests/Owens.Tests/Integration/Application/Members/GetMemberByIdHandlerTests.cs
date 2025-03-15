@@ -16,7 +16,7 @@ namespace Owens.Tests.Integration.Application.Members
 {
     /// <inheritdoc />
     [TestClass]
-    public class GetMemberByIdHandlerTests : BaseIntegrationTest
+    public class GetMemberByIdHandlerTests
     {
         /// <summary>
         /// Handle, success, is correct.
@@ -25,6 +25,8 @@ namespace Owens.Tests.Integration.Application.Members
         [TestMethod]
         public async Task Handle_Success_IsCorrectAsync()
         {
+            await IntegrationHelpers.ClearTablesAsync();
+
             var id = Guid.NewGuid();
 
             await using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))

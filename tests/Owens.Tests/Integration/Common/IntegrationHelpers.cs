@@ -2,6 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,18 @@ namespace Owens.Tests.Integration.Common
         }
 
         /// <summary>
+        /// Gets a request handler for a specified type.
+        /// </summary>
+        /// <typeparam name="TRequest">The request type.</typeparam>
+        /// <typeparam name="TResponse">The request response.</typeparam>
+        /// <returns>A <see cref="IEnvelopeHandler{TRequest,TResponse}"/>.</returns>
+        public static IRequestHandler<TRequest, IEnvelope<TResponse>> GetEnvelopeHandler<TRequest, TResponse>()
+            where TRequest : IEnvelopeRequest<TResponse>
+        {
+            return GetProvider().GetRequiredService<IRequestHandler<TRequest, IEnvelope<TResponse>>>();
+        }
+
+        /// <summary>
         /// Gets the application context options.
         /// </summary>
         /// <returns>A <see cref="DbContextOptions"/> instance.</returns>
@@ -39,6 +53,20 @@ namespace Owens.Tests.Integration.Common
             builder.UseSqlServer(GetApplicationConnectionString());
 
             return builder.Options;
+        }
+
+        /// <summary>
+        /// Clears all database tables.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ClearTablesAsync()
+        {
+            await using (var context = new ApplicationContext(GetApplicationOptions()))
+            {
+                context.Members.RemoveRange(context.Members);
+
+                await context.SaveChangesAsync();
+            }
         }
 
         /// <summary>

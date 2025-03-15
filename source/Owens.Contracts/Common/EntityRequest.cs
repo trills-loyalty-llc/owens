@@ -23,7 +23,7 @@ namespace Owens.Contracts.Common
         /// <summary>
         /// Gets the identifier.
         /// </summary>
-        [Required(AllowEmptyStrings = false)]
+        [Required]
         public Guid Id { get; }
     }
 }

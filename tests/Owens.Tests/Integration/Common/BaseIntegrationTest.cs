@@ -18,9 +18,9 @@ namespace Owens.Tests.Integration.Common
         {
             using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
             {
-                context.Database.EnsureDeleted();
+                context.Members.RemoveRange(context.Members);
 
-                context.Database.EnsureCreated();
+                context.SaveChanges();
             }
         }
     }
