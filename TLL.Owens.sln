@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Infrastructure", "sou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.API", "source\Owens.API\Owens.API.csproj", "{67734521-C0EF-48C0-923E-4A480593D4EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Tests", "tests\Owens.Tests\Owens.Tests.csproj", "{F2E2B925-DA47-4F52-B789-9A239390CEC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Tests", "tests\Owens.Tests\Owens.Tests.csproj", "{D61829F9-66EC-4449-B809-32DEAA64953D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +46,10 @@ Global
 		{67734521-C0EF-48C0-923E-4A480593D4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67734521-C0EF-48C0-923E-4A480593D4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67734521-C0EF-48C0-923E-4A480593D4EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2E2B925-DA47-4F52-B789-9A239390CEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E2B925-DA47-4F52-B789-9A239390CEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2E2B925-DA47-4F52-B789-9A239390CEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2E2B925-DA47-4F52-B789-9A239390CEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61829F9-66EC-4449-B809-32DEAA64953D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61829F9-66EC-4449-B809-32DEAA64953D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61829F9-66EC-4449-B809-32DEAA64953D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61829F9-66EC-4449-B809-32DEAA64953D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

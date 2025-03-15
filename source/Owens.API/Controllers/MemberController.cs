@@ -35,7 +35,7 @@ namespace Owens.API.Controllers
         [ProducesResponseType<RegisterMemberResponse>(StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterMember(RegisterMemberRequest request, CancellationToken cancellationToken)
         {
-            return await HandleCreatedObject(request, cancellationToken);
+            return await ExecuteCreatedLocation(request, cancellationToken);
         }
     }
 }

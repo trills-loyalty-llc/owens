@@ -33,7 +33,7 @@ namespace Owens.API.Controllers
         [ProducesResponseType<HealthReport>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken = default)
         {
-            return await HandleOkObject(new HealthCheckRequest(), cancellationToken);
+            return await ExecuteOkObject(new HealthCheckRequest(), cancellationToken);
         }
     }
 }
