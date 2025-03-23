@@ -42,6 +42,8 @@ namespace Owens.API
 
             app.MapControllers();
 
+            app.UseCors(policyBuilder => policyBuilder.AllowAnyHeader().AllowAnyHeader().AllowAnyOrigin());
+
             await app.RunAsync();
         }
     }
