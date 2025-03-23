@@ -14,7 +14,6 @@ using Owens.Tests.Integration.Common;
 
 namespace Owens.Tests.Integration.Application.Members
 {
-    /// <inheritdoc />
     [TestClass]
     public class GetMemberByIdHandlerTests
     {
