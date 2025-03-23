@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Owens.Domain.Members;
+using Owens.Infrastructure.Common.Logging;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Identity.Models;
 
@@ -24,12 +25,18 @@ namespace Owens.Infrastructure.DataAccess.Common
             Database.EnsureCreated();
 
             Members = Set<Member>();
+            Logs = Set<Log>();
         }
 
         /// <summary>
-        /// Gets the members dbSet.
+        /// Gets the program members.
         /// </summary>
         public DbSet<Member> Members { get; }
+
+        /// <summary>
+        /// Gets the application logs.
+        /// </summary>
+        public DbSet<Log> Logs { get; }
 
         /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder builder)

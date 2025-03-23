@@ -8,7 +8,7 @@
     <PackageReference Include="AspNetCoreAnalyzers" Version="0.3.0" />
     <PackageReference Include="MediatorBuddy.AspNet" Version="0.9.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
-    <PackageReference Include="Scalar.AspNetCore" Version="2.0.34" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

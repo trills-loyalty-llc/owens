@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Owens.Domain.Common;
 
-namespace Owens.Infrastructure.DataAccess.Common
+namespace Owens.Infrastructure.Common.DataAccess
 {
     /// <inheritdoc />
     public abstract class EntityTypeConfigurationBase<TRoot> : IEntityTypeConfiguration<TRoot>

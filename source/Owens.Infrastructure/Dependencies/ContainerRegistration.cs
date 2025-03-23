@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Application.Members.Common;
 using Owens.Infrastructure.Common.HealthChecks;
+using Owens.Infrastructure.Common.Logging;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
 
@@ -43,6 +44,9 @@ namespace Owens.Infrastructure.Dependencies
                 .AddResourceUtilizationHealthCheck();
 
             services.AddTransient<IHealthCheckService, HealthCheckManager>();
+
+            // Logging
+            services.AddTransient<ILogger, Logger>();
         }
     }
 }

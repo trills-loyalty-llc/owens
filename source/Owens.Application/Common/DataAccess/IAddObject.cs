@@ -19,6 +19,6 @@ namespace Owens.Application.Common.DataAccess
         /// <param name="aggregateRoot">The <see cref="IAggregateRoot"/> object.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<bool> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken);
+        Task<int> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken);
     }
 }
