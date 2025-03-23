@@ -31,7 +31,7 @@ namespace Owens.Application.Members.Register
 
             var result = await _memberRepository.AddMember(member, userInformation, cancellationToken);
 
-            if (!result)
+            if (result < 1)
             {
                 return OperationCouldNotBeCompleted();
             }

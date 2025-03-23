@@ -13,6 +13,9 @@ using Owens.Tests.Integration.Common;
 
 namespace Owens.Tests.Integration.Application.Members
 {
+    /// <summary>
+    /// Tests for the <see cref="GetMemberByIdHandler"/> class.
+    /// </summary>
     [TestClass]
     public class GetMemberByIdHandlerTests
     {

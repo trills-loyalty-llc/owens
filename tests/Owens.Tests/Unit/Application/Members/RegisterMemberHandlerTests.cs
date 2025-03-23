@@ -37,7 +37,7 @@ namespace Owens.Tests.Unit.Application.Members
         public async Task Handle_Failure_IsCorrect()
         {
             _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
-                .ReturnsAsync(false);
+                .ReturnsAsync(1);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 
@@ -52,7 +52,7 @@ namespace Owens.Tests.Unit.Application.Members
         public async Task Handle_Success_IsCorrect()
         {
             _memberRepository.Setup(x => x.AddMember(It.IsAny<Member>(), It.IsAny<UserInformation>(), CancellationToken.None))
-                .ReturnsAsync(true);
+                .ReturnsAsync(1);
 
             var result = await _handler.Handle(new RegisterMemberRequest(), CancellationToken.None);
 
