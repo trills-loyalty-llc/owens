@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Contracts.Users.Register;
+using Owens.Application.Users.Register;
 using Owens.Domain.Users;
 
 namespace Owens.Application.Users.Common

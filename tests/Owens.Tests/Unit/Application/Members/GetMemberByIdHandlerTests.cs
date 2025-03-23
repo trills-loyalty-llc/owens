@@ -6,7 +6,6 @@ using MediatorBuddy;
 using Moq;
 using Owens.Application.Members.Common;
 using Owens.Application.Members.GetById;
-using Owens.Contracts.Members.GetById;
 using Owens.Domain.Members;
 
 namespace Owens.Tests.Unit.Application.Members

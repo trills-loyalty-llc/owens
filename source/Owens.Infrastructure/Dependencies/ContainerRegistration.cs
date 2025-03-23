@@ -3,11 +3,11 @@
 // </copyright>
 
 using ChainStrategy.Registration;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Application.Members.Common;
 using Owens.Infrastructure.Common.HealthChecks;
+using Owens.Infrastructure.Common.Logging;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
 
@@ -30,7 +30,7 @@ namespace Owens.Infrastructure.Dependencies
             services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Application);
 
             // Data Access
-            services.AddDbContext<ApplicationContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Database")));
+            services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
 
             services.AddTransient<IMemberRepository, MemberRepository>();
 
@@ -44,6 +44,9 @@ namespace Owens.Infrastructure.Dependencies
                 .AddResourceUtilizationHealthCheck();
 
             services.AddTransient<IHealthCheckService, HealthCheckManager>();
+
+            // Logging
+            services.AddTransient<ILogger, Logger>();
         }
     }
 }

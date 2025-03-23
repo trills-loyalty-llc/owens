@@ -14,14 +14,30 @@ namespace Owens.Infrastructure.HealthChecks
     {
        private HealthCheckResponse(HealthReport healthReport)
        {
-            HealthReport = healthReport;
+           Entries = healthReport.Entries
+               .Select(pair => KeyValuePair.Create(pair.Key, HealthReportEntryResponse.FromEntry(pair.Value)))
+               .ToDictionary();
+           TotalDuration = healthReport.TotalDuration;
+           Status = healthReport.Status;
        }
 
+       /// <summary>
+       /// Gets the health report entries.
+       /// </summary>
+       [Required]
+       public IDictionary<string, HealthReportEntryResponse> Entries { get; init; }
+
         /// <summary>
-        /// Gets the health report.
+        /// Gets the total health check duration.
         /// </summary>
        [Required]
-       public HealthReport HealthReport { get; }
+       public TimeSpan TotalDuration { get; init; }
+
+        /// <summary>
+        /// Gets the total health status.
+        /// </summary>
+       [Required]
+       public HealthStatus Status { get; init; }
 
        /// <summary>
        /// Instantiates a response for a health check.

@@ -2,6 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using MediatorBuddy;
 using MediatR;
 
 namespace Owens.Infrastructure.ErrorHandling

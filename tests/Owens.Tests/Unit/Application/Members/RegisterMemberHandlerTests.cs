@@ -6,7 +6,6 @@ using MediatorBuddy;
 using Moq;
 using Owens.Application.Members.Common;
 using Owens.Application.Members.Register;
-using Owens.Contracts.Members.Register;
 using Owens.Domain.Members;
 using Owens.Domain.Users;
 

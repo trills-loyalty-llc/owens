@@ -3,9 +3,9 @@
 // </copyright>
 
 using MediatorBuddy;
-using Owens.Contracts.Common;
+using Owens.Application.Common.Contracts;
 
-namespace Owens.Contracts.Members.GetById
+namespace Owens.Application.Members.GetById
 {
     /// <inheritdoc cref="IEnvelopeRequest" />
     public class GetMemberByIdRequest : EntityRequest, IEnvelopeRequest<GetMemberByIdResponse>

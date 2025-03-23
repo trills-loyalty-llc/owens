@@ -5,7 +5,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Owens.Application.Members.GetById;
-using Owens.Contracts.Members.GetById;
 using Owens.Domain.Members;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;

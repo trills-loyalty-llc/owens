@@ -5,7 +5,6 @@
 using MediatorBuddy;
 using Owens.Application.Members.Common;
 using Owens.Application.Users.Common;
-using Owens.Contracts.Members.Register;
 
 namespace Owens.Application.Members.Register
 {

@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Owens.Contracts.Users.Register
+namespace Owens.Application.Users.Register
 {
     /// <summary>
     /// Request object registering users.

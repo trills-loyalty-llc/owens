@@ -4,7 +4,6 @@
 
 using MediatorBuddy;
 using Owens.Application.Members.Common;
-using Owens.Contracts.Members.GetById;
 
 namespace Owens.Application.Members.GetById
 {

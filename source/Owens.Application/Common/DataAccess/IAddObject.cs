@@ -2,9 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.GuidPrimary;
+using Owens.Domain.Common;
 
-namespace Owens.Application.Common.Interfaces
+namespace Owens.Application.Common.DataAccess
 {
     /// <summary>
     /// Interface for adding an object to the persistence.
@@ -19,6 +19,6 @@ namespace Owens.Application.Common.Interfaces
         /// <param name="aggregateRoot">The <see cref="IAggregateRoot"/> object.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<bool> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken);
+        Task<int> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken);
     }
 }

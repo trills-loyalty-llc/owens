@@ -2,7 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using ClearDomain.GuidPrimary;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Owens.Application.Members.Common;
@@ -31,19 +30,16 @@ namespace Owens.Infrastructure.DataAccess.Members
         }
 
         /// <inheritdoc/>
-        public async Task<bool> AddMember(Member member, UserInformation userInformation, CancellationToken cancellationToken)
+        public async Task<int> AddMember(Member member, UserInformation userInformation, CancellationToken cancellationToken)
         {
             var user = User.FromInformation(member.Id, userInformation);
 
             await _userManager.CreateAsync(user, userInformation.Password);
 
-            await ApplicationContext.Members.AddAsync(member, cancellationToken);
-
-            var result = await ApplicationContext.SaveChangesAsync(cancellationToken);
-
-            await PublishEvents(new List<IAggregateRoot> { member }, cancellationToken);
-
-            return result > 0;
+            return await ExecuteCommand(
+                members => members.AddAsync(member, cancellationToken).AsTask(),
+                cancellationToken,
+                member);
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="ChainStrategy" Version="1.0.0" />
-    <PackageReference Include="MediatorBuddy" Version="0.9.3" />
+    <PackageReference Include="ChainStrategy" Version="1.1.0" />
+    <PackageReference Include="MediatorBuddy" Version="0.9.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Owens.Contracts\Owens.Contracts.csproj" />
     <ProjectReference Include="..\Owens.Domain\Owens.Domain.csproj" />
   </ItemGroup>
 
