@@ -54,21 +54,14 @@ namespace Owens.Infrastructure.DataAccess.Common
             return result.FirstOrDefault();
         }
 
-        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<DbSet<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction, CancellationToken cancellationToken)
-        {
-            try
-            {
-                return await executionFunction.Invoke(_context.Set<TAggregateRoot>());
-            }
-            catch (Exception exception)
-            {
-                await _publisher.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
-
-                return new List<TAggregateRoot>();
-            }
-        }
-
-        private async Task<int> ExecuteCommand(Func<DbSet<TAggregateRoot>, Task> executionFunction, CancellationToken cancellationToken, params TAggregateRoot[] aggregateRoots)
+        /// <summary>
+        /// Performs a command operation.
+        /// </summary>
+        /// <param name="executionFunction">A <see cref="Func{TResult}"/> to execute.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <param name="aggregateRoots">A <see cref="IEnumerable{T}"/> of roots.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        protected async Task<int> ExecuteCommand(Func<DbSet<TAggregateRoot>, Task> executionFunction, CancellationToken cancellationToken, params TAggregateRoot[] aggregateRoots)
         {
             try
             {
@@ -96,6 +89,20 @@ namespace Owens.Infrastructure.DataAccess.Common
                 await _publisher.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
 
                 return ApplicationStatus.GeneralError;
+            }
+        }
+
+        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<DbSet<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await executionFunction.Invoke(_context.Set<TAggregateRoot>());
+            }
+            catch (Exception exception)
+            {
+                await _publisher.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
+
+                return new List<TAggregateRoot>();
             }
         }
     }

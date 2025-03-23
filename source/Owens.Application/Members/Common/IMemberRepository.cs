@@ -21,6 +21,6 @@ namespace Owens.Application.Members.Common
         /// <param name="userInformation">A <see cref="UserInformation"/> class.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<bool> AddMember(Member member, UserInformation userInformation, CancellationToken cancellationToken);
+        Task<int> AddMember(Member member, UserInformation userInformation, CancellationToken cancellationToken);
     }
 }
