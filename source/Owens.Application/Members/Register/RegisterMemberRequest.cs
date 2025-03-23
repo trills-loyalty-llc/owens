@@ -3,6 +3,7 @@
 // </copyright>
 
 using MediatorBuddy;
+using Owens.Application.Users.Register;
 
 namespace Owens.Application.Members.Register
 {

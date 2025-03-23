@@ -2,6 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Application.Common.Contracts;
+
 namespace Owens.Application.Members.GetById
 {
     /// <inheritdoc />

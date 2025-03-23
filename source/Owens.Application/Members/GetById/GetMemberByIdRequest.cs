@@ -3,6 +3,7 @@
 // </copyright>
 
 using MediatorBuddy;
+using Owens.Application.Common.Contracts;
 
 namespace Owens.Application.Members.GetById
 {
