@@ -5,7 +5,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Owens.Infrastructure.Common.DataAccess;
 
-namespace Owens.Infrastructure.Common.Logging
+namespace Owens.Infrastructure.Common.Logging.Common
 {
     /// <inheritdoc />
     public class LogTypeBuilder : EntityTypeConfigurationBase<Log>

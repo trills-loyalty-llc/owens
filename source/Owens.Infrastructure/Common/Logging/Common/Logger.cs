@@ -4,7 +4,7 @@
 
 using Owens.Infrastructure.DataAccess.Common;
 
-namespace Owens.Infrastructure.Common.Logging
+namespace Owens.Infrastructure.Common.Logging.Common
 {
     /// <inheritdoc />
     internal class Logger : ILogger

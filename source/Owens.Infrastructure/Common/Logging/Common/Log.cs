@@ -4,7 +4,7 @@
 
 using Owens.Domain.Common;
 
-namespace Owens.Infrastructure.Common.Logging
+namespace Owens.Infrastructure.Common.Logging.Common
 {
     /// <inheritdoc />
     public class Log : AggregateRoot

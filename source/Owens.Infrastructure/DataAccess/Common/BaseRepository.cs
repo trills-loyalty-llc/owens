@@ -17,7 +17,8 @@ namespace Owens.Infrastructure.DataAccess.Common
     /// <typeparam name="TAggregateRoot">The type of the aggregate root.</typeparam>
     public abstract class BaseRepository<TAggregateRoot> :
         IAddObject<TAggregateRoot>,
-        IGetObjectById<TAggregateRoot>
+        IGetObjectById<TAggregateRoot>,
+        IGetPagination<TAggregateRoot>
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly IPublisher _publisher;
@@ -52,6 +53,22 @@ namespace Owens.Infrastructure.DataAccess.Common
                 cancellationToken);
 
             return result.FirstOrDefault();
+        }
+
+        /// <inheritdoc />
+        public async Task<PaginationResult<TAggregateRoot>> GetPaginatedRoots(PaginationQuery<TAggregateRoot> query, CancellationToken cancellationToken)
+        {
+            var totalCount = await _context.Set<TAggregateRoot>()
+                .Where(query.Query)
+                .CountAsync(cancellationToken);
+
+            var resultList = await _context.Set<TAggregateRoot>()
+                .Where(query.Query)
+                .Skip(query.Skip)
+                .Take(query.Take)
+                .ToListAsync(cancellationToken);
+
+            return new PaginationResult<TAggregateRoot>(resultList, totalCount);
         }
 
         /// <summary>

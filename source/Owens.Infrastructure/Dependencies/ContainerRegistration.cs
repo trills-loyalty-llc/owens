@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Owens.Application.Members.Common;
 using Owens.Infrastructure.Common.HealthChecks;
 using Owens.Infrastructure.Common.Logging;
+using Owens.Infrastructure.Common.Logging.Common;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Members;
 
@@ -47,6 +48,7 @@ namespace Owens.Infrastructure.Dependencies
 
             // Logging
             services.AddTransient<ILogger, Logger>();
+            services.AddTransient<ILogRepository, LogRepository>();
         }
     }
 }

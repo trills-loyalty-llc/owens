@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Owens.Domain.Members;
-using Owens.Infrastructure.Common.Logging;
+using Owens.Infrastructure.Common.Logging.Common;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Identity.Models;
 
