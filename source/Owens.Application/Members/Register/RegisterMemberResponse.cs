@@ -2,9 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Contracts.Common;
+using Owens.Application.Common.Contracts;
 
-namespace Owens.Contracts.Members.Register
+namespace Owens.Application.Members.Register
 {
     /// <inheritdoc />
     public class RegisterMemberResponse : EntityResponse

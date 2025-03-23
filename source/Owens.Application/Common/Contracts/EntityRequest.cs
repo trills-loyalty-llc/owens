@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Owens.Contracts.Common
+namespace Owens.Application.Common.Contracts
 {
     /// <summary>
     /// Request object for all entities.

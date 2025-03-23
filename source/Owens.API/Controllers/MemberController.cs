@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Owens.API.Common;
-using Owens.Contracts.Members.Register;
+using Owens.Application.Members.Register;
 
 namespace Owens.API.Controllers
 {

@@ -6,7 +6,7 @@ using MediatorBuddy;
 using MediatorBuddy.AspNet;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Owens.Contracts.Common;
+using Owens.Application.Common.Contracts;
 
 namespace Owens.API.Common
 {

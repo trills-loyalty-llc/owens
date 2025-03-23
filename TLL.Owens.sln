@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Domain", "source\Owens.Domain\Owens.Domain.csproj", "{B8F0BEFA-B068-435E-8372-6FE04929E70B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Contracts", "source\Owens.Contracts\Owens.Contracts.csproj", "{61078190-58DE-4349-8906-7EA645D089D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Application", "source\Owens.Application\Owens.Application.csproj", "{DB1BBD6A-E1C5-40B8-9E38-509F7EC1DFBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owens.Infrastructure", "source\Owens.Infrastructure\Owens.Infrastructure.csproj", "{21621E22-6359-4631-B575-41C9DADE360C}"
@@ -30,10 +28,6 @@ Global
 		{B8F0BEFA-B068-435E-8372-6FE04929E70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8F0BEFA-B068-435E-8372-6FE04929E70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8F0BEFA-B068-435E-8372-6FE04929E70B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61078190-58DE-4349-8906-7EA645D089D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61078190-58DE-4349-8906-7EA645D089D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61078190-58DE-4349-8906-7EA645D089D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61078190-58DE-4349-8906-7EA645D089D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DB1BBD6A-E1C5-40B8-9E38-509F7EC1DFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB1BBD6A-E1C5-40B8-9E38-509F7EC1DFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB1BBD6A-E1C5-40B8-9E38-509F7EC1DFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU

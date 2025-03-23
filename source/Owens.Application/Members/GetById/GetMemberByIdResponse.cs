@@ -2,9 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Contracts.Common;
-
-namespace Owens.Contracts.Members.GetById
+namespace Owens.Application.Members.GetById
 {
     /// <inheritdoc />
     public class GetMemberByIdResponse : EntityResponse
