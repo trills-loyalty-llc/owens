@@ -28,12 +28,12 @@ namespace Owens.Application.Common.Contracts
         /// Gets the paginated entities.
         /// </summary>
         [Required]
-        public IEnumerable<TEntity> Entities { get; }
+        public IEnumerable<TEntity> Entities { get; init; }
 
         /// <summary>
         /// Gets the total paginated count.
         /// </summary>
         [Required]
-        public int TotalCount { get; }
+        public int TotalCount { get; init; }
     }
 }
