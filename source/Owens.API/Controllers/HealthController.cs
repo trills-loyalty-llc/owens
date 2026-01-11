@@ -2,11 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Owens.API.Common;
-using Owens.Infrastructure.Common.Logging.GetLogs;
 using Owens.Infrastructure.HealthChecks;
+using Owens.Infrastructure.Logging.Common;
+using Owens.Infrastructure.Logging.GetLogs;
+using Owens.Infrastructure.Logging.Services;
 
 namespace Owens.API.Controllers
 {
@@ -15,13 +16,20 @@ namespace Owens.API.Controllers
     [Route("health")]
     public class HealthController : BaseController
     {
+        private readonly IHealthCheckService _service;
+        private readonly ILoggingService _loggingService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthController"/> class.
         /// </summary>
-        /// <param name="mediator">An instance of the <see cref="IMediator"/> interface.</param>
-        public HealthController(IMediator mediator)
-            : base(mediator)
+        /// <param name="logger">An instance of the <see cref="ILogger{TCategoryName}"/> interface.</param>
+        /// <param name="service">An instance of the <see cref="IHealthCheckService"/> interface.</param>
+        /// <param name="loggingService">An instance of the <see cref="ILogRepository"/> interface.</param>
+        public HealthController(ILogger<HealthController> logger, IHealthCheckService service, ILoggingService loggingService)
+            : base(logger)
         {
+            _service = service;
+            _loggingService = loggingService;
         }
 
         /// <summary>
@@ -33,7 +41,7 @@ namespace Owens.API.Controllers
         [ProducesResponseType<HealthCheckResponse>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken = default)
         {
-            return await ExecuteOkObject(new HealthCheckRequest(), cancellationToken);
+            return await ExecuteOkObject(_service.HealthCheckAsync, new HealthCheckRequest(), cancellationToken);
         }
 
         /// <summary>
@@ -47,7 +55,7 @@ namespace Owens.API.Controllers
         [ProducesResponseType<GetLogsResponse>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetLogs(int skip = 0, int take = 10, CancellationToken cancellationToken = default)
         {
-            return await ExecuteOkObject(new GetLogsRequest(skip, take), cancellationToken);
+            return await ExecuteOkObject(_loggingService.GetLogs, new GetLogsRequest(skip, take), cancellationToken);
         }
     }
 }

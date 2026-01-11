@@ -18,8 +18,6 @@ namespace Owens.Tests.Integration.Common
         {
             using (var context = new ApplicationContext(IntegrationHelpers.GetApplicationOptions()))
             {
-                context.Members.RemoveRange(context.Members);
-
                 context.SaveChanges();
             }
         }

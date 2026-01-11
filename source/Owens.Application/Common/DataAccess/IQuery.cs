@@ -3,7 +3,7 @@
 // </copyright>
 
 using System.Linq.Expressions;
-using Owens.Domain.Common;
+using ClearDomain.GuidPrimary;
 
 namespace Owens.Application.Common.DataAccess
 {

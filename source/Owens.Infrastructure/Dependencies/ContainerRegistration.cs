@@ -5,12 +5,10 @@
 using ChainStrategy.Registration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Owens.Application.Members.Common;
-using Owens.Infrastructure.Common.HealthChecks;
-using Owens.Infrastructure.Common.Logging;
-using Owens.Infrastructure.Common.Logging.Common;
 using Owens.Infrastructure.DataAccess.Common;
-using Owens.Infrastructure.DataAccess.Members;
+using Owens.Infrastructure.DataAccess.Logging;
+using Owens.Infrastructure.HealthChecks;
+using Owens.Infrastructure.Logging.Common;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -27,13 +25,10 @@ namespace Owens.Infrastructure.Dependencies
         public static void RegisterDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             // Application
-            services.AddMediatR(serviceConfiguration => serviceConfiguration.RegisterServicesFromAssemblies(AssemblyConstants.Infrastructure, AssemblyConstants.Application));
             services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Application);
 
             // Data Access
             services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
-
-            services.AddTransient<IMemberRepository, MemberRepository>();
 
             // Time
             services.AddSingleton(_ => TimeProvider.System);

@@ -2,12 +2,12 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatR;
-
 namespace Owens.Infrastructure.ErrorHandling
 {
-    /// <inheritdoc />
-    public class GeneralExceptionOccurred : INotification
+    /// <summary>
+    /// Base class for global exception.
+    /// </summary>
+    public class GeneralExceptionOccurred
     {
         private GeneralExceptionOccurred(Exception exception)
         {

@@ -3,14 +3,11 @@
 // </copyright>
 
 using FluentValidation;
-using Owens.Domain.Clients;
-using Owens.Domain.Members;
 
 namespace Owens.Domain.Users
 {
     /// <summary>
     /// Represents an intermediate state of a User during the registration process.
-    /// A User can refer to either a <see cref="Member"/> or <see cref="Client"/>.
     /// </summary>
     public class UserInformation
     {

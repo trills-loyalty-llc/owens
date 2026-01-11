@@ -2,12 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatorBuddy;
-using MediatR;
+using ClearDomain.GuidPrimary;
 using Microsoft.EntityFrameworkCore;
 using Owens.Application.Common.DataAccess;
-using Owens.Domain.Common;
-using Owens.Infrastructure.ErrorHandling;
 
 namespace Owens.Infrastructure.DataAccess.Common
 {
@@ -21,18 +18,14 @@ namespace Owens.Infrastructure.DataAccess.Common
         IGetPagination<TAggregateRoot>
         where TAggregateRoot : class, IAggregateRoot
     {
-        private readonly IPublisher _publisher;
-
         private readonly ApplicationContext _context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TAggregateRoot}"/> class.
         /// </summary>
-        /// <param name="publisher">An instance of the <see cref="IPublisher"/> interface.</param>
         /// <param name="applicationContext">An instance of the <see cref="ApplicationContext"/> class.</param>
-        protected BaseRepository(IPublisher publisher, ApplicationContext applicationContext)
+        protected BaseRepository(ApplicationContext applicationContext)
         {
-            _publisher = publisher;
             _context = applicationContext;
         }
 
@@ -86,26 +79,11 @@ namespace Owens.Infrastructure.DataAccess.Common
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
 
-                if (result > 0)
-                {
-                    foreach (var aggregateRoot in aggregateRoots)
-                    {
-                        foreach (var domainEvent in aggregateRoot.DomainEvents)
-                        {
-                            await _publisher.Publish(domainEvent, cancellationToken);
-                        }
-                    }
-
-                    return ApplicationStatus.Success;
-                }
-
-                return ApplicationStatus.GeneralError;
+                return result;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                await _publisher.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
-
-                return ApplicationStatus.GeneralError;
+                throw;
             }
         }
 
@@ -115,10 +93,8 @@ namespace Owens.Infrastructure.DataAccess.Common
             {
                 return await executionFunction.Invoke(_context.Set<TAggregateRoot>());
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                await _publisher.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
-
                 return new List<TAggregateRoot>();
             }
         }

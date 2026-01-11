@@ -3,8 +3,8 @@
 // </copyright>
 
 using System.Linq.Expressions;
+using ClearDomain.GuidPrimary;
 using Owens.Application.Common.Contracts;
-using Owens.Domain.Common;
 
 namespace Owens.Application.Common.DataAccess
 {

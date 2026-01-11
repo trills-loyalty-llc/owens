@@ -3,17 +3,16 @@
 // </copyright>
 
 using System.Text.RegularExpressions;
-using Owens.Domain.Members;
 
 namespace Owens.Infrastructure.Identity.Models
 {
     /// <summary>
-    /// Requirements for <see cref="Member"/> passwords.
+    /// Requirements for <see cref="User"/> passwords.
     /// </summary>
     public class PasswordRequirements
     {
         /// <summary>
-        /// Gets the minimum password length for a <see cref="Member"/>.
+        /// Gets the minimum password length for a <see cref="User"/>.
         /// </summary>
         public const int MinimumPasswordLength = 8;
 

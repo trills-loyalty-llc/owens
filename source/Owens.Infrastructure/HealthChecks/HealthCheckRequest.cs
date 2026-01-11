@@ -2,12 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using MediatorBuddy;
-
 namespace Owens.Infrastructure.HealthChecks
 {
-    /// <inheritdoc />
-    public class HealthCheckRequest : IEnvelopeRequest<HealthCheckResponse>
+    public class HealthCheckRequest
     {
     }
 }

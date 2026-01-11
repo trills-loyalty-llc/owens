@@ -5,10 +5,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Owens.Domain.Members;
-using Owens.Infrastructure.Common.Logging.Common;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Identity.Models;
+using Owens.Infrastructure.Logging.Common;
 
 namespace Owens.Infrastructure.DataAccess.Common
 {
@@ -24,14 +23,8 @@ namespace Owens.Infrastructure.DataAccess.Common
         {
             Database.EnsureCreated();
 
-            Members = Set<Member>();
             Logs = Set<Log>();
         }
-
-        /// <summary>
-        /// Gets the program members.
-        /// </summary>
-        public DbSet<Member> Members { get; }
 
         /// <summary>
         /// Gets the application logs.

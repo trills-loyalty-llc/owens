@@ -24,6 +24,6 @@ namespace Owens.Application.Common.Contracts
         /// Gets the entity identifier. Init modifier is required for OpenAPI.
         /// </summary>
         [Required]
-        public Guid Id { get; init; }
+        public Guid Id { get; }
     }
 }

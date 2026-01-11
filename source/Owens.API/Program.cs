@@ -2,11 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.Reflection;
-using MediatorBuddy.AspNet.Registration;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Identity.Models;
-using Scalar.AspNetCore;
+using Serilog;
 
 namespace Owens.API
 {
@@ -25,15 +23,16 @@ namespace Owens.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
-            builder.Services.AddOpenApi();
             builder.Services.RegisterDependencies(builder.Configuration);
-            builder.Services.AddMediatorBuddy(configuration => configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             builder.Services.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            app.MapOpenApi();
-            app.MapScalarApiReference();
+            app.UseSerilogRequestLogging();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 
