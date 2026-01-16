@@ -9,6 +9,8 @@ using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Logging;
 using Owens.Infrastructure.HealthChecks;
 using Owens.Infrastructure.Logging.Common;
+using Owens.Infrastructure.Logging.Services;
+using Serilog;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -42,8 +44,15 @@ namespace Owens.Infrastructure.Dependencies
             services.AddTransient<IHealthCheckService, HealthCheckManager>();
 
             // Logging
-            services.AddTransient<ILogger, Logger>();
+            services.AddTransient<ILoggingService, LoggingService>();
             services.AddTransient<ILogRepository, LogRepository>();
+
+            services.AddSerilog((serviceProvider, lc) => lc
+                .ReadFrom.Configuration(configuration)
+                .ReadFrom.Services(serviceProvider)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.Debug());
         }
     }
 }

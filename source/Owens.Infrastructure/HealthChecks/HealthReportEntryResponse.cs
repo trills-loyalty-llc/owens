@@ -21,7 +21,6 @@ namespace Owens.Infrastructure.HealthChecks
             Data = entry.Data.ToDictionary();
             Description = entry.Description ?? string.Empty;
             Duration = entry.Duration;
-            Exception = entry.Exception;
             Status = entry.Status;
             Tags = entry.Tags;
         }
@@ -30,36 +29,31 @@ namespace Owens.Infrastructure.HealthChecks
         /// Gets the entry data.
         /// </summary>
         [Required]
-        public IDictionary<string, object> Data { get; init; }
+        public IDictionary<string, object> Data { get; }
 
         /// <summary>
         /// Gets the entry description.
         /// </summary>
         [Required]
-        public string Description { get; init; }
+        public string Description { get; }
 
         /// <summary>
         /// Gets the duration to retrieve the entry.
         /// </summary>
         [Required]
-        public TimeSpan Duration { get; init; }
-
-        /// <summary>
-        /// Gets the optional exception if one was thrown.
-        /// </summary>
-        public Exception? Exception { get; init; }
+        public TimeSpan Duration { get; }
 
         /// <summary>
         /// Gets the status of the entry.
         /// </summary>
         [Required]
-        public HealthStatus Status { get; init; }
+        public HealthStatus Status { get; }
 
         /// <summary>
         /// Gets the tags associated with the entry.
         /// </summary>
         [Required]
-        public IEnumerable<string> Tags { get; init; }
+        public IEnumerable<string> Tags { get; }
 
         /// <summary>
         /// Static creation method.

@@ -4,6 +4,9 @@
 
 namespace Owens.Infrastructure.HealthChecks
 {
+    /// <summary>
+    /// Request object for health checks.
+    /// </summary>
     public class HealthCheckRequest
     {
     }

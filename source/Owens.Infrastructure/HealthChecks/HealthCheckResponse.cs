@@ -2,8 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Owens.Infrastructure.HealthChecks
 {
@@ -12,41 +12,41 @@ namespace Owens.Infrastructure.HealthChecks
     /// </summary>
     public class HealthCheckResponse
     {
-       private HealthCheckResponse(HealthReport healthReport)
-       {
-           Entries = healthReport.Entries
-               .Select(pair => KeyValuePair.Create(pair.Key, HealthReportEntryResponse.FromEntry(pair.Value)))
-               .ToDictionary();
-           TotalDuration = healthReport.TotalDuration;
-           Status = healthReport.Status;
-       }
+        private HealthCheckResponse(HealthReport healthReport)
+        {
+            Entries = healthReport.Entries
+                .Select(pair => KeyValuePair.Create(pair.Key, HealthReportEntryResponse.FromEntry(pair.Value)))
+                .ToDictionary();
+            TotalDuration = healthReport.TotalDuration;
+            Status = healthReport.Status;
+        }
 
-       /// <summary>
-       /// Gets the health report entries.
-       /// </summary>
-       [Required]
-       public IDictionary<string, HealthReportEntryResponse> Entries { get; init; }
+        /// <summary>
+        /// Gets the health report entries.
+        /// </summary>
+        [Required]
+        public IDictionary<string, HealthReportEntryResponse> Entries { get; }
 
         /// <summary>
         /// Gets the total health check duration.
         /// </summary>
-       [Required]
-       public TimeSpan TotalDuration { get; init; }
+        [Required]
+        public TimeSpan TotalDuration { get; }
 
         /// <summary>
         /// Gets the total health status.
         /// </summary>
-       [Required]
-       public HealthStatus Status { get; init; }
+        [Required]
+        public HealthStatus Status { get; }
 
-       /// <summary>
-       /// Instantiates a response for a health check.
-       /// </summary>
-       /// <param name="healthReport">A <see cref="HealthReport"/> class.</param>
-       /// <returns>A new instance of a <see cref="HealthCheckResponse"/>.</returns>
-       public static HealthCheckResponse FromReport(HealthReport healthReport)
-       {
-           return new HealthCheckResponse(healthReport);
-       }
+        /// <summary>
+        /// Instantiates a response for a health check.
+        /// </summary>
+        /// <param name="healthReport">A <see cref="HealthReport"/> class.</param>
+        /// <returns>A new instance of a <see cref="HealthCheckResponse"/>.</returns>
+        public static HealthCheckResponse FromReport(HealthReport healthReport)
+        {
+            return new HealthCheckResponse(healthReport);
+        }
     }
 }

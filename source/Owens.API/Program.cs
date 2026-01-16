@@ -22,6 +22,12 @@ namespace Owens.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.Debug()
+                .CreateBootstrapLogger();
+
             builder.Services.AddControllers();
             builder.Services.RegisterDependencies(builder.Configuration);
             builder.Services.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));

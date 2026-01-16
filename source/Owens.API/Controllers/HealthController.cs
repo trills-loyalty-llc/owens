@@ -13,7 +13,7 @@ namespace Owens.API.Controllers
 {
     /// <inheritdoc />
     [ApiController]
-    [Route("health")]
+    [Route("status")]
     public class HealthController : BaseController
     {
         private readonly IHealthCheckService _service;
