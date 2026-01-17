@@ -2,14 +2,15 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Owens.Domain.Members;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 using Owens.Infrastructure.Identity.Services;
+using System.Text;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -25,7 +26,7 @@ namespace Owens.Infrastructure.Dependencies
         /// <param name="tokenConfiguration">An instance of the <see cref="TokenConfiguration"/> class.</param>
         public static void AddAuthenticationDependencies(this IServiceCollection services, TokenConfiguration tokenConfiguration)
         {
-            services.AddIdentity<User, IdentityRole<Guid>>()
+            services.AddIdentity<Member, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
 
