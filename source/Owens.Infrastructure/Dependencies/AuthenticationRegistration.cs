@@ -27,13 +27,12 @@ namespace Owens.Infrastructure.Dependencies
         /// <param name="configuration">An instance of the <see cref="IConfiguration"/> interface.</param>
         public static void AddAuthenticationDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<Member, IdentityRole<Guid>>()
             var tokenConfiguration = new TokenConfiguration(
                 configuration["Security:Audience"] ?? throw new ArgumentNullException(nameof(configuration), "Audience was null"),
                 configuration["Security:Issuer"] ?? throw new ArgumentNullException(nameof(configuration), "Issuer was null"),
                 configuration["Security:Key"] ?? throw new ArgumentNullException(nameof(configuration), "Key was null"));
 
-            services.AddIdentity<User, IdentityRole<Guid>>()
+            services.AddIdentity<Member, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
 

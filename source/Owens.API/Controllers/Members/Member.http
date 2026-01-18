@@ -1,6 +1,5 @@
-@Owens.API_HostAddress = https://localhost:7004
 
-POST {{Owens.API_HostAddress}}/member
+POST {{HostAddress}}/member
 Content-Type: application/json
 
 {

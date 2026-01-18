@@ -2,17 +2,18 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Domain.Members;
 using System.Text.RegularExpressions;
 
 namespace Owens.Infrastructure.Identity.Models
 {
     /// <summary>
-    /// Requirements for <see cref="User"/> passwords.
+    /// Requirements for <see cref="Member"/> passwords.
     /// </summary>
     public class PasswordRequirements
     {
         /// <summary>
-        /// Gets the minimum password length for a <see cref="User"/>.
+        /// Gets the minimum password length for a <see cref="Member"/>.
         /// </summary>
         public const int MinimumPasswordLength = 8;
 

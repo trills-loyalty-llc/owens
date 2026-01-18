@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Dependencies;
-using Owens.Infrastructure.Identity.Models;
 
 namespace Owens.Tests.Integration.Common
 {
@@ -78,7 +77,7 @@ namespace Owens.Tests.Integration.Common
 
                 collection.RegisterDependencies(configuration);
                 collection.AddLogging();
-                collection.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
+                collection.AddAuthenticationDependencies(configuration);
 
                 var provider = collection.BuildServiceProvider();
                 _serviceProvider = provider;
