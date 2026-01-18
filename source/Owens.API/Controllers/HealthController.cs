@@ -13,7 +13,7 @@ namespace Owens.API.Controllers
 {
     /// <inheritdoc />
     [ApiController]
-    [Route("status")]
+    [Route("health")]
     public class HealthController : BaseController
     {
         private readonly IHealthCheckService _service;
@@ -37,7 +37,7 @@ namespace Owens.API.Controllers
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [HttpGet("health", Name = "HealthCheck")]
+        [HttpGet("health", Name = "GetHealthChecks")]
         [ProducesResponseType<HealthCheckResponse>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken = default)
         {
@@ -51,7 +51,7 @@ namespace Owens.API.Controllers
         /// <param name="take">The number of logs to return.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [HttpGet("logs", Name = "Logs")]
+        [HttpGet("logs", Name = "GetLogs")]
         [ProducesResponseType<GetLogsResponse>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetLogs(int skip = 0, int take = 10, CancellationToken cancellationToken = default)
         {

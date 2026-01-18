@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Owens.Domain.Members;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 using Owens.Infrastructure.Identity.Services;
@@ -26,6 +27,7 @@ namespace Owens.Infrastructure.Dependencies
         /// <param name="configuration">An instance of the <see cref="IConfiguration"/> interface.</param>
         public static void AddAuthenticationDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddIdentity<Member, IdentityRole<Guid>>()
             var tokenConfiguration = new TokenConfiguration(
                 configuration["Security:Audience"] ?? throw new ArgumentNullException(nameof(configuration), "Audience was null"),
                 configuration["Security:Issuer"] ?? throw new ArgumentNullException(nameof(configuration), "Issuer was null"),

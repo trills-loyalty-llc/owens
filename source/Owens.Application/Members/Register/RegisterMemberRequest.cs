@@ -1,15 +1,15 @@
-﻿// <copyright file="RegisterUserRequest.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="RegisterMemberRequest.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Owens.Application.Users.Register
+namespace Owens.Application.Members.Register
 {
     /// <summary>
     /// Request object registering users.
     /// </summary>
-    public abstract class RegisterUserRequest
+    public abstract class RegisterMemberRequest
     {
         /// <summary>
         /// Gets the username.
