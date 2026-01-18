@@ -2,14 +2,15 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.Identity.Models;
 using Owens.Infrastructure.Identity.Services;
+using System.Text;
 
 namespace Owens.Infrastructure.Dependencies
 {
@@ -22,9 +23,14 @@ namespace Owens.Infrastructure.Dependencies
         /// Registers all Authentication based dependencies.
         /// </summary>
         /// <param name="services">An instance of the <see cref="IServiceCollection"/> interface.</param>
-        /// <param name="tokenConfiguration">An instance of the <see cref="TokenConfiguration"/> class.</param>
-        public static void AddAuthenticationDependencies(this IServiceCollection services, TokenConfiguration tokenConfiguration)
+        /// <param name="configuration">An instance of the <see cref="IConfiguration"/> interface.</param>
+        public static void AddAuthenticationDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            var tokenConfiguration = new TokenConfiguration(
+                configuration["Security:Audience"] ?? throw new ArgumentNullException(nameof(configuration), "Audience was null"),
+                configuration["Security:Issuer"] ?? throw new ArgumentNullException(nameof(configuration), "Issuer was null"),
+                configuration["Security:Key"] ?? throw new ArgumentNullException(nameof(configuration), "Key was null"));
+
             services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();

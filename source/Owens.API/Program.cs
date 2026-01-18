@@ -3,8 +3,8 @@
 // </copyright>
 
 using Owens.Infrastructure.Dependencies;
-using Owens.Infrastructure.Identity.Models;
 using Serilog;
+using System.Reflection;
 
 namespace Owens.API
 {
@@ -30,8 +30,13 @@ namespace Owens.API
 
             builder.Services.AddControllers();
             builder.Services.RegisterDependencies(builder.Configuration);
-            builder.Services.AddAuthenticationDependencies(new TokenConfiguration(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString()));
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddAuthenticationDependencies(builder.Configuration);
+            builder.Services.AddSwaggerGen(options =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+            });
 
             var app = builder.Build();
 
