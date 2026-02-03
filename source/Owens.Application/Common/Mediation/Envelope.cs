@@ -17,11 +17,17 @@ namespace Owens.Application.Common.Mediation
         public Envelope(TResponse response)
         {
             Response = response;
+            Status = ApplicationStatus.Success;
         }
 
         /// <summary>
         /// Gets the response object.
         /// </summary>
         public TResponse Response { get; }
+
+        /// <summary>
+        /// Gets the application status.
+        /// </summary>
+        public int Status { get; }
     }
 }

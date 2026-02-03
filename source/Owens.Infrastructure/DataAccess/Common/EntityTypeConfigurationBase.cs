@@ -10,21 +10,22 @@ namespace Owens.Infrastructure.DataAccess.Common
 {
     /// <inheritdoc />
     public abstract class EntityTypeConfigurationBase<TRoot> : IEntityTypeConfiguration<TRoot>
-        where TRoot : class, IAggregateRoot
+        where TRoot : class, IEntity
     {
         /// <inheritdoc />
         public void Configure(EntityTypeBuilder<TRoot> builder)
         {
             builder.Property(root => root.Id).ValueGeneratedNever();
-            builder.Ignore(root => root.DomainEvents);
 
-            ConfigureRoot(builder);
+            ConfigureEntity(builder);
         }
 
         /// <summary>
         /// Adds additional entity configuration.
         /// </summary>
         /// <param name="builder">A <see cref="EntityTypeBuilder{TEntity}"/> object.</param>
-        protected abstract void ConfigureRoot(EntityTypeBuilder<TRoot> builder);
+        protected virtual void ConfigureEntity(EntityTypeBuilder<TRoot> builder)
+        {
+        }
     }
 }

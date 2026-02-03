@@ -9,7 +9,7 @@ using Owens.Infrastructure.DataAccess.Common;
 namespace Owens.Infrastructure.DataAccess.Members
 {
     /// <inheritdoc />
-    public class MemberTypeBuilder : EntityTypeConfigurationBase<Member>
+    public class MemberTypeBuilder : AggregateRootConfigurationBase<Member>
     {
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<Member> builder)

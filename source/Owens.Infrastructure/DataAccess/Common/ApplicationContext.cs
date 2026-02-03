@@ -5,7 +5,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Owens.Domain.Attractions;
 using Owens.Domain.Members;
+using Owens.Domain.Operators;
+using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.Logging.Common;
 
@@ -23,8 +26,26 @@ namespace Owens.Infrastructure.DataAccess.Common
         {
             Database.EnsureCreated();
 
+            Operators = Set<ResortOperator>();
+            ThemeParks = Set<ThemePark>();
+            Attractions = Set<Attraction>();
             Logs = Set<Log>();
         }
+
+        /// <summary>
+        /// Gets the operators set.
+        /// </summary>
+        public DbSet<ResortOperator> Operators { get; }
+
+        /// <summary>
+        /// Gets the theme parks set.
+        /// </summary>
+        public DbSet<ThemePark> ThemeParks { get; }
+
+        /// <summary>
+        /// Gets the attractions set.
+        /// </summary>
+        public DbSet<Attraction> Attractions { get; }
 
         /// <summary>
         /// Gets the application logs.

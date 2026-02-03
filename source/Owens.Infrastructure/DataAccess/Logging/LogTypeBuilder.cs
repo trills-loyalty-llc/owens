@@ -9,7 +9,7 @@ using Owens.Infrastructure.Logging.Common;
 namespace Owens.Infrastructure.DataAccess.Logging
 {
     /// <inheritdoc />
-    public class LogTypeBuilder : EntityTypeConfigurationBase<Log>
+    public class LogTypeBuilder : AggregateRootConfigurationBase<Log>
     {
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<Log> builder)

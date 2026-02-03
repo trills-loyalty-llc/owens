@@ -3,6 +3,7 @@
 // </copyright>
 
 using ChainStrategy.Registration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NMediation.Dependencies;
@@ -30,6 +31,12 @@ namespace Owens.Infrastructure.Dependencies
 
             // Data Access
             services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
+
+            // Spool up the database for rapid creation if a model was changed.
+            using (var context = new ApplicationContext(new DbContextOptionsBuilder().UseSqlServer(configuration.GetConnectionString("Database")).Options))
+            {
+                context.Database.EnsureCreated();
+            }
 
             // Time
             services.AddSingleton(_ => TimeProvider.System);

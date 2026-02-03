@@ -53,11 +53,11 @@ namespace Owens.API.Common
         {
             try
             {
-                var response = await _mediation.Mediate(payload, cancellationToken);
+                var envelope = await _mediation.Mediate(payload, cancellationToken);
 
-                if (response != null)
+                if (envelope.Status == ApplicationStatus.Success)
                 {
-                    return resultFunc.Invoke(response.Response);
+                    return resultFunc.Invoke(envelope.Response);
                 }
             }
             catch (Exception exception)

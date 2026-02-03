@@ -4,7 +4,9 @@
 
 using ClearDomain.GuidPrimary;
 using Microsoft.EntityFrameworkCore;
+using NMediation.Abstractions;
 using Owens.Application.Common.DataAccess;
+using Owens.Infrastructure.ErrorHandling;
 
 namespace Owens.Infrastructure.DataAccess.Common
 {
@@ -19,14 +21,17 @@ namespace Owens.Infrastructure.DataAccess.Common
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly ApplicationContext _context;
+        private readonly IMediation _mediation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TAggregateRoot}"/> class.
         /// </summary>
         /// <param name="applicationContext">An instance of the <see cref="ApplicationContext"/> class.</param>
-        protected BaseRepository(ApplicationContext applicationContext)
+        /// <param name="mediation">An instance of the <see cref="IMediation"/> interface.</param>
+        protected BaseRepository(ApplicationContext applicationContext, IMediation mediation)
         {
             _context = applicationContext;
+            _mediation = mediation;
         }
 
         /// <inheritdoc/>
@@ -42,8 +47,7 @@ namespace Owens.Infrastructure.DataAccess.Common
         public async Task<TAggregateRoot?> GetObjectById(Guid id, CancellationToken cancellationToken)
         {
             var result = await ExecuteQuery(
-                set => set.Where(root => root.Id == id).ToListAsync(cancellationToken),
-                cancellationToken);
+                set => set.Where(root => root.Id == id).ToListAsync(cancellationToken));
 
             return result.FirstOrDefault();
         }
@@ -57,6 +61,7 @@ namespace Owens.Infrastructure.DataAccess.Common
 
             var resultList = await _context.Set<TAggregateRoot>()
                 .Where(query.Query)
+                .OrderBy(root => root.Id)
                 .Skip(query.Skip)
                 .Take(query.Take)
                 .ToListAsync(cancellationToken);
@@ -79,15 +84,28 @@ namespace Owens.Infrastructure.DataAccess.Common
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
 
+                if (result > 0)
+                {
+                    foreach (var aggregateRoot in aggregateRoots)
+                    {
+                        foreach (var occurrence in aggregateRoot.DomainEvents)
+                        {
+                            await _mediation.Publish(occurrence, cancellationToken);
+                        }
+                    }
+                }
+
                 return result;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw;
+               await _mediation.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
             }
+
+            return 0;
         }
 
-        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<DbSet<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction, CancellationToken cancellationToken)
+        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<DbSet<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction)
         {
             try
             {

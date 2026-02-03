@@ -28,9 +28,9 @@ namespace Owens.Infrastructure.Dependencies
         public static void AddAuthenticationDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             var tokenConfiguration = new TokenConfiguration(
-                configuration["Security:Audience"] ?? throw new ArgumentNullException(nameof(configuration), "Audience was null"),
-                configuration["Security:Issuer"] ?? throw new ArgumentNullException(nameof(configuration), "Issuer was null"),
-                configuration["Security:Key"] ?? throw new ArgumentNullException(nameof(configuration), "Key was null"));
+                configuration.GetValue<string>("Security:Audience") ?? throw new ArgumentNullException(nameof(configuration), "Audience was null"),
+                configuration.GetValue<string>("Security:Issuer") ?? throw new ArgumentNullException(nameof(configuration), "Issuer was null"),
+                configuration.GetValue<string>("Security:Key") ?? throw new ArgumentNullException(nameof(configuration), "Key was null"));
 
             services.AddIdentity<Member, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationContext>()
