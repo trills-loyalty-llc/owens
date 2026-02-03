@@ -2,12 +2,14 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using NMediation.Abstractions;
+
 namespace Owens.Infrastructure.ErrorHandling
 {
     /// <summary>
     /// Base class for global exception.
     /// </summary>
-    public class GeneralExceptionOccurred
+    public class GeneralExceptionOccurred : IOccurrence
     {
         private GeneralExceptionOccurred(Exception exception)
         {

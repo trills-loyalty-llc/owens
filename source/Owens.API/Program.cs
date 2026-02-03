@@ -29,6 +29,7 @@ namespace Owens.API
                 .CreateBootstrapLogger();
 
             builder.Services.AddControllers();
+            builder.Services.RegisterJobs();
             builder.Services.RegisterDependencies(builder.Configuration);
             builder.Services.AddAuthenticationDependencies(builder.Configuration);
             builder.Services.AddSwaggerGen(options =>

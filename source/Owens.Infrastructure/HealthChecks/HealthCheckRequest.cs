@@ -2,12 +2,14 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Application.Common.Mediation;
+
 namespace Owens.Infrastructure.HealthChecks
 {
     /// <summary>
     /// Request object for health checks.
     /// </summary>
-    public class HealthCheckRequest
+    public class HealthCheckRequest : IEnvelopePayload<HealthCheckResponse>
     {
     }
 }

@@ -3,6 +3,7 @@
 // </copyright>
 
 using Microsoft.AspNetCore.Mvc;
+using NMediation.Abstractions;
 using Owens.API.Common;
 using Owens.Infrastructure.HealthChecks;
 
@@ -13,17 +14,13 @@ namespace Owens.API.Controllers.Information
     [Route("status")]
     public class Status : BaseController
     {
-        private readonly IHealthCheckService _service;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Status"/> class.
         /// </summary>
-        /// <param name="logger">An instance of the <see cref="ILogger{TCategoryName}"/> interface.</param>
-        /// <param name="service">An instance of the <see cref="IHealthCheckService"/> interface.</param>
-        public Status(ILogger<Status> logger, IHealthCheckService service)
-            : base(logger)
+        /// <param name="mediation">An instance of the <see cref="IMediation"/> payload.</param>
+        public Status(IMediation mediation)
+            : base(mediation)
         {
-            _service = service;
         }
 
         /// <summary>
@@ -35,7 +32,7 @@ namespace Owens.API.Controllers.Information
         [ProducesResponseType<HealthCheckResponse>(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHealthStatusAsync(CancellationToken cancellationToken = default)
         {
-            return await ExecuteOkObject(_service.HealthCheckAsync, new HealthCheckRequest(), cancellationToken);
+            return await ExecuteOkObject(new HealthCheckRequest(), cancellationToken);
         }
     }
 }

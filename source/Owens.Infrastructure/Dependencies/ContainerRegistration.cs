@@ -5,6 +5,7 @@
 using ChainStrategy.Registration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NMediation.Dependencies;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.HealthChecks;
 using Serilog;
@@ -24,7 +25,8 @@ namespace Owens.Infrastructure.Dependencies
         public static void RegisterDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             // Application
-            services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Application);
+            services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Infrastructure);
+            services.AddNMediation(AssemblyConstants.Application, AssemblyConstants.Infrastructure);
 
             // Data Access
             services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
@@ -42,8 +44,8 @@ namespace Owens.Infrastructure.Dependencies
 
             // Logging
             services.AddSerilog((serviceProvider, lc) => lc
-                .ReadFrom.Configuration(configuration)
                 .ReadFrom.Services(serviceProvider)
+                .ReadFrom.Configuration(configuration)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .WriteTo.Debug());

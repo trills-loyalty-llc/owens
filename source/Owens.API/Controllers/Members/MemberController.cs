@@ -3,6 +3,7 @@
 // </copyright>
 
 using Microsoft.AspNetCore.Mvc;
+using NMediation.Abstractions;
 using Owens.API.Common;
 
 namespace Owens.API.Controllers.Members
@@ -13,8 +14,8 @@ namespace Owens.API.Controllers.Members
     public class MemberController : BaseController
     {
         /// <inheritdoc />
-        public MemberController(ILogger<BaseController> logger)
-            : base(logger)
+        public MemberController(IMediation mediation)
+            : base(mediation)
         {
         }
     }

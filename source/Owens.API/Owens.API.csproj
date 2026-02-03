@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCoreAnalyzers" Version="0.3.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
