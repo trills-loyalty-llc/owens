@@ -1,4 +1,4 @@
-﻿// <copyright file="Status.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="StatusController.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -12,13 +12,13 @@ namespace Owens.API.Controllers.Information
     /// <inheritdoc />
     [ApiController]
     [Route("status")]
-    public class Status : BaseController
+    public class StatusController : BaseController
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Status"/> class.
+        /// Initializes a new instance of the <see cref="StatusController"/> class.
         /// </summary>
         /// <param name="mediation">An instance of the <see cref="IMediation"/> payload.</param>
-        public Status(IMediation mediation)
+        public StatusController(IMediation mediation)
             : base(mediation)
         {
         }
