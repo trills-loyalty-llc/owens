@@ -27,6 +27,7 @@ namespace Owens.API.Controllers.Attractions
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpPost("", Name = "AddAttraction")]
+        [ProducesResponseType<AddAttractionResponse>(StatusCodes.Status201Created)]
         public async Task<IActionResult> AddAttraction(AddAttractionRequest request, CancellationToken cancellationToken = default)
         {
             return await ExecuteCreated(request, cancellationToken);

@@ -26,6 +26,11 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
                 .HasMany(themePark => themePark.ParkZones)
                 .WithOne()
                 .IsRequired();
+
+            builder
+                .HasMany(themePark => themePark.WeatherStatus)
+                .WithOne()
+                .IsRequired();
         }
     }
 }

@@ -47,9 +47,9 @@ namespace Owens.Domain.ThemeParks
         }
 
         /// <summary>
-        /// Yield an empty instance to satisfy nullable requirements.
+        /// Creates an empty location coordinates to satisfy nullable requirements.
         /// </summary>
-        /// <returns>An empty <see cref="LocationCoordinates"/> instance.</returns>
+        /// <returns>An empty <see cref="LocationCoordinates"/>.</returns>
         public static LocationCoordinates Empty()
         {
             return new LocationCoordinates(0, 0);

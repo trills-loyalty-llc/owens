@@ -1,0 +1,11 @@
+###
+
+POST {{HostAddress}}/theme-park
+Content-Type: application/json
+{
+  "description": "Universal Studios Florida",
+  "latitude": "28.477",
+  "longitude": "-81.473"
+}
+
+###

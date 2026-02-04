@@ -16,11 +16,13 @@ namespace Owens.Domain.ThemeParks
         /// Initializes a new instance of the <see cref="ThemePark"/> class.
         /// </summary>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        public ThemePark(string description)
+        /// <param name="coordinates">The coordinates for the park.</param>
+        public ThemePark(string description, LocationCoordinates coordinates)
         {
             Description = description;
-            Coordinates = LocationCoordinates.Empty();
+            Coordinates = coordinates;
             ParkZones = new List<ParkZone>();
+            WeatherStatus = new List<WeatherStatus>();
         }
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace Owens.Domain.ThemeParks
             Description = description;
             Coordinates = LocationCoordinates.Empty();
             ParkZones = new List<ParkZone>();
+            WeatherStatus = new List<WeatherStatus>();
         }
 
         /// <inheritdoc/>
@@ -48,5 +51,19 @@ namespace Owens.Domain.ThemeParks
         /// Gets the zones available in the park.
         /// </summary>
         public ICollection<ParkZone> ParkZones { get; }
+
+        /// <summary>
+        /// Gets the weather status updates for a theme park.
+        /// </summary>
+        public ICollection<WeatherStatus> WeatherStatus { get; }
+
+        /// <summary>
+        /// Appends a weather update to the theme park.
+        /// </summary>
+        /// <param name="weatherStatus">A weather update to append.</param>
+        public void AppendWeather(WeatherStatus weatherStatus)
+        {
+            WeatherStatus.Add(weatherStatus);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="ContainerRegistration.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="ApplicationRegistration.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -10,10 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 using NMediation.Dependencies;
 using Owens.Application.Attractions.Common;
 using Owens.Application.Services.QueueTimes.Interfaces;
+using Owens.Application.Services.Weather.Interfaces;
+using Owens.Application.ThemeParks.Common;
 using Owens.Infrastructure.DataAccess.Attractions;
 using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.DataAccess.ThemeParks;
 using Owens.Infrastructure.HealthChecks;
 using Owens.Infrastructure.ServiceClients.QueueTimes.Clients;
+using Owens.Infrastructure.ServiceClients.Weather.Clients;
 using Polly;
 using Polly.Retry;
 using Polly.Timeout;
@@ -24,7 +28,7 @@ namespace Owens.Infrastructure.Dependencies
     /// <summary>
     /// Registers all application dependencies.
     /// </summary>
-    public static class ContainerRegistration
+    public static class ApplicationRegistration
     {
         /// <summary>
         /// Common method to register all application dependencies.
@@ -41,10 +45,19 @@ namespace Owens.Infrastructure.Dependencies
             // Time
             services.AddSingleton(_ => TimeProvider.System);
 
+            // Options
+            var options = new ConfigurationOptions
+            {
+                WeatherKey = configuration.GetValue<string>("Keys:Weather") ?? throw new ArgumentNullException(nameof(configuration), "Can't find Weather key."),
+            };
+
+            services.AddSingleton(_ => options);
+
             // Data Access
             services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
 
             services.AddTransient<IAttractionRepository, AttractionRepository>();
+            services.AddTransient<IThemeParkRepository, ThemeParkRepository>();
 
             // Spool up the database for rapid creation if a model was changed.
             using (var context = new ApplicationContext(new DbContextOptionsBuilder().UseSqlServer(configuration.GetConnectionString("Database")).Options))
@@ -81,6 +94,12 @@ namespace Owens.Infrastructure.Dependencies
                 .AddHttpClient<IQueueTimesService, QueueTimesServiceClient>(client =>
                 {
                     client.BaseAddress = new Uri("https://queue-times.com/parks/");
+                }).AddPolicyHandler(policy);
+
+            services
+                .AddHttpClient<IWeatherService, WeatherServiceClient>(client =>
+                {
+                    client.BaseAddress = new Uri("https://api.weatherapi.com/v1/");
                 }).AddPolicyHandler(policy);
         }
     }

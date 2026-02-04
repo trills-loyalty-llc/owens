@@ -18,7 +18,8 @@ namespace Owens.Infrastructure.DataAccess.Common
         IAddObject<TAggregateRoot>,
         IUpdateObject<TAggregateRoot>,
         IGetObjectById<TAggregateRoot>,
-        IGetPagination<TAggregateRoot>
+        IGetPagination<TAggregateRoot>,
+        IGetAllObjects<TAggregateRoot>
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly IMediation _mediation;
@@ -40,12 +41,20 @@ namespace Owens.Infrastructure.DataAccess.Common
         protected ApplicationContext Context { get; }
 
         /// <inheritdoc/>
-        public async Task<int> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken)
+        public async Task<PersistenceResult> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken)
         {
-            return await ExecuteCommand(
+            var result = await ExecuteCommand(
                 set => set.AddAsync(aggregateRoot, cancellationToken).AsTask(),
                 cancellationToken,
                 aggregateRoot);
+
+            return result > 0 ? PersistenceResult.Success(result) : PersistenceResult.Failure();
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<TAggregateRoot>> GetAllObjects(CancellationToken cancellationToken = default)
+        {
+            return await ExecuteQuery(dbSet => dbSet.ToListAsync(cancellationToken));
         }
 
         /// <inheritdoc/>

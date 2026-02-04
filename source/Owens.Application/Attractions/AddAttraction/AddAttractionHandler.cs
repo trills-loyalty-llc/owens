@@ -36,9 +36,9 @@ namespace Owens.Application.Attractions.AddAttraction
                 return ValidationFailed();
             }
 
-            var rows = await _attractionRepository.AddObject(envelope.Entity, cancellationToken);
+            var result = await _attractionRepository.AddObject(envelope.Entity, cancellationToken);
 
-            if (rows < 1)
+            if (result.Failed)
             {
                 return OperationFailed();
             }
