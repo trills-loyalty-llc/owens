@@ -14,6 +14,14 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<ThemePark> builder)
         {
+            builder.Property(themePark => themePark.Description);
+
+            builder.ComplexProperty(themePark => themePark.Coordinates, propertyBuilder =>
+            {
+                propertyBuilder.Property(coordinates => coordinates.Latitude);
+                propertyBuilder.Property(coordinates => coordinates.Longitude);
+            });
+
             builder
                 .HasMany(themePark => themePark.ParkZones)
                 .WithOne()

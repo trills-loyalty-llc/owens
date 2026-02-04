@@ -12,6 +12,16 @@ namespace Owens.Application.Common.Mediation
         /// <summary>
         /// Successful operation.
         /// </summary>
-        public static readonly int Success = 1;
+        public const int Success = 1;
+
+        /// <summary>
+        /// Validation failed during the operation.
+        /// </summary>
+        public const int ValidationFailed = 2;
+
+        /// <summary>
+        /// None descriptive failure.
+        /// </summary>
+        public const int GeneralFailure = 3;
     }
 }

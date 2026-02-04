@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="ChainStrategy" Version="1.3.0" />
+    <PackageReference Include="FactoryFoundation" Version="0.9.0" />
   </ItemGroup>
 
   <ItemGroup>

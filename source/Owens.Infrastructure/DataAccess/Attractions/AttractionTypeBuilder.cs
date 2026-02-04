@@ -18,6 +18,8 @@ namespace Owens.Infrastructure.DataAccess.Attractions
 
             builder.HasIndex(attraction => attraction.ExternalId).IsUnique();
 
+            builder.Property(attraction => attraction.AttractionType);
+
             builder
                 .HasMany(attraction => attraction.Status)
                 .WithOne()

@@ -17,10 +17,12 @@ namespace Owens.Domain.Attractions
         /// </summary>
         /// <param name="description">The description for the attraction.</param>
         /// <param name="externalId">The external identifier.</param>
-        public Attraction(string description, int externalId)
+        /// <param name="attractionType">The type of the attraction.</param>
+        public Attraction(string description, int externalId, AttractionType attractionType)
         {
             Description = description;
             ExternalId = externalId;
+            AttractionType = attractionType;
             Status = new List<AttractionStatus>();
         }
 
@@ -30,11 +32,13 @@ namespace Owens.Domain.Attractions
         /// <param name="id">The identifier of the root.</param>
         /// <param name="description">The description for the attraction.</param>
         /// <param name="externalId">The external identifier.</param>
-        public Attraction(Guid id, string description, int externalId)
+        /// <param name="attractionType">The type of the attraction.</param>
+        public Attraction(Guid id, string description, int externalId, AttractionType attractionType)
             : base(id)
         {
             Description = description;
             ExternalId = externalId;
+            AttractionType = attractionType;
             Status = new List<AttractionStatus>();
         }
 
@@ -45,6 +49,11 @@ namespace Owens.Domain.Attractions
         /// Gets the external identifier.
         /// </summary>
         public int ExternalId { get; }
+
+        /// <summary>
+        /// Gets the type of the attraction.
+        /// </summary>
+        public AttractionType AttractionType { get; }
 
         /// <summary>
         /// Gets a series of status updates.

@@ -22,5 +22,23 @@ namespace Owens.Application.Common.Mediation
         {
             return new Envelope<TResponse>(response);
         }
+
+        /// <summary>
+        /// Returns a validation failure result.
+        /// </summary>
+        /// <returns>An <see cref="Envelope{T}"/>.</returns>
+        protected Envelope<TResponse> ValidationFailed()
+        {
+            return new Envelope<TResponse>(ApplicationStatus.ValidationFailed);
+        }
+
+        /// <summary>
+        /// Returns a general failure.
+        /// </summary>
+        /// <returns>An <see cref="Envelope{T}"/>.</returns>
+        protected Envelope<TResponse> OperationFailed()
+        {
+            return new Envelope<TResponse>(ApplicationStatus.GeneralFailure);
+        }
     }
 }

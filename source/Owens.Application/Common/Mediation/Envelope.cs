@@ -21,6 +21,16 @@ namespace Owens.Application.Common.Mediation
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Envelope{TResponse}"/> class.
+        /// </summary>
+        /// <param name="status">The failed status for the operation.</param>
+        public Envelope(int status)
+        {
+            Response = default!;
+            Status = status;
+        }
+
+        /// <summary>
         /// Gets the response object.
         /// </summary>
         public TResponse Response { get; }

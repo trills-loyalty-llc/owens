@@ -5,8 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NMediation.Abstractions;
 using Owens.API.Common;
-using Owens.Application.Attractions.Common;
-using Owens.Domain.Attractions;
+using Owens.Application.Attractions.AddAttraction;
 
 namespace Owens.API.Controllers.Attractions
 {
@@ -15,28 +14,22 @@ namespace Owens.API.Controllers.Attractions
     [Route("attraction")]
     public class AttractionController : BaseController
     {
-        private readonly IAttractionRepository _attractionRepository;
-
         /// <inheritdoc />
-        public AttractionController(IMediation mediation, IAttractionRepository attractionRepository)
+        public AttractionController(IMediation mediation)
             : base(mediation)
         {
-            _attractionRepository = attractionRepository;
         }
 
         /// <summary>
         /// Adds an attraction.
         /// </summary>
-        /// <param name="description">The attraction name.</param>
-        /// <param name="externalId">THe external identifier.</param>
+        /// <param name="request">An <see cref="AddAttractionRequest"/> instance.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpPost("", Name = "AddAttraction")]
-        public async Task<IActionResult> AddAttraction(string description, int externalId, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> AddAttraction(AddAttractionRequest request, CancellationToken cancellationToken = default)
         {
-            await _attractionRepository.AddObject(new Attraction(description, externalId), cancellationToken);
-
-            return Created();
+            return await ExecuteCreated(request, cancellationToken);
         }
     }
 }
