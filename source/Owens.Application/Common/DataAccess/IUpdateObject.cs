@@ -1,0 +1,24 @@
+﻿// <copyright file="IUpdateObject.cs" company="Trills Loyalty LLC">
+// Copyright (c) Trills Loyalty LLC. All rights reserved.
+// </copyright>
+
+using ClearDomain.GuidPrimary;
+
+namespace Owens.Application.Common.DataAccess
+{
+    /// <summary>
+    /// Interface for updating an object.
+    /// </summary>
+    /// <typeparam name="TAggregateRoot">The type of the aggregate root.</typeparam>
+    public interface IUpdateObject<in TAggregateRoot>
+        where TAggregateRoot : IAggregateRoot
+    {
+        /// <summary>
+        /// Updates an existing object.
+        /// </summary>
+        /// <param name="aggregateRoot">The <see cref="IAggregateRoot"/> object.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task<int> UpdateObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken);
+    }
+}

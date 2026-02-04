@@ -16,11 +16,11 @@ namespace Owens.Infrastructure.DataAccess.Common
     /// <typeparam name="TAggregateRoot">The type of the aggregate root.</typeparam>
     public abstract class BaseRepository<TAggregateRoot> :
         IAddObject<TAggregateRoot>,
+        IUpdateObject<TAggregateRoot>,
         IGetObjectById<TAggregateRoot>,
         IGetPagination<TAggregateRoot>
         where TAggregateRoot : class, IAggregateRoot
     {
-        private readonly ApplicationContext _context;
         private readonly IMediation _mediation;
 
         /// <summary>
@@ -30,9 +30,14 @@ namespace Owens.Infrastructure.DataAccess.Common
         /// <param name="mediation">An instance of the <see cref="IMediation"/> interface.</param>
         protected BaseRepository(ApplicationContext applicationContext, IMediation mediation)
         {
-            _context = applicationContext;
+            Context = applicationContext;
             _mediation = mediation;
         }
+
+        /// <summary>
+        /// Gets the context.
+        /// </summary>
+        protected ApplicationContext Context { get; }
 
         /// <inheritdoc/>
         public async Task<int> AddObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken)
@@ -55,11 +60,11 @@ namespace Owens.Infrastructure.DataAccess.Common
         /// <inheritdoc />
         public async Task<PaginationResult<TAggregateRoot>> GetPaginatedRoots(PaginationQuery<TAggregateRoot> query, CancellationToken cancellationToken)
         {
-            var totalCount = await _context.Set<TAggregateRoot>()
+            var totalCount = await Context.Set<TAggregateRoot>()
                 .Where(query.Query)
                 .CountAsync(cancellationToken);
 
-            var resultList = await _context.Set<TAggregateRoot>()
+            var resultList = await Context.Set<TAggregateRoot>()
                 .Where(query.Query)
                 .OrderBy(root => root.Id)
                 .Skip(query.Skip)
@@ -67,6 +72,19 @@ namespace Owens.Infrastructure.DataAccess.Common
                 .ToListAsync(cancellationToken);
 
             return new PaginationResult<TAggregateRoot>(resultList, totalCount);
+        }
+
+        /// <inheritdoc/>
+        public async Task<int> UpdateObject(TAggregateRoot aggregateRoot, CancellationToken cancellationToken)
+        {
+            return await ExecuteCommand(
+                dbSet =>
+                {
+                    dbSet.Update(aggregateRoot);
+
+                    return Task.CompletedTask;
+                },
+                cancellationToken);
         }
 
         /// <summary>
@@ -80,9 +98,9 @@ namespace Owens.Infrastructure.DataAccess.Common
         {
             try
             {
-                await executionFunction.Invoke(_context.Set<TAggregateRoot>());
+                await executionFunction.Invoke(Context.Set<TAggregateRoot>());
 
-                var result = await _context.SaveChangesAsync(cancellationToken);
+                var result = await Context.SaveChangesAsync(cancellationToken);
 
                 if (result > 0)
                 {
@@ -99,7 +117,7 @@ namespace Owens.Infrastructure.DataAccess.Common
             }
             catch (Exception exception)
             {
-               await _mediation.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
+                await _mediation.Publish(GeneralExceptionOccurred.FromException(exception), cancellationToken);
             }
 
             return 0;
@@ -109,7 +127,7 @@ namespace Owens.Infrastructure.DataAccess.Common
         {
             try
             {
-                return await executionFunction.Invoke(_context.Set<TAggregateRoot>());
+                return await executionFunction.Invoke(Context.Set<TAggregateRoot>());
             }
             catch (Exception)
             {
