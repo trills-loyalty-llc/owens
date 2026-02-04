@@ -3,12 +3,20 @@
 // </copyright>
 
 using ChainStrategy.Registration;
+using FactoryFoundation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NMediation.Dependencies;
+using Owens.Application.Attractions.Common;
+using Owens.Application.Services.QueueTimes.Interfaces;
+using Owens.Infrastructure.DataAccess.Attractions;
 using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.HealthChecks;
+using Owens.Infrastructure.ServiceClients.QueueTimes.Clients;
+using Polly;
+using Polly.Retry;
+using Polly.Timeout;
 using Serilog;
 
 namespace Owens.Infrastructure.Dependencies
@@ -28,9 +36,15 @@ namespace Owens.Infrastructure.Dependencies
             // Application
             services.AddChainStrategy(AssemblyConstants.Application, AssemblyConstants.Infrastructure);
             services.AddNMediation(AssemblyConstants.Application, AssemblyConstants.Infrastructure);
+            services.AddFactoryFoundation(AssemblyConstants.Application, AssemblyConstants.Infrastructure);
+
+            // Time
+            services.AddSingleton(_ => TimeProvider.System);
 
             // Data Access
             services.AddSqlServer<ApplicationContext>(configuration.GetConnectionString("Database"));
+
+            services.AddTransient<IAttractionRepository, AttractionRepository>();
 
             // Spool up the database for rapid creation if a model was changed.
             using (var context = new ApplicationContext(new DbContextOptionsBuilder().UseSqlServer(configuration.GetConnectionString("Database")).Options))
@@ -56,6 +70,18 @@ namespace Owens.Infrastructure.Dependencies
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .WriteTo.Debug());
+
+            // Service Clients
+            var policy = new ResiliencePipelineBuilder<HttpResponseMessage>()
+                .AddRetry(new RetryStrategyOptions<HttpResponseMessage>())
+                .AddTimeout(new TimeoutStrategyOptions())
+                .Build().AsAsyncPolicy();
+
+            services
+                .AddHttpClient<IQueueTimesService, QueueTimesServiceClient>(client =>
+                {
+                    client.BaseAddress = new Uri("https://queue-times.com/parks/");
+                }).AddPolicyHandler(policy);
         }
     }
 }

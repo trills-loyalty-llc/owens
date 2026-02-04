@@ -14,6 +14,10 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<Attraction> builder)
         {
+            builder.Property(attraction => attraction.Description);
+
+            builder.HasIndex(attraction => attraction.ExternalId).IsUnique();
+
             builder
                 .HasMany(attraction => attraction.Status)
                 .WithOne()

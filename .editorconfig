@@ -51,6 +51,8 @@ tab_width = 4
 indent_size = 4
 end_of_line = crlf
 dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_prefer_collection_expression = false:silent
+dotnet_style_collection_initializer = false:silent
 
 [*.cs]
 csharp_indent_labels = one_less_than_current
@@ -81,3 +83,4 @@ dotnet_diagnostic.IDE0290.severity = silent
 dotnet_diagnostic.IDE0090.severity = silent
 dotnet_diagnostic.IDE0028.severity = silent
 dotnet_diagnostic.IDE0063.severity = silent
+dotnet_diagnostic.IDE0301.severity = silent

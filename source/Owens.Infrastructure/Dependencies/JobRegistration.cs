@@ -24,9 +24,10 @@ namespace Owens.Infrastructure.Dependencies
             {
                 configurator.AddJob<WaitTimesJob>(jobConfigurator => jobConfigurator.WithIdentity(WaitTimesJob.WaitTimesJobKey));
 
+                const int queueTimesInterval = 5;
                 configurator.AddTrigger(triggerConfigurator => triggerConfigurator
                     .ForJob(WaitTimesJob.WaitTimesJobKey)
-                    .WithSimpleSchedule(builder => builder.WithIntervalInMinutes(5).RepeatForever()));
+                    .WithSimpleSchedule(builder => builder.WithIntervalInMinutes(queueTimesInterval).RepeatForever()));
             });
 
             services.AddQuartzServer(options => options.WaitForJobsToComplete = true);
