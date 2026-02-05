@@ -22,7 +22,7 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         /// <inheritdoc/>
         public Task<Attraction?> GetByExternalId(int id, CancellationToken cancellationToken = default)
         {
-            return Context.Attractions.FirstOrDefaultAsync(attraction => attraction.ExternalId == id, cancellationToken);
+            return Context.Attractions.FirstOrDefaultAsync(attraction => attraction.QueueTimesExternalId == id, cancellationToken);
         }
     }
 }

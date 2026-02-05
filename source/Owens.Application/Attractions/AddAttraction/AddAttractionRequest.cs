@@ -2,9 +2,9 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.ComponentModel.DataAnnotations;
 using Owens.Application.Common.Mediation;
 using Owens.Domain.Attractions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Owens.Application.Attractions.AddAttraction
 {
@@ -28,5 +28,11 @@ namespace Owens.Application.Attractions.AddAttraction
         /// </summary>
         [Range(0, 7)]
         public AttractionType AttractionType { get; init; }
+
+        /// <summary>
+        /// Gets the external scheduling identifier.
+        /// </summary>
+        [Required(AllowEmptyStrings = false)]
+        public Guid ExternalSchedulingId { get; init; }
     }
 }

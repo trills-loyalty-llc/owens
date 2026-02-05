@@ -49,7 +49,7 @@ namespace Owens.Infrastructure.Jobs
 
                 if (exists != null)
                 {
-                    exists.AppendStatus(new AttractionStatus(response.Wait, _timeProvider.GetUtcNow(), response.IsOperational));
+                    exists.AppendStatus(new QueueStatus(response.Wait, _timeProvider.GetUtcNow(), response.IsOperational));
 
                     await _attractionRepository.UpdateObject(exists, context.CancellationToken);
                 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="WeatherFactory.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="WeatherServiceFactory.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,7 @@ using Owens.Infrastructure.ServiceClients.Weather.Models;
 namespace Owens.Infrastructure.ServiceClients.Weather.Factories
 {
     /// <inheritdoc />
-    public class WeatherFactory : ICanTranslate<WeatherResponseWrapper, CurrentWeather>
+    public class WeatherServiceFactory : ICanTranslate<WeatherResponseWrapper, CurrentWeather>
     {
         /// <inheritdoc/>
         public CurrentWeather TranslateTo(WeatherResponseWrapper initial)

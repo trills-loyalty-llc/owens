@@ -1,4 +1,4 @@
-﻿// <copyright file="QueueTimesFactory.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="QueueTimesServiceFactory.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,7 @@ using Owens.Infrastructure.ServiceClients.QueueTimes.Models;
 namespace Owens.Infrastructure.ServiceClients.QueueTimes.Factories
 {
     /// <inheritdoc />
-    public class QueueTimesFactory : ICanTranslate<QueueTimesResponseWrapper, List<RideQueueStatus>>
+    public class QueueTimesServiceFactory : ICanTranslate<QueueTimesResponseWrapper, List<RideQueueStatus>>
     {
         /// <inheritdoc/>
         public List<RideQueueStatus> TranslateTo(QueueTimesResponseWrapper initial)

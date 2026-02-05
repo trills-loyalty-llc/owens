@@ -16,6 +16,8 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         {
             builder.Property(themePark => themePark.Description);
 
+            builder.HasIndex(themePark => themePark.SchedulingExternalId).IsUnique();
+
             builder.ComplexProperty(themePark => themePark.Coordinates, propertyBuilder =>
             {
                 propertyBuilder.Property(coordinates => coordinates.Latitude);
@@ -29,6 +31,11 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
 
             builder
                 .HasMany(themePark => themePark.WeatherStatus)
+                .WithOne()
+                .IsRequired();
+
+            builder
+                .HasMany(themePark => themePark.Schedules)
                 .WithOne()
                 .IsRequired();
         }

@@ -16,14 +16,16 @@ namespace Owens.Domain.Attractions
         /// Initializes a new instance of the <see cref="Attraction"/> class.
         /// </summary>
         /// <param name="description">The description for the attraction.</param>
-        /// <param name="externalId">The external identifier.</param>
+        /// <param name="queueTimesExternalId">The external identifier for queue times.</param>
+        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(string description, int externalId, AttractionType attractionType)
+        public Attraction(string description, int queueTimesExternalId, Guid schedulingExternalId, AttractionType attractionType)
         {
             Description = description;
-            ExternalId = externalId;
+            QueueTimesExternalId = queueTimesExternalId;
+            SchedulingExternalId = schedulingExternalId;
             AttractionType = attractionType;
-            Status = new List<AttractionStatus>();
+            Status = new List<QueueStatus>();
         }
 
         /// <summary>
@@ -31,24 +33,31 @@ namespace Owens.Domain.Attractions
         /// </summary>
         /// <param name="id">The identifier of the root.</param>
         /// <param name="description">The description for the attraction.</param>
-        /// <param name="externalId">The external identifier.</param>
+        /// <param name="queueTimesExternalId">The external identifier for queue times.</param>
+        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(Guid id, string description, int externalId, AttractionType attractionType)
+        public Attraction(Guid id, string description, int queueTimesExternalId, Guid schedulingExternalId, AttractionType attractionType)
             : base(id)
         {
             Description = description;
-            ExternalId = externalId;
+            QueueTimesExternalId = queueTimesExternalId;
+            SchedulingExternalId = schedulingExternalId;
             AttractionType = attractionType;
-            Status = new List<AttractionStatus>();
+            Status = new List<QueueStatus>();
         }
 
         /// <inheritdoc/>
         public string Description { get; }
 
         /// <summary>
-        /// Gets the external identifier.
+        /// Gets the external identifier for queue times.
         /// </summary>
-        public int ExternalId { get; }
+        public int QueueTimesExternalId { get; }
+
+        /// <summary>
+        /// Gets the external identifier for scheduling.
+        /// </summary>
+        public Guid SchedulingExternalId { get; }
 
         /// <summary>
         /// Gets the type of the attraction.
@@ -58,13 +67,13 @@ namespace Owens.Domain.Attractions
         /// <summary>
         /// Gets a series of status updates.
         /// </summary>
-        public ICollection<AttractionStatus> Status { get; }
+        public ICollection<QueueStatus> Status { get; }
 
         /// <summary>
         /// Appends a new status to the attraction.
         /// </summary>
-        /// <param name="status">A <see cref="AttractionStatus"/> to append.</param>
-        public void AppendStatus(AttractionStatus status)
+        /// <param name="status">A <see cref="QueueStatus"/> to append.</param>
+        public void AppendStatus(QueueStatus status)
         {
             Status.Add(status);
         }

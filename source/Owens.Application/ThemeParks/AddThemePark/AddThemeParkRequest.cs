@@ -2,8 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using System.ComponentModel.DataAnnotations;
 using Owens.Application.Common.Mediation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Owens.Application.ThemeParks.AddThemePark
 {
@@ -27,5 +27,11 @@ namespace Owens.Application.ThemeParks.AddThemePark
         /// </summary>
         [Range(-180, 180)]
         public double Longitude { get; init; }
+
+        /// <summary>
+        /// Gets the external scheduling identifier.
+        /// </summary>
+        [Required(AllowEmptyStrings = false)]
+        public Guid ExternalSchedulingId { get; init; }
     }
 }

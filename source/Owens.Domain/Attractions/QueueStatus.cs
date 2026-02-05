@@ -1,4 +1,4 @@
-﻿// <copyright file="AttractionStatus.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="QueueStatus.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -7,16 +7,16 @@ using ClearDomain.GuidPrimary;
 namespace Owens.Domain.Attractions
 {
     /// <inheritdoc />
-    public class AttractionStatus : Entity
+    public class QueueStatus : Entity
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttractionStatus"/> class.
+        /// Initializes a new instance of the <see cref="QueueStatus"/> class.
         /// </summary>
         /// <param name="id">The identifier of the entity.</param>
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
         /// <param name="isOperational">Designates if the attraction is open.</param>
-        public AttractionStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
+        public QueueStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
             : base(id)
         {
             Wait = wait;
@@ -25,12 +25,12 @@ namespace Owens.Domain.Attractions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttractionStatus"/> class.
+        /// Initializes a new instance of the <see cref="QueueStatus"/> class.
         /// </summary>
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
         /// <param name="isOperational">Designates if the attraction is open.</param>
-        public AttractionStatus(TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
+        public QueueStatus(TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
         {
             Wait = wait;
             TimeStamp = timeStamp;

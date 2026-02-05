@@ -9,10 +9,10 @@ using Owens.Infrastructure.DataAccess.Common;
 namespace Owens.Infrastructure.DataAccess.Attractions
 {
     /// <inheritdoc />
-    public class AttractionStatusTypeBuilder : EntityTypeConfigurationBase<AttractionStatus>
+    public class AttractionStatusTypeBuilder : EntityTypeConfigurationBase<QueueStatus>
     {
         /// <inheritdoc/>
-        protected override void ConfigureEntity(EntityTypeBuilder<AttractionStatus> builder)
+        protected override void ConfigureEntity(EntityTypeBuilder<QueueStatus> builder)
         {
             builder.Property(status => status.Wait);
             builder.Property(status => status.TimeStamp);

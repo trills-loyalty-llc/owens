@@ -16,7 +16,9 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         {
             builder.Property(attraction => attraction.Description);
 
-            builder.HasIndex(attraction => attraction.ExternalId).IsUnique();
+            builder.HasIndex(attraction => attraction.QueueTimesExternalId).IsUnique();
+
+            builder.HasIndex(attraction => attraction.SchedulingExternalId).IsUnique();
 
             builder.Property(attraction => attraction.AttractionType);
 

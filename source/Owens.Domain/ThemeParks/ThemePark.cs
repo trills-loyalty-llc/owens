@@ -17,12 +17,15 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="description">An alphaNumeric description for the park.</param>
         /// <param name="coordinates">The coordinates for the park.</param>
-        public ThemePark(string description, LocationCoordinates coordinates)
+        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
+        public ThemePark(string description, LocationCoordinates coordinates, Guid schedulingExternalId)
         {
             Description = description;
             Coordinates = coordinates;
+            SchedulingExternalId = schedulingExternalId;
             ParkZones = new List<ParkZone>();
             WeatherStatus = new List<WeatherStatus>();
+            Schedules = new List<ThemeParkSchedule>();
         }
 
         /// <summary>
@@ -30,17 +33,25 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The identifier for the park.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        public ThemePark(Guid id, string description)
+        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
+        public ThemePark(Guid id, string description, Guid schedulingExternalId)
             : base(id)
         {
             Description = description;
+            SchedulingExternalId = schedulingExternalId;
             Coordinates = LocationCoordinates.Empty();
             ParkZones = new List<ParkZone>();
             WeatherStatus = new List<WeatherStatus>();
+            Schedules = new List<ThemeParkSchedule>();
         }
 
         /// <inheritdoc/>
         public string Description { get; }
+
+        /// <summary>
+        /// Gets get the external identifier for scheduling.
+        /// </summary>
+        public Guid SchedulingExternalId { get; }
 
         /// <summary>
         /// Gets the location coordinates of the park.
@@ -56,6 +67,11 @@ namespace Owens.Domain.ThemeParks
         /// Gets the weather status updates for a theme park.
         /// </summary>
         public ICollection<WeatherStatus> WeatherStatus { get; }
+
+        /// <summary>
+        /// Gets the schedules for a theme park.
+        /// </summary>
+        public ICollection<ThemeParkSchedule> Schedules { get; }
 
         /// <summary>
         /// Appends a weather update to the theme park.

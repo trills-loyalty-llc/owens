@@ -21,6 +21,7 @@ namespace Owens.Application.Attractions.Common
             return FactoryHelpers.TryCreateValidate(() => new Attraction(
                     initial.Description,
                     initial.ExternalId,
+                    initial.ExternalSchedulingId,
                     initial.AttractionType));
         }
 
