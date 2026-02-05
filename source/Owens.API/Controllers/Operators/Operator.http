@@ -1,0 +1,25 @@
+###
+
+POST {{HostAddress}}/operator
+Content-Type: application/json
+{
+  "name": "Disney"
+}
+
+###
+
+POST {{HostAddress}}/operator
+Content-Type: application/json
+{
+  "name": "Universal"
+}
+
+###
+
+POST {{HostAddress}}/operator
+Content-Type: application/json
+{
+  "name": "SeaWorld"
+}
+
+###

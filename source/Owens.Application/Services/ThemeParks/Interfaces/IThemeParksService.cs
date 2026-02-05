@@ -25,5 +25,13 @@ namespace Owens.Application.Services.ThemeParks.Interfaces
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         Task<ParkDetails> GetParkDetails(Guid id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves all children for a park.
+        /// </summary>
+        /// <param name="id">The park identifier.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task<List<ParkChildren>> GetParkChildren(Guid id, CancellationToken cancellationToken = default);
     }
 }

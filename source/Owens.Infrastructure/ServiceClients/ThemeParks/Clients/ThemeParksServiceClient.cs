@@ -31,5 +31,11 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
         {
             return await ExecuteGet<ParkDetailsResponse, ParkDetails>(new Uri($"entity/{id}", UriKind.Relative), ParkDetailsResponse.Default(), cancellationToken);
         }
+
+        /// <inheritdoc/>
+        public async Task<List<ParkChildren>> GetParkChildren(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGet<ParkChildrenResponseWrapper, List<ParkChildren>>(new Uri($"entity/{id}/children", UriKind.Relative), ParkChildrenResponseWrapper.Default(), cancellationToken);
+        }
     }
 }

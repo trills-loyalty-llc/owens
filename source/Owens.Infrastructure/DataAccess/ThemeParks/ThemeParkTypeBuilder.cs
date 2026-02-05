@@ -16,6 +16,8 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         {
             builder.Property(themePark => themePark.Description);
 
+            builder.Property(themePark => themePark.TimeZoneId);
+
             builder.ComplexProperty(themePark => themePark.Coordinates, propertyBuilder =>
             {
                 propertyBuilder.Property(coordinates => coordinates.Latitude);

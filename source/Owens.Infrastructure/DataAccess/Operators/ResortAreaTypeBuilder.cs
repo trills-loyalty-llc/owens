@@ -15,8 +15,6 @@ namespace Owens.Infrastructure.DataAccess.Operators
         protected override void ConfigureEntity(EntityTypeBuilder<ResortArea> builder)
         {
             builder.Property(resortArea => resortArea.Description);
-
-            builder.Property(resortArea => resortArea.TimeZoneId);
         }
     }
 }

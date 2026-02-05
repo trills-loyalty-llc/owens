@@ -48,5 +48,10 @@ namespace Owens.Domain.Attractions
         /// An attraction where most of the ride vehicle is floating for the duration of the ride.
         /// </summary>
         Water,
+
+        /// <summary>
+        /// The attraction type is pending and needs to be updated.
+        /// </summary>
+        Pending,
     }
 }

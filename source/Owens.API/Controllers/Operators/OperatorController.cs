@@ -1,4 +1,4 @@
-﻿// <copyright file="ResortOperatorController.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="OperatorController.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -12,11 +12,11 @@ namespace Owens.API.Controllers.Operators
 {
     /// <inheritdoc />
     [ApiController]
-    [Route("resort-operator")]
-    public class ResortOperatorController : BaseController
+    [Route("operator")]
+    public class OperatorController : BaseController
     {
         /// <inheritdoc />
-        public ResortOperatorController(IMediation mediation)
+        public OperatorController(IMediation mediation)
             : base(mediation)
         {
         }
@@ -29,7 +29,7 @@ namespace Owens.API.Controllers.Operators
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpPost("", Name = "AddResortOperator")]
         [ProducesResponseType<AddOperatorResponse>(StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddOperator(AddOperatorRequest request, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> AddResortOperator(AddOperatorRequest request, CancellationToken cancellationToken = default)
         {
             return await ExecuteCreated(request, cancellationToken);
         }

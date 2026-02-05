@@ -12,7 +12,8 @@ namespace Owens.Application.Operators.Common
     /// </summary>
     public interface IOperatorRepository :
         IAddObject<ResortOperator>,
-        IGetAllObjects<ResortOperator>
+        IGetAllObjects<ResortOperator>,
+        IUpdateObject<ResortOperator>
     {
     }
 }

@@ -13,7 +13,8 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
     /// </summary>
     public class ThemeParkServiceFactory :
         ICanTranslate<DestinationsResponseWrapper, List<Destination>>,
-        ICanTranslate<ParkDetailsResponse, ParkDetails>
+        ICanTranslate<ParkDetailsResponse, ParkDetails>,
+        ICanTranslate<ParkChildrenResponseWrapper, List<ParkChildren>>
     {
         /// <inheritdoc/>
         public List<Destination> TranslateTo(DestinationsResponseWrapper initial)
@@ -38,6 +39,8 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
         {
             return new ParkDetails
             {
+                Id = initial.Id,
+                Description = initial.Description,
                 TimeZone = initial.TimeZone,
                 Location = new ParkLocation
                 {
@@ -45,6 +48,17 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
                     Longitude = initial.Location.Longitude,
                 },
             };
+        }
+
+        /// <inheritdoc/>
+        public List<ParkChildren> TranslateTo(ParkChildrenResponseWrapper initial)
+        {
+            return initial.Children
+                .Select(childResponse => new ParkChildren
+                {
+                    Id = childResponse.Id,
+                    Description = childResponse.Description,
+                }).ToList();
         }
     }
 }

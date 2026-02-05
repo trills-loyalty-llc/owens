@@ -29,9 +29,9 @@ namespace Owens.Application.ThemeParks.AddThemePark
         public double Longitude { get; init; }
 
         /// <summary>
-        /// Gets the external scheduling identifier.
+        /// Gets the time zone identifier.
         /// </summary>
         [Required(AllowEmptyStrings = false)]
-        public Guid ExternalSchedulingId { get; init; }
+        public string TimeZoneId { get; init; } = string.Empty;
     }
 }

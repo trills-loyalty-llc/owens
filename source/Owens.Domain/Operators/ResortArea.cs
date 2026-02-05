@@ -15,11 +15,9 @@ namespace Owens.Domain.Operators
         /// Initializes a new instance of the <see cref="ResortArea"/> class.
         /// </summary>
         /// <param name="description">A description of the resort area.</param>
-        /// <param name="timeZoneId">The time zone identifier of the resort area.</param>
-        public ResortArea(string description, string timeZoneId)
+        public ResortArea(string description)
         {
             Description = description;
-            TimeZoneId = timeZoneId;
         }
 
         /// <summary>
@@ -27,22 +25,15 @@ namespace Owens.Domain.Operators
         /// </summary>
         /// <param name="id">The resort area identifier.</param>
         /// <param name="description">A description of the resort area.</param>
-        /// <param name="timeZoneId">The time zone identifier of the resort area.</param>
-        public ResortArea(Guid id, string description, string timeZoneId)
+        public ResortArea(Guid id, string description)
             : base(id)
         {
             Description = description;
-            TimeZoneId = timeZoneId;
         }
 
         /// <summary>
         /// Gets the description of the resort area.
         /// </summary>
         public string Description { get; }
-
-        /// <summary>
-        /// Gets the time zone identifier of the resort area.
-        /// </summary>
-        public string TimeZoneId { get; }
     }
 }

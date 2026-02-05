@@ -15,11 +15,15 @@ namespace Owens.Domain.ThemeParks
         /// <summary>
         /// Initializes a new instance of the <see cref="ThemePark"/> class.
         /// </summary>
+        /// <param name="id">The park identifier.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
+        /// <param name="timeZoneId">The time zone identifier.</param>
         /// <param name="coordinates">The coordinates for the park.</param>
-        public ThemePark(string description, LocationCoordinates coordinates)
+        public ThemePark(Guid id, string description, string timeZoneId, LocationCoordinates coordinates)
+            : base(id)
         {
             Description = description;
+            TimeZoneId = timeZoneId;
             Coordinates = coordinates;
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
@@ -30,10 +34,12 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The identifier for the park.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        public ThemePark(Guid id, string description)
+        /// <param name="timeZoneId">The time zone identifier.</param>
+        public ThemePark(Guid id, string description, string timeZoneId)
             : base(id)
         {
             Description = description;
+            TimeZoneId = timeZoneId;
             Coordinates = LocationCoordinates.Empty();
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
@@ -41,6 +47,11 @@ namespace Owens.Domain.ThemeParks
 
         /// <inheritdoc/>
         public string Description { get; }
+
+        /// <summary>
+        /// Gets the time zone identifier.
+        /// </summary>
+        public string TimeZoneId { get; }
 
         /// <summary>
         /// Gets the location coordinates of the park.
