@@ -16,14 +16,10 @@ namespace Owens.Domain.Attractions
         /// Initializes a new instance of the <see cref="Attraction"/> class.
         /// </summary>
         /// <param name="description">The description for the attraction.</param>
-        /// <param name="queueTimesExternalId">The external identifier for queue times.</param>
-        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(string description, int queueTimesExternalId, Guid schedulingExternalId, AttractionType attractionType)
+        public Attraction(string description, AttractionType attractionType)
         {
             Description = description;
-            QueueTimesExternalId = queueTimesExternalId;
-            SchedulingExternalId = schedulingExternalId;
             AttractionType = attractionType;
             Status = new List<QueueStatus>();
         }
@@ -33,31 +29,17 @@ namespace Owens.Domain.Attractions
         /// </summary>
         /// <param name="id">The identifier of the root.</param>
         /// <param name="description">The description for the attraction.</param>
-        /// <param name="queueTimesExternalId">The external identifier for queue times.</param>
-        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(Guid id, string description, int queueTimesExternalId, Guid schedulingExternalId, AttractionType attractionType)
+        public Attraction(Guid id, string description, AttractionType attractionType)
             : base(id)
         {
             Description = description;
-            QueueTimesExternalId = queueTimesExternalId;
-            SchedulingExternalId = schedulingExternalId;
             AttractionType = attractionType;
             Status = new List<QueueStatus>();
         }
 
         /// <inheritdoc/>
         public string Description { get; }
-
-        /// <summary>
-        /// Gets the external identifier for queue times.
-        /// </summary>
-        public int QueueTimesExternalId { get; }
-
-        /// <summary>
-        /// Gets the external identifier for scheduling.
-        /// </summary>
-        public Guid SchedulingExternalId { get; }
 
         /// <summary>
         /// Gets the type of the attraction.

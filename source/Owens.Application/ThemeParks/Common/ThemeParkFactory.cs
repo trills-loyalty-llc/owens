@@ -33,8 +33,7 @@ namespace Owens.Application.ThemeParks.Common
         {
             return FactoryHelpers.TryCreateValidate(() => new ThemePark(
                 initial.Description,
-                LocationCoordinates.FromCoordinates(initial.Latitude, initial.Longitude),
-                initial.ExternalSchedulingId));
+                LocationCoordinates.FromCoordinates(initial.Latitude, initial.Longitude)));
         }
 
         /// <inheritdoc/>

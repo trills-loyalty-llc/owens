@@ -49,6 +49,18 @@ namespace Owens.API.Common
             return await ExecuteRequest(request, response => Created(new Uri($"{response.Id}", UriKind.Relative), response), cancellationToken);
         }
 
+        /// <summary>
+        /// Handles a No Content response.
+        /// </summary>
+        /// <typeparam name="TResponse">The type for the response.</typeparam>
+        /// <param name="request">An instance of the request object.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        protected async Task<IActionResult> ExecuteNoContent<TResponse>(IPayload<Envelope<TResponse>> request, CancellationToken cancellationToken)
+        {
+            return await ExecuteRequest(request, response => NoContent(), cancellationToken);
+        }
+
         private async Task<IActionResult> ExecuteRequest<TResponse>(IPayload<Envelope<TResponse>> payload, Func<TResponse, IActionResult> resultFunc, CancellationToken cancellationToken)
         {
             try

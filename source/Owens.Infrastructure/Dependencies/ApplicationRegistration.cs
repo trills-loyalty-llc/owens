@@ -9,12 +9,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NMediation.Dependencies;
 using Owens.Application.Attractions.Common;
+using Owens.Application.Operators.Common;
 using Owens.Application.Services.QueueTimes.Interfaces;
 using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.Services.Weather.Interfaces;
 using Owens.Application.ThemeParks.Common;
 using Owens.Infrastructure.DataAccess.Attractions;
 using Owens.Infrastructure.DataAccess.Common;
+using Owens.Infrastructure.DataAccess.Operators;
 using Owens.Infrastructure.DataAccess.ThemeParks;
 using Owens.Infrastructure.HealthChecks;
 using Owens.Infrastructure.ServiceClients.QueueTimes.Clients;
@@ -60,6 +62,7 @@ namespace Owens.Infrastructure.Dependencies
 
             services.AddTransient<IAttractionRepository, AttractionRepository>();
             services.AddTransient<IThemeParkRepository, ThemeParkRepository>();
+            services.AddTransient<IOperatorRepository, OperatorRepository>();
 
             // Spool up the database for rapid creation if a model was changed.
             using (var context = new ApplicationContext(new DbContextOptionsBuilder().UseSqlServer(configuration.GetConnectionString("Database")).Options))

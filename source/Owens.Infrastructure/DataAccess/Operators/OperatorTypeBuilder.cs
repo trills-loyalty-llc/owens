@@ -14,6 +14,8 @@ namespace Owens.Infrastructure.DataAccess.Operators
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<ResortOperator> builder)
         {
+            builder.Property(resortOperator => resortOperator.Description);
+
             builder
                 .HasMany(resortOperator => resortOperator.ResortAreas)
                 .WithOne()

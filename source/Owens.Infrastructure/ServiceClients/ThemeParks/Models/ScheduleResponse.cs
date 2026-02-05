@@ -4,6 +4,9 @@
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
 {
+    /// <summary>
+    /// Response for a park schedule.
+    /// </summary>
     public class ScheduleResponse
     {
     }

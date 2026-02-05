@@ -45,7 +45,8 @@ namespace Owens.Infrastructure.Jobs
 
             foreach (var response in responses)
             {
-                var exists = await _attractionRepository.GetByExternalId(response.Id, context.CancellationToken);
+                // TODO: Update identifier.
+                var exists = await _attractionRepository.GetObjectById(Guid.Empty, context.CancellationToken);
 
                 if (exists != null)
                 {

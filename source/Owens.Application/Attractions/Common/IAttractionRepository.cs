@@ -15,12 +15,5 @@ namespace Owens.Application.Attractions.Common
         IUpdateObject<Attraction>,
         IGetObjectById<Attraction>
     {
-        /// <summary>
-        /// Gets the attraction external identifier.
-        /// </summary>
-        /// <param name="id">The external identifier.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<Attraction?> GetByExternalId(int id, CancellationToken cancellationToken = default);
     }
 }

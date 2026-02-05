@@ -17,13 +17,10 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="description">An alphaNumeric description for the park.</param>
         /// <param name="coordinates">The coordinates for the park.</param>
-        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
-        public ThemePark(string description, LocationCoordinates coordinates, Guid schedulingExternalId)
+        public ThemePark(string description, LocationCoordinates coordinates)
         {
             Description = description;
             Coordinates = coordinates;
-            SchedulingExternalId = schedulingExternalId;
-            ParkZones = new List<ParkZone>();
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
         }
@@ -33,14 +30,11 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The identifier for the park.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        /// <param name="schedulingExternalId">The external identifier for scheduling.</param>
-        public ThemePark(Guid id, string description, Guid schedulingExternalId)
+        public ThemePark(Guid id, string description)
             : base(id)
         {
             Description = description;
-            SchedulingExternalId = schedulingExternalId;
             Coordinates = LocationCoordinates.Empty();
-            ParkZones = new List<ParkZone>();
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
         }
@@ -49,19 +43,9 @@ namespace Owens.Domain.ThemeParks
         public string Description { get; }
 
         /// <summary>
-        /// Gets get the external identifier for scheduling.
-        /// </summary>
-        public Guid SchedulingExternalId { get; }
-
-        /// <summary>
         /// Gets the location coordinates of the park.
         /// </summary>
         public LocationCoordinates Coordinates { get; }
-
-        /// <summary>
-        /// Gets the zones available in the park.
-        /// </summary>
-        public ICollection<ParkZone> ParkZones { get; }
 
         /// <summary>
         /// Gets the weather status updates for a theme park.

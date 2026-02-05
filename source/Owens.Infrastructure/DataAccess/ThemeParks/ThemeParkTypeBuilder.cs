@@ -16,18 +16,11 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         {
             builder.Property(themePark => themePark.Description);
 
-            builder.HasIndex(themePark => themePark.SchedulingExternalId).IsUnique();
-
             builder.ComplexProperty(themePark => themePark.Coordinates, propertyBuilder =>
             {
                 propertyBuilder.Property(coordinates => coordinates.Latitude);
                 propertyBuilder.Property(coordinates => coordinates.Longitude);
             });
-
-            builder
-                .HasMany(themePark => themePark.ParkZones)
-                .WithOne()
-                .IsRequired();
 
             builder
                 .HasMany(themePark => themePark.WeatherStatus)

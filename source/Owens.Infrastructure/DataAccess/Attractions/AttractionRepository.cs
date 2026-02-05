@@ -2,7 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.EntityFrameworkCore;
 using NMediation.Abstractions;
 using Owens.Application.Attractions.Common;
 using Owens.Domain.Attractions;
@@ -17,12 +16,6 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         public AttractionRepository(ApplicationContext applicationContext, IMediation mediation)
             : base(applicationContext, mediation)
         {
-        }
-
-        /// <inheritdoc/>
-        public Task<Attraction?> GetByExternalId(int id, CancellationToken cancellationToken = default)
-        {
-            return Context.Attractions.FirstOrDefaultAsync(attraction => attraction.QueueTimesExternalId == id, cancellationToken);
         }
     }
 }
