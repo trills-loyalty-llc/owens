@@ -3,7 +3,7 @@
     <AppDesignerFolder>Operators</AppDesignerFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ClearDomain.Identity" Version="0.9.7" />
+    <PackageReference Include="ClearDomain.Identity" Version="0.9.8" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
   </ItemGroup>
 </Project>
