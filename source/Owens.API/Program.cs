@@ -31,7 +31,6 @@ namespace Owens.API
             builder.Services.AddControllers();
             builder.Services.RegisterJobs();
             builder.Services.RegisterDependencies(builder.Configuration);
-            builder.Services.AddAuthenticationDependencies(builder.Configuration);
             builder.Services.AddSwaggerGen(options =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

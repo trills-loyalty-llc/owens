@@ -77,7 +77,6 @@ namespace Owens.Tests.Integration.Common
 
                 collection.RegisterDependencies(configuration);
                 collection.AddLogging();
-                collection.AddAuthenticationDependencies(configuration);
 
                 var provider = collection.BuildServiceProvider();
                 _serviceProvider = provider;

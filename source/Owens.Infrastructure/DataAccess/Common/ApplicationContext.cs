@@ -2,11 +2,8 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Owens.Domain.Attractions;
-using Owens.Domain.Members;
 using Owens.Domain.Operators;
 using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.Dependencies;
@@ -15,7 +12,7 @@ using Owens.Infrastructure.Logging.Common;
 namespace Owens.Infrastructure.DataAccess.Common
 {
     /// <inheritdoc />
-    public sealed class ApplicationContext : IdentityDbContext<Member, IdentityRole<Guid>, Guid>
+    public sealed class ApplicationContext : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationContext"/> class.
