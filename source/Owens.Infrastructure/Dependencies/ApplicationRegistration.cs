@@ -85,6 +85,7 @@ namespace Owens.Infrastructure.Dependencies
                 .ReadFrom.Services(serviceProvider)
                 .ReadFrom.Configuration(configuration)
                 .Enrich.FromLogContext()
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                 .WriteTo.Console()
                 .WriteTo.Debug());
 
