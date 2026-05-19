@@ -21,6 +21,12 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
             builder.Property(parkSchedule => parkSchedule.Opening);
 
             builder.Property(parkSchedule => parkSchedule.Closing);
+
+            builder.ComplexProperty(parkSchedule => parkSchedule.Ticketing, propertyBuilder =>
+            {
+                propertyBuilder.Property(ticketing => ticketing.Price);
+                propertyBuilder.Property(ticketing => ticketing.TicketingType);
+            });
         }
     }
 }

@@ -36,8 +36,7 @@ namespace Owens.Application.ThemeParks.Common
             return FactoryHelpers.TryCreateValidate(() => new ThemePark(
                 Guid.NewGuid(),
                 initial.Description,
-                initial.TimeZoneId,
-                LocationCoordinates.FromCoordinates(initial.Latitude, initial.Longitude)));
+                Location.FromMetadata(initial.Latitude, initial.Longitude, initial.TimeZoneId)));
         }
 
         /// <inheritdoc/>
@@ -58,8 +57,7 @@ namespace Owens.Application.ThemeParks.Common
             return new ThemePark(
                 initial.Id,
                 initial.Description,
-                initial.TimeZone,
-                LocationCoordinates.FromCoordinates(initial.Location.Latitude, initial.Location.Longitude));
+                Location.FromMetadata(initial.Location.Latitude, initial.Location.Longitude, initial.TimeZone));
         }
     }
 }

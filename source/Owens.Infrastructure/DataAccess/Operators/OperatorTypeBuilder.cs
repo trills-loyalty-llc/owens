@@ -20,13 +20,6 @@ namespace Owens.Infrastructure.DataAccess.Operators
                 .HasMany(resortOperator => resortOperator.ResortAreas)
                 .WithOne()
                 .IsRequired();
-
-            builder.HasData(new List<ResortOperator>
-            {
-                new ResortOperator("Disney"),
-                new ResortOperator("Universal"),
-                new ResortOperator("SeaWorld"),
-            });
         }
     }
 }

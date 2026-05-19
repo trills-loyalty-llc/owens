@@ -16,12 +16,11 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         {
             builder.Property(themePark => themePark.Description);
 
-            builder.Property(themePark => themePark.TimeZoneId);
-
-            builder.ComplexProperty(themePark => themePark.Coordinates, propertyBuilder =>
+            builder.ComplexProperty(themePark => themePark.Location, propertyBuilder =>
             {
-                propertyBuilder.Property(coordinates => coordinates.Latitude);
-                propertyBuilder.Property(coordinates => coordinates.Longitude);
+                propertyBuilder.Property(location => location.Latitude);
+                propertyBuilder.Property(location => location.Longitude);
+                propertyBuilder.Property(location => location.TimeZoneId);
             });
 
             builder

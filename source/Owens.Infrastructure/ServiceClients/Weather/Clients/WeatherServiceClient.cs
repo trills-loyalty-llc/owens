@@ -32,7 +32,7 @@ namespace Owens.Infrastructure.ServiceClients.Weather.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<CurrentWeather> GetWeatherAtLocation(LocationCoordinates coordinates, CancellationToken cancellationToken = default)
+        public async Task<CurrentWeather> GetWeatherAtLocation(Location coordinates, CancellationToken cancellationToken = default)
         {
             var uri = new Uri($"current.json?key={_options.WeatherKey}&q={coordinates.Latitude},{coordinates.Longitude}", UriKind.Relative);
 

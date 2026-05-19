@@ -52,7 +52,7 @@ namespace Owens.Infrastructure.Jobs
 
             foreach (var themePark in themeParks)
             {
-                var currentWeather = await _weatherService.GetWeatherAtLocation(themePark.Coordinates, context.CancellationToken);
+                var currentWeather = await _weatherService.GetWeatherAtLocation(themePark.Location, context.CancellationToken);
 
                 var weatherStatus = _translator.Translate<CurrentWeather, WeatherStatus>(currentWeather);
 

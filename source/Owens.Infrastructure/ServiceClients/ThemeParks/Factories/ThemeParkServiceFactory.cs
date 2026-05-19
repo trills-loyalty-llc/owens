@@ -4,6 +4,7 @@
 
 using FactoryFoundation;
 using Owens.Domain.Attractions;
+using Owens.Domain.Common;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
@@ -18,7 +19,7 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
         {
             var entity = first.LiveData.First();
 
-            var status = Enum.Parse<OperationalStatus>(entity.Status, true);
+            var status = Enum.Parse<OperatingStatus>(entity.Status, true);
 
             return new QueueStatus(TimeSpan.FromMinutes(entity.Queue.StandBy.WaitInMinutes), DateTimeOffset.UtcNow, status);
         }

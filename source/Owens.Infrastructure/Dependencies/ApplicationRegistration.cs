@@ -67,6 +67,10 @@ namespace Owens.Infrastructure.Dependencies
             using (var context = new ApplicationContext(new DbContextOptionsBuilder().UseSqlServer(configuration.GetConnectionString("Database")).Options))
             {
                 context.Database.EnsureCreated();
+
+                context.Operators.AddRange(SeedData.InitialSeedData());
+
+                context.SaveChanges();
             }
 
             // Time

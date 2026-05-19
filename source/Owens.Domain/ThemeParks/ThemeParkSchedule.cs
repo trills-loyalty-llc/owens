@@ -25,6 +25,7 @@ namespace Owens.Domain.ThemeParks
             Operating = operating;
             Opening = opening;
             Closing = closing;
+            Ticketing = Ticketing.Empty();
         }
 
         /// <summary>
@@ -35,13 +36,15 @@ namespace Owens.Domain.ThemeParks
         /// <param name="operating">The operation status of the park.</param>
         /// <param name="opening">The opening timestamp for the park.</param>
         /// <param name="closing">The closing timestamp for the park.</param>
-        public ThemeParkSchedule(Guid id, DateOnly operatingDate, OperatingStatus operating, DateTimeOffset opening, DateTimeOffset closing)
+        /// <param name="ticketing">The ticketing metadata for the schedule.</param>
+        public ThemeParkSchedule(Guid id, DateOnly operatingDate, OperatingStatus operating, DateTimeOffset opening, DateTimeOffset closing, Ticketing ticketing)
             : base(id)
         {
             OperatingDate = operatingDate;
             Operating = operating;
             Opening = opening;
             Closing = closing;
+            Ticketing = ticketing;
         }
 
         /// <summary>
@@ -53,6 +56,11 @@ namespace Owens.Domain.ThemeParks
         /// Gets get the operating status.
         /// </summary>
         public OperatingStatus Operating { get; }
+
+        /// <summary>
+        /// Gets the ticket for the schedule.
+        /// </summary>
+        public Ticketing Ticketing { get; }
 
         /// <summary>
         /// Gets the opening time.

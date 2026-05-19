@@ -7,7 +7,7 @@ using FluentValidation;
 namespace Owens.Domain.ThemeParks
 {
     /// <inheritdoc />
-    public class LocationCoordinatesValidator : AbstractValidator<LocationCoordinates>
+    public class LocationCoordinatesValidator : AbstractValidator<Location>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationCoordinatesValidator"/> class.

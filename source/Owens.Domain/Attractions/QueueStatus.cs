@@ -3,6 +3,7 @@
 // </copyright>
 
 using ClearDomain.GuidPrimary;
+using Owens.Domain.Common;
 
 namespace Owens.Domain.Attractions
 {
@@ -16,7 +17,7 @@ namespace Owens.Domain.Attractions
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
         /// <param name="status">The current status of the attraction.</param>
-        public QueueStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, OperationalStatus status)
+        public QueueStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, OperatingStatus status)
             : base(id)
         {
             Wait = wait;
@@ -30,7 +31,7 @@ namespace Owens.Domain.Attractions
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
         /// <param name="status">The current status of the attraction.</param>
-        public QueueStatus(TimeSpan wait, DateTimeOffset timeStamp, OperationalStatus status)
+        public QueueStatus(TimeSpan wait, DateTimeOffset timeStamp, OperatingStatus status)
         {
             Wait = wait;
             TimeStamp = timeStamp;
@@ -50,6 +51,6 @@ namespace Owens.Domain.Attractions
         /// <summary>
         /// Gets a value indicating whether the attraction is operating.
         /// </summary>
-        public OperationalStatus Status { get; }
+        public OperatingStatus Status { get; }
     }
 }

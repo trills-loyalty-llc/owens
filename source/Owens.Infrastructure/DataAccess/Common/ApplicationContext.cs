@@ -55,8 +55,6 @@ namespace Owens.Infrastructure.DataAccess.Common
             base.OnModelCreating(builder);
 
             builder.ApplyConfigurationsFromAssembly(AssemblyConstants.Infrastructure);
-
-            builder.Entity<Attraction>().HasData(SeedData.Attractions());
         }
     }
 }

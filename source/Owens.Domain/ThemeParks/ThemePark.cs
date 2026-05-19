@@ -17,14 +17,12 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The park identifier.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        /// <param name="timeZoneId">The time zone identifier.</param>
-        /// <param name="coordinates">The coordinates for the park.</param>
-        public ThemePark(Guid id, string description, string timeZoneId, LocationCoordinates coordinates)
+        /// <param name="location">The location for the park.</param>
+        public ThemePark(Guid id, string description, Location location)
             : base(id)
         {
             Description = description;
-            TimeZoneId = timeZoneId;
-            Coordinates = coordinates;
+            Location = location;
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
         }
@@ -34,13 +32,11 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The identifier for the park.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        /// <param name="timeZoneId">The time zone identifier.</param>
-        public ThemePark(Guid id, string description, string timeZoneId)
+        public ThemePark(Guid id, string description)
             : base(id)
         {
             Description = description;
-            TimeZoneId = timeZoneId;
-            Coordinates = LocationCoordinates.Empty();
+            Location = Location.Empty();
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
         }
@@ -49,14 +45,9 @@ namespace Owens.Domain.ThemeParks
         public string Description { get; }
 
         /// <summary>
-        /// Gets the time zone identifier.
-        /// </summary>
-        public string TimeZoneId { get; }
-
-        /// <summary>
         /// Gets the location coordinates of the park.
         /// </summary>
-        public LocationCoordinates Coordinates { get; }
+        public Location Location { get; }
 
         /// <summary>
         /// Gets the weather status updates for a theme park.
@@ -75,6 +66,15 @@ namespace Owens.Domain.ThemeParks
         public void AppendWeather(WeatherStatus weatherStatus)
         {
             WeatherStatus.Add(weatherStatus);
+        }
+
+        /// <summary>
+        /// Appends a schedule to a theme park.
+        /// </summary>
+        /// <param name="schedule">A schedule update to append.</param>
+        public void AppendSchedule(ThemeParkSchedule schedule)
+        {
+            Schedules.Add(schedule);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="LocationCoordinates.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="Location.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -10,17 +10,19 @@ namespace Owens.Domain.ThemeParks
     /// <summary>
     /// Denotes a location using latitude and longitude.
     /// </summary>
-    public class LocationCoordinates : ValueObject
+    public class Location : ValueObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LocationCoordinates"/> class.
+        /// Initializes a new instance of the <see cref="Location"/> class.
         /// </summary>
         /// <param name="latitude">A latitude value of a location.</param>
         /// <param name="longitude">A longitude value of a location.</param>
-        public LocationCoordinates(double latitude, double longitude)
+        /// <param name="timeZoneId">The time zone identifier of a location.</param>
+        public Location(double latitude, double longitude, string timeZoneId)
         {
             Latitude = latitude;
             Longitude = longitude;
+            TimeZoneId = timeZoneId;
 
             new LocationCoordinatesValidator().ValidateAndThrow(this);
         }
@@ -36,23 +38,29 @@ namespace Owens.Domain.ThemeParks
         public double Longitude { get; }
 
         /// <summary>
+        /// Gets the time zone identifier.
+        /// </summary>
+        public string TimeZoneId { get; }
+
+        /// <summary>
         /// Creates a location instance from a series of values.
         /// </summary>
         /// <param name="latitude">A latitude value of a location.</param>
         /// <param name="longitude">A longitude value of a location.</param>
-        /// <returns>A <see cref="LocationCoordinates"/> instance.</returns>
-        public static LocationCoordinates FromCoordinates(double latitude, double longitude)
+        /// <param name="timeZoneId">The time zone identifier of a location.</param>
+        /// <returns>A <see cref="Location"/> instance.</returns>
+        public static Location FromMetadata(double latitude, double longitude, string timeZoneId)
         {
-            return new LocationCoordinates(latitude, longitude);
+            return new Location(latitude, longitude, timeZoneId);
         }
 
         /// <summary>
         /// Creates an empty location coordinates to satisfy nullable requirements.
         /// </summary>
-        /// <returns>An empty <see cref="LocationCoordinates"/>.</returns>
-        public static LocationCoordinates Empty()
+        /// <returns>An empty <see cref="Location"/>.</returns>
+        public static Location Empty()
         {
-            return new LocationCoordinates(0, 0);
+            return new Location(0, 0, string.Empty);
         }
     }
 }
