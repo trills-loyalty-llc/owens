@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using NMediation.Abstractions;
 using Owens.API.Common;
 using Owens.Application.Operators.AddOperator;
-using Owens.Application.Operators.ImportResortAreas;
 
 namespace Owens.API.Controllers.Operators
 {
@@ -32,18 +31,6 @@ namespace Owens.API.Controllers.Operators
         public async Task<IActionResult> AddResortOperator(AddOperatorRequest request, CancellationToken cancellationToken = default)
         {
             return await ExecuteCreated(request, cancellationToken);
-        }
-
-        /// <summary>
-        /// Imports all basic resort area information.
-        /// </summary>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [HttpPost("resort-areas", Name = "ImportResortAreas")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> ImportResortAreas(CancellationToken cancellationToken = default)
-        {
-            return await ExecuteNoContent(new ImportResortAreasRequest(), cancellationToken);
         }
     }
 }

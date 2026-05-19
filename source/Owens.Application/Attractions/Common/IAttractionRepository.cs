@@ -13,7 +13,8 @@ namespace Owens.Application.Attractions.Common
     public interface IAttractionRepository :
         IAddObject<Attraction>,
         IUpdateObject<Attraction>,
-        IGetObjectById<Attraction>
+        IGetObjectById<Attraction>,
+        IGetAllObjects<Attraction>
     {
     }
 }

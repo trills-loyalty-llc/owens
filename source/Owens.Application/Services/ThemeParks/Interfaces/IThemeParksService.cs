@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Application.Services.ThemeParks.Models;
+using Owens.Domain.Attractions;
 
 namespace Owens.Application.Services.ThemeParks.Interfaces
 {
@@ -12,26 +12,11 @@ namespace Owens.Application.Services.ThemeParks.Interfaces
     public interface IThemeParksService
     {
         /// <summary>
-        /// Retrieves all available destinations.
+        /// Retrieves the current status of an attraction queue.
         /// </summary>
+        /// <param name="id">The identifier of teh attraction.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<List<Destination>> GetDestinations(CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Retrieves details about a park.
-        /// </summary>
-        /// <param name="id">The park identifier.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<ParkDetails> GetParkDetails(Guid id, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Retrieves all children for a park.
-        /// </summary>
-        /// <param name="id">The park identifier.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<List<ParkChildren>> GetParkChildren(Guid id, CancellationToken cancellationToken = default);
+        Task<QueueStatus> GetCurrentStatus(Guid id, CancellationToken cancellationToken = default);
     }
 }

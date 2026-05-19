@@ -22,14 +22,14 @@ namespace Owens.Infrastructure.Dependencies
         {
             services.AddQuartz(configurator =>
             {
-                configurator.AddJob<WaitTimesJob>(jobConfigurator => jobConfigurator.WithIdentity(WaitTimesJob.WaitTimesJobKey));
+                configurator.AddJob<QueueStatusJob>(jobConfigurator => jobConfigurator.WithIdentity(QueueStatusJob.QueueStatusJobKey));
                 configurator.AddJob<WeatherJob>(jobConfigurator => jobConfigurator.WithIdentity(WeatherJob.WeatherJobKey));
 
                 const int fiveMinutes = 5;
 
                 configurator.AddTrigger(triggerConfigurator => triggerConfigurator
-                    .ForJob(WaitTimesJob.WaitTimesJobKey)
-                    .WithSimpleSchedule(builder => builder.WithIntervalInMinutes(fiveMinutes).RepeatForever()));
+                   .ForJob(QueueStatusJob.QueueStatusJobKey)
+                   .WithSimpleSchedule(builder => builder.WithIntervalInMinutes(fiveMinutes).RepeatForever()));
 
                 configurator.AddTrigger(triggerConfigurator => triggerConfigurator
                     .ForJob(WeatherJob.WeatherJobKey)

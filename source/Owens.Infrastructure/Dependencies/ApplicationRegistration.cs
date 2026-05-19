@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NMediation.Dependencies;
 using Owens.Application.Attractions.Common;
 using Owens.Application.Operators.Common;
-using Owens.Application.Services.QueueTimes.Interfaces;
 using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.Services.Weather.Interfaces;
 using Owens.Application.ThemeParks.Common;
@@ -19,10 +18,10 @@ using Owens.Infrastructure.DataAccess.Common;
 using Owens.Infrastructure.DataAccess.Operators;
 using Owens.Infrastructure.DataAccess.ThemeParks;
 using Owens.Infrastructure.HealthChecks;
-using Owens.Infrastructure.ServiceClients.QueueTimes.Clients;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Clients;
 using Owens.Infrastructure.ServiceClients.Weather.Clients;
 using Polly;
+using Polly.RateLimiting;
 using Polly.Retry;
 using Polly.Timeout;
 using Serilog;
@@ -93,24 +92,19 @@ namespace Owens.Infrastructure.Dependencies
             var policy = new ResiliencePipelineBuilder<HttpResponseMessage>()
                 .AddRetry(new RetryStrategyOptions<HttpResponseMessage>())
                 .AddTimeout(new TimeoutStrategyOptions())
+                .AddRateLimiter(new RateLimiterStrategyOptions())
                 .Build().AsAsyncPolicy();
-
-            services
-                .AddHttpClient<IQueueTimesService, QueueTimesServiceClient>(client =>
-                {
-                    client.BaseAddress = new Uri("https://queue-times.com/parks/");
-                }).AddPolicyHandler(policy);
 
             services
                 .AddHttpClient<IWeatherService, WeatherServiceClient>(client =>
                 {
-                    client.BaseAddress = new Uri("https://api.weatherapi.com/v1/");
+                    client.BaseAddress = new Uri(configuration.GetConnectionString("Weather") ?? throw new ArgumentNullException(nameof(configuration)));
                 }).AddPolicyHandler(policy);
 
             services
                 .AddHttpClient<IThemeParksService, ThemeParksServiceClient>(client =>
                 {
-                    client.BaseAddress = new Uri("https://api.themeparks.wiki/v1/");
+                    client.BaseAddress = new Uri(configuration.GetConnectionString("ThemeParks") ?? throw new ArgumentNullException(nameof(configuration)));
                 }).AddPolicyHandler(policy);
         }
     }

@@ -15,13 +15,13 @@ namespace Owens.Domain.Attractions
         /// <param name="id">The identifier of the entity.</param>
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
-        /// <param name="isOperational">Designates if the attraction is open.</param>
-        public QueueStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
+        /// <param name="status">The current status of the attraction.</param>
+        public QueueStatus(Guid id, TimeSpan wait, DateTimeOffset timeStamp, OperationalStatus status)
             : base(id)
         {
             Wait = wait;
             TimeStamp = timeStamp;
-            IsOperational = isOperational;
+            Status = status;
         }
 
         /// <summary>
@@ -29,12 +29,12 @@ namespace Owens.Domain.Attractions
         /// </summary>
         /// <param name="wait">The wait time for the attraction.</param>
         /// <param name="timeStamp">The timestamp of the status update.</param>
-        /// <param name="isOperational">Designates if the attraction is open.</param>
-        public QueueStatus(TimeSpan wait, DateTimeOffset timeStamp, bool isOperational)
+        /// <param name="status">The current status of the attraction.</param>
+        public QueueStatus(TimeSpan wait, DateTimeOffset timeStamp, OperationalStatus status)
         {
             Wait = wait;
             TimeStamp = timeStamp;
-            IsOperational = isOperational;
+            Status = status;
         }
 
         /// <summary>
@@ -50,6 +50,6 @@ namespace Owens.Domain.Attractions
         /// <summary>
         /// Gets a value indicating whether the attraction is operating.
         /// </summary>
-        public bool IsOperational { get; }
+        public OperationalStatus Status { get; }
     }
 }

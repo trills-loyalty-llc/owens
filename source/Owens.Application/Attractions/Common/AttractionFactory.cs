@@ -21,8 +21,9 @@ namespace Owens.Application.Attractions.Common
         public ValidationEnvelope<Attraction> TranslateTo(AddAttractionRequest initial)
         {
             return FactoryHelpers.TryCreateValidate(() => new Attraction(
-                    initial.Description,
-                    initial.AttractionType));
+                initial.AttractionId,
+                initial.Description,
+                initial.AttractionType));
         }
 
         /// <inheritdoc/>

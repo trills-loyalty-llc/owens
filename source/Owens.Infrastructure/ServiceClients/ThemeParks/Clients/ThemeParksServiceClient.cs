@@ -5,7 +5,7 @@
 using FactoryFoundation;
 using Microsoft.Extensions.Logging;
 using Owens.Application.Services.ThemeParks.Interfaces;
-using Owens.Application.Services.ThemeParks.Models;
+using Owens.Domain.Attractions;
 using Owens.Infrastructure.ServiceClients.Common;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
 
@@ -21,21 +21,9 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<List<Destination>> GetDestinations(CancellationToken cancellationToken = default)
+        public async Task<QueueStatus> GetCurrentStatus(Guid id, CancellationToken cancellationToken = default)
         {
-            return await ExecuteGet<DestinationsResponseWrapper, List<Destination>>(new Uri("destinations", UriKind.Relative), DestinationsResponseWrapper.Default(), cancellationToken);
-        }
-
-        /// <inheritdoc/>
-        public async Task<ParkDetails> GetParkDetails(Guid id, CancellationToken cancellationToken = default)
-        {
-            return await ExecuteGet<ParkDetailsResponse, ParkDetails>(new Uri($"entity/{id}", UriKind.Relative), ParkDetailsResponse.Default(), cancellationToken);
-        }
-
-        /// <inheritdoc/>
-        public async Task<List<ParkChildren>> GetParkChildren(Guid id, CancellationToken cancellationToken = default)
-        {
-            return await ExecuteGet<ParkChildrenResponseWrapper, List<ParkChildren>>(new Uri($"entity/{id}/children", UriKind.Relative), ParkChildrenResponseWrapper.Default(), cancellationToken);
+            return await ExecuteGet<EntityResult, QueueStatus>(new Uri($"entity/{id}/live", UriKind.Relative), new EntityResult(), cancellationToken);
         }
     }
 }

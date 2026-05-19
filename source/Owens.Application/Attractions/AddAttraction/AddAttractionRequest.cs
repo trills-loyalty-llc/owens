@@ -18,12 +18,6 @@ namespace Owens.Application.Attractions.AddAttraction
         public string Description { get; init; } = string.Empty;
 
         /// <summary>
-        /// Gets the external id.
-        /// </summary>
-        [Range(0, 9999)]
-        public int ExternalId { get; init; }
-
-        /// <summary>
         /// Gets the attraction type.
         /// </summary>
         [Range(0, 7)]
@@ -33,6 +27,6 @@ namespace Owens.Application.Attractions.AddAttraction
         /// Gets the external scheduling identifier.
         /// </summary>
         [Required(AllowEmptyStrings = false)]
-        public Guid ExternalSchedulingId { get; init; }
+        public Guid AttractionId { get; init; }
     }
 }

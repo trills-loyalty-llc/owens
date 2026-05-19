@@ -16,7 +16,7 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         {
             builder.Property(status => status.Wait);
             builder.Property(status => status.TimeStamp);
-            builder.Property(status => status.IsOperational);
+            builder.Property(status => status.Status);
         }
     }
 }

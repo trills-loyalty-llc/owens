@@ -8,12 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="10.0.0">
+    <Compile Remove="Integration\Application\**" />
+    <Compile Remove="Unit\Application\**" />
+    <EmbeddedResource Remove="Integration\Application\**" />
+    <EmbeddedResource Remove="Unit\Application\**" />
+    <None Remove="Integration\Application\**" />
+    <None Remove="Unit\Application\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="10.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Moq" Version="4.20.72" />
-    <PackageReference Include="MSTest" Version="4.2.1" />
+    <PackageReference Include="MSTest" Version="4.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,11 +31,6 @@
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Integration\Application\" />
-    <Folder Include="Unit\Application\" />
   </ItemGroup>
 
 </Project>
