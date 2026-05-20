@@ -4,7 +4,6 @@
 
 using FactoryFoundation;
 using Owens.Application.Attractions.AddAttraction;
-using Owens.Application.Services.ThemeParks.Models;
 using Owens.Domain.Attractions;
 
 namespace Owens.Application.Attractions.Common
@@ -14,8 +13,7 @@ namespace Owens.Application.Attractions.Common
     /// </summary>
     public class AttractionFactory :
         ICanTranslate<AddAttractionRequest, ValidationEnvelope<Attraction>>,
-        ICanTranslate<Attraction, AddAttractionResponse>,
-        ICanTranslate<ParkChildren, Attraction>
+        ICanTranslate<Attraction, AddAttractionResponse>
     {
         /// <inheritdoc/>
         public ValidationEnvelope<Attraction> TranslateTo(AddAttractionRequest initial)
@@ -30,12 +28,6 @@ namespace Owens.Application.Attractions.Common
         public AddAttractionResponse TranslateTo(Attraction initial)
         {
             return new AddAttractionResponse(initial.Id);
-        }
-
-        /// <inheritdoc/>
-        public Attraction TranslateTo(ParkChildren initial)
-        {
-            return new Attraction(initial.Id, initial.Description, AttractionType.Pending);
         }
     }
 }

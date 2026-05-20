@@ -15,7 +15,7 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
         /// Gets the current standby wait time in minutes.
         /// </summary>
         [JsonPropertyName("waitTime")]
-        public int WaitInMinutes { get; init; }
+        public int? WaitInMinutes { get; init; }
 
         /// <summary>
         /// Empty result to satisfy nullable requirements.

@@ -15,6 +15,11 @@ namespace Owens.Infrastructure.DataAccess.Operators
         protected override void ConfigureEntity(EntityTypeBuilder<ResortArea> builder)
         {
             builder.Property(resortArea => resortArea.Description);
+
+            builder
+                .HasMany(resortArea => resortArea.ThemeParks)
+                .WithOne()
+                .IsRequired();
         }
     }
 }

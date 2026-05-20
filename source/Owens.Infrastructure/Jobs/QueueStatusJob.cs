@@ -2,9 +2,10 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.Extensions.Logging;
+using FactoryFoundation;
 using Owens.Application.Attractions.Common;
 using Owens.Application.Services.ThemeParks.Interfaces;
+using Owens.Application.ThemeParks.Common;
 using Quartz;
 
 namespace Owens.Infrastructure.Jobs
@@ -17,41 +18,47 @@ namespace Owens.Infrastructure.Jobs
         /// </summary>
         public static readonly JobKey QueueStatusJobKey = JobKey.Create("QueueStatusJobKey");
 
+        private readonly ITranslator _translator;
         private readonly IThemeParksService _themeParksService;
-        private readonly ILogger<QueueStatusJob> _logger;
-        private readonly TimeProvider _timeProvider;
         private readonly IAttractionRepository _attractionRepository;
+        private readonly IThemeParkRepository _themeParkRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueueStatusJob"/> class.
         /// </summary>
-        /// <param name="logger">An instance of the <see cref="ILogger{T}"/> interface.</param>
+        /// <param name="translator">An instance of the <see cref="ITranslator"/> interface.</param>
         /// <param name="themeParkService">An instance of the <see cref="IThemeParksService"/> interface.</param>
-        /// <param name="timeProvider">An instance of the <see cref="TimeProvider"/> class.</param>
         /// <param name="attractionRepository">An instance of the <see cref="IAttractionRepository"/> interface.</param>
-        public QueueStatusJob(ILogger<QueueStatusJob> logger, IThemeParksService themeParkService, TimeProvider timeProvider, IAttractionRepository attractionRepository)
+        /// <param name="themeParkRepository">An instance of the <see cref="IThemeParkRepository"/> interface.</param>
+        public QueueStatusJob(ITranslator translator, IThemeParksService themeParkService, IAttractionRepository attractionRepository, IThemeParkRepository themeParkRepository)
         {
-            _logger = logger;
+            _translator = translator;
             _themeParksService = themeParkService;
-            _timeProvider = timeProvider;
             _attractionRepository = attractionRepository;
+            _themeParkRepository = themeParkRepository;
         }
 
         /// <inheritdoc/>
         public async Task Execute(IJobExecutionContext context)
         {
-            var attractionList = await _attractionRepository.GetAllObjects(context.CancellationToken);
+            var themeParksList = await _themeParkRepository.GetAllObjects(context.CancellationToken);
 
-            foreach (var attraction in attractionList)
+            foreach (var themePark in themeParksList)
             {
-                var status = await _themeParksService.GetCurrentStatus(attraction.Id, context.CancellationToken);
+                var themeParkStatus = await _themeParksService.GetThemeParkStatus(themePark.Id, context.CancellationToken);
 
-                attraction.AppendStatus(status);
+                foreach (var (id, status) in themeParkStatus.Attractions)
+                {
+                    var attraction = await _attractionRepository.GetObjectById(id, context.CancellationToken);
 
-                await _attractionRepository.UpdateObject(attraction, context.CancellationToken);
+                    if (attraction != null)
+                    {
+                        attraction.AppendStatus(status);
+
+                        await _attractionRepository.UpdateObject(attraction, context.CancellationToken);
+                    }
+                }
             }
-
-            _logger.LogInformation("Wait Times job ran at {DateTime}", _timeProvider.GetUtcNow());
         }
     }
 }

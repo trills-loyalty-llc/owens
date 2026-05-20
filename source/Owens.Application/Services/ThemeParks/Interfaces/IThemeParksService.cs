@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Domain.Attractions;
+using Owens.Application.Services.ThemeParks.Models;
 
 namespace Owens.Application.Services.ThemeParks.Interfaces
 {
@@ -17,6 +17,6 @@ namespace Owens.Application.Services.ThemeParks.Interfaces
         /// <param name="id">The identifier of teh attraction.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<QueueStatus> GetCurrentStatus(Guid id, CancellationToken cancellationToken = default);
+        Task<ThemeParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default);
     }
 }

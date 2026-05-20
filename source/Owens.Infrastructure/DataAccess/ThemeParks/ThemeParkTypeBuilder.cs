@@ -32,6 +32,11 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
                 .HasMany(themePark => themePark.Schedules)
                 .WithOne()
                 .IsRequired();
+
+            builder
+                .HasMany(themePark => themePark.Attractions)
+                .WithOne()
+                .IsRequired();
         }
     }
 }

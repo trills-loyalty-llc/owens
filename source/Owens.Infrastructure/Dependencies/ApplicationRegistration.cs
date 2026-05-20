@@ -68,9 +68,12 @@ namespace Owens.Infrastructure.Dependencies
             {
                 context.Database.EnsureCreated();
 
-                context.Operators.AddRange(SeedData.InitialSeedData());
+                if (context.Operators.ToList().Count == 0)
+                {
+                    context.Operators.AddRange(SeedData.InitialSeedData());
 
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
 
             // Time

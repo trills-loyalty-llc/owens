@@ -3,6 +3,7 @@
 // </copyright>
 
 using ClearDomain.GuidPrimary;
+using Owens.Domain.ThemeParks;
 
 namespace Owens.Domain.Operators
 {
@@ -18,6 +19,7 @@ namespace Owens.Domain.Operators
         public ResortArea(string description)
         {
             Description = description;
+            ThemeParks = new List<ThemePark>();
         }
 
         /// <summary>
@@ -29,11 +31,26 @@ namespace Owens.Domain.Operators
             : base(id)
         {
             Description = description;
+            ThemeParks = new List<ThemePark>();
         }
 
         /// <summary>
         /// Gets the description of the resort area.
         /// </summary>
         public string Description { get; }
+
+        /// <summary>
+        /// Gets all theme parks for a resort.
+        /// </summary>
+        public ICollection<ThemePark> ThemeParks { get; }
+
+        /// <summary>
+        /// Appends a theme park to a resort.
+        /// </summary>
+        /// <param name="themePark">A <see cref="ThemePark"/> instance.</param>
+        public void AppendThemePark(ThemePark themePark)
+        {
+            ThemeParks.Add(themePark);
+        }
     }
 }

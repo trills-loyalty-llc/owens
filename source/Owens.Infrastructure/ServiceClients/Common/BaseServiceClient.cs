@@ -51,6 +51,8 @@ namespace Owens.Infrastructure.ServiceClients.Common
 
                 if (message.IsSuccessStatusCode)
                 {
+                    var asJson = await message.Content.ReadAsStringAsync(cancellationToken);
+
                     result = await message.Content.ReadFromJsonAsync<TResult>(cancellationToken) ?? defaultValue;
                 }
             }

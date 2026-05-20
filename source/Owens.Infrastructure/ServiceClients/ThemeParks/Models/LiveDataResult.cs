@@ -10,6 +10,11 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
     public class LiveDataResult
     {
         /// <summary>
+        /// Gets the entity identifier.
+        /// </summary>
+        public Guid Id { get; init; }
+
+        /// <summary>
         /// Gets the queue result.
         /// </summary>
         public QueueResult Queue { get; init; } = QueueResult.Empty();

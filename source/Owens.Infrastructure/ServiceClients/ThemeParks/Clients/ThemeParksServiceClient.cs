@@ -5,7 +5,7 @@
 using FactoryFoundation;
 using Microsoft.Extensions.Logging;
 using Owens.Application.Services.ThemeParks.Interfaces;
-using Owens.Domain.Attractions;
+using Owens.Application.Services.ThemeParks.Models;
 using Owens.Infrastructure.ServiceClients.Common;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
 
@@ -21,9 +21,9 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<QueueStatus> GetCurrentStatus(Guid id, CancellationToken cancellationToken = default)
+        public async Task<ThemeParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default)
         {
-            return await ExecuteGet<EntityResult, QueueStatus>(new Uri($"entity/{id}/live", UriKind.Relative), new EntityResult(), cancellationToken);
+            return await ExecuteGet<EntityResult, ThemeParkStatus>(new Uri($"entity/{id}/live", UriKind.Relative), new EntityResult(), cancellationToken);
         }
     }
 }

@@ -3,6 +3,7 @@
 // </copyright>
 
 using ClearDomain.GuidPrimary;
+using Owens.Domain.Attractions;
 using Owens.Domain.Common;
 
 namespace Owens.Domain.ThemeParks
@@ -25,6 +26,7 @@ namespace Owens.Domain.ThemeParks
             Location = location;
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
+            Attractions = new List<Attraction>();
         }
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace Owens.Domain.ThemeParks
             Location = Location.Empty();
             WeatherStatus = new List<WeatherStatus>();
             Schedules = new List<ThemeParkSchedule>();
+            Attractions = new List<Attraction>();
         }
 
         /// <inheritdoc/>
@@ -60,6 +63,11 @@ namespace Owens.Domain.ThemeParks
         public ICollection<ThemeParkSchedule> Schedules { get; }
 
         /// <summary>
+        /// Gets the attractions for a theme park.
+        /// </summary>
+        public ICollection<Attraction> Attractions { get; }
+
+        /// <summary>
         /// Appends a weather update to the theme park.
         /// </summary>
         /// <param name="weatherStatus">A weather update to append.</param>
@@ -75,6 +83,15 @@ namespace Owens.Domain.ThemeParks
         public void AppendSchedule(ThemeParkSchedule schedule)
         {
             Schedules.Add(schedule);
+        }
+
+        /// <summary>
+        /// Appends an attraction to a theme park.
+        /// </summary>
+        /// <param name="attraction">An attraction to append.</param>
+        public void AppendAttraction(Attraction attraction)
+        {
+            Attractions.Add(attraction);
         }
     }
 }

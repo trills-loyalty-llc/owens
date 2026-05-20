@@ -4,7 +4,6 @@
 
 using FactoryFoundation;
 using Owens.Application.Operators.AddOperator;
-using Owens.Application.Services.ThemeParks.Models;
 using Owens.Domain.Operators;
 
 namespace Owens.Application.Operators.Common
@@ -14,8 +13,7 @@ namespace Owens.Application.Operators.Common
     /// </summary>
     public class OperatorFactory :
         ICanTranslate<AddOperatorRequest, ValidationEnvelope<ResortOperator>>,
-        ICanTranslate<ResortOperator, AddOperatorResponse>,
-        ICanTranslate<Destination, ResortArea>
+        ICanTranslate<ResortOperator, AddOperatorResponse>
     {
         /// <inheritdoc/>
         public ValidationEnvelope<ResortOperator> TranslateTo(AddOperatorRequest initial)
@@ -27,12 +25,6 @@ namespace Owens.Application.Operators.Common
         public AddOperatorResponse TranslateTo(ResortOperator initial)
         {
             return new AddOperatorResponse(initial.Id);
-        }
-
-        /// <inheritdoc/>
-        public ResortArea TranslateTo(Destination initial)
-        {
-            return new ResortArea(initial.Id, initial.Description);
         }
     }
 }
