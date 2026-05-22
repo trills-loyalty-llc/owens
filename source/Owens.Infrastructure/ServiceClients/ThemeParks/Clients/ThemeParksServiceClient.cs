@@ -21,9 +21,15 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<ThemeParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default)
+        public async Task<ParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default)
         {
-            return await ExecuteGet<EntityResult, ThemeParkStatus>(new Uri($"entity/{id}/live", UriKind.Relative), new EntityResult(), cancellationToken);
+            return await ExecuteGet<LiveStatusResult, ParkStatus>(new Uri($"entity/{id}/live", UriKind.Relative), new LiveStatusResult(), cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<ParkSchedule> GetThemeParkSchedule(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGet<ScheduleResult, ParkSchedule>(new Uri($"entity/{id}/schedule", UriKind.Relative), new ScheduleResult(), cancellationToken);
         }
     }
 }

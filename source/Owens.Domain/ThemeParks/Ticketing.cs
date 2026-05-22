@@ -38,6 +38,27 @@ namespace Owens.Domain.ThemeParks
         /// <returns>An empty <see cref="Ticketing"/> object.</returns>
         public static Ticketing Empty()
         {
+            return new Ticketing(0, TicketingType.Normal);
+        }
+
+        /// <summary>
+        /// Ticketing instance from external client metadata.
+        /// </summary>
+        /// <param name="ticketType">The type of the ticket.</param>
+        /// <param name="description">A description on the ticket.</param>
+        /// <returns>A <see cref="Ticketing"/> object.</returns>
+        public static Ticketing FromTicketType(string ticketType, string description)
+        {
+            if (ticketType == "TICKETED_EVENT" && description == "Early Entry")
+            {
+                return new Ticketing(0m, TicketingType.EarlyEntry);
+            }
+
+            if (ticketType == "TICKETED_EVENT" && description == "Extended Evening")
+            {
+                return new Ticketing(0m, TicketingType.ExtendedHours);
+            }
+
             return new Ticketing(0m, TicketingType.Normal);
         }
     }

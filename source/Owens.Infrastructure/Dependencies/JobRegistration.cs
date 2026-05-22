@@ -24,8 +24,10 @@ namespace Owens.Infrastructure.Dependencies
             {
                 configurator.AddJob<QueueStatusJob>(jobConfigurator => jobConfigurator.WithIdentity(QueueStatusJob.QueueStatusJobKey));
                 configurator.AddJob<WeatherJob>(jobConfigurator => jobConfigurator.WithIdentity(WeatherJob.WeatherJobKey));
+                configurator.AddJob<ParkScheduleJob>(jobConfigurator => jobConfigurator.WithIdentity(ParkScheduleJob.ParkScheduleJobKey));
 
                 const int fiveMinutes = 5;
+                const int onceADay = 24;
 
                 configurator.AddTrigger(triggerConfigurator => triggerConfigurator
                    .ForJob(QueueStatusJob.QueueStatusJobKey)
@@ -34,6 +36,10 @@ namespace Owens.Infrastructure.Dependencies
                 configurator.AddTrigger(triggerConfigurator => triggerConfigurator
                     .ForJob(WeatherJob.WeatherJobKey)
                     .WithSimpleSchedule(builder => builder.WithIntervalInMinutes(fiveMinutes).RepeatForever()));
+
+                configurator.AddTrigger(triggerConfigurator => triggerConfigurator
+                    .ForJob(ParkScheduleJob.ParkScheduleJobKey)
+                    .WithSimpleSchedule(builder => builder.WithIntervalInHours(onceADay).RepeatForever()));
             });
 
             services.AddQuartzServer(options => options.WaitForJobsToComplete = true);

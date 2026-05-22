@@ -28,5 +28,10 @@ namespace Owens.Domain.ThemeParks
         /// Extended hours beyond the normal operating window.
         /// </summary>
         ExtendedHours = 3,
+
+        /// <summary>
+        /// Early entry hours beyond the normal operating window.
+        /// </summary>
+        EarlyEntry = 4,
     }
 }

@@ -6,6 +6,7 @@ using FactoryFoundation;
 using Owens.Application.Services.ThemeParks.Models;
 using Owens.Domain.Attractions;
 using Owens.Domain.Common;
+using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
@@ -13,7 +14,9 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
     /// <summary>
     /// Factory for the theme park service client.
     /// </summary>
-    public class ThemeParkServiceFactory : ICanTranslate<EntityResult, ThemeParkStatus>
+    public class ThemeParkServiceFactory :
+        ICanTranslate<LiveStatusResult, ParkStatus>,
+        ICanTranslate<ScheduleResult, ParkSchedule>
     {
         private readonly TimeProvider _timeProvider;
 
@@ -27,9 +30,9 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
         }
 
         /// <inheritdoc/>
-        public ThemeParkStatus TranslateTo(EntityResult first)
+        public ParkStatus TranslateTo(LiveStatusResult first)
         {
-            return new ThemeParkStatus
+            return new ParkStatus
             {
                 Attractions = first.LiveData
                     .Select(dataResult => (
@@ -38,6 +41,22 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
                         TimeSpan.FromMinutes(dataResult.Queue.StandBy.WaitInMinutes ?? 0),
                         _timeProvider.GetUtcNow(),
                         Enum.Parse<OperatingStatus>(dataResult.Status, true))))
+                    .ToList(),
+            };
+        }
+
+        /// <inheritdoc/>
+        public ParkSchedule TranslateTo(ScheduleResult first)
+        {
+            return new ParkSchedule
+            {
+                Schedules = first.Schedule
+                    .Select(scheduleResult => new ThemeParkSchedule(
+                        scheduleResult.Date,
+                        OperatingStatus.Operating,
+                        scheduleResult.OpeningTime,
+                        scheduleResult.ClosingTime,
+                        Ticketing.FromTicketType(scheduleResult.Type, scheduleResult.Description)))
                     .ToList(),
             };
         }

@@ -14,6 +14,8 @@ namespace Owens.Infrastructure.DataAccess.Attractions
         /// <inheritdoc/>
         protected override void ConfigureRoot(EntityTypeBuilder<Attraction> builder)
         {
+            builder.Property(attraction => attraction.ExternalId);
+
             builder.Property(attraction => attraction.Description);
 
             builder.Property(attraction => attraction.AttractionType);

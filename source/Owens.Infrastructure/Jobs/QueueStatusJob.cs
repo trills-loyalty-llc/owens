@@ -2,7 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using FactoryFoundation;
 using Owens.Application.Attractions.Common;
 using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.ThemeParks.Common;
@@ -18,7 +17,6 @@ namespace Owens.Infrastructure.Jobs
         /// </summary>
         public static readonly JobKey QueueStatusJobKey = JobKey.Create("QueueStatusJobKey");
 
-        private readonly ITranslator _translator;
         private readonly IThemeParksService _themeParksService;
         private readonly IAttractionRepository _attractionRepository;
         private readonly IThemeParkRepository _themeParkRepository;
@@ -26,13 +24,11 @@ namespace Owens.Infrastructure.Jobs
         /// <summary>
         /// Initializes a new instance of the <see cref="QueueStatusJob"/> class.
         /// </summary>
-        /// <param name="translator">An instance of the <see cref="ITranslator"/> interface.</param>
         /// <param name="themeParkService">An instance of the <see cref="IThemeParksService"/> interface.</param>
         /// <param name="attractionRepository">An instance of the <see cref="IAttractionRepository"/> interface.</param>
         /// <param name="themeParkRepository">An instance of the <see cref="IThemeParkRepository"/> interface.</param>
-        public QueueStatusJob(ITranslator translator, IThemeParksService themeParkService, IAttractionRepository attractionRepository, IThemeParkRepository themeParkRepository)
+        public QueueStatusJob(IThemeParksService themeParkService, IAttractionRepository attractionRepository, IThemeParkRepository themeParkRepository)
         {
-            _translator = translator;
             _themeParksService = themeParkService;
             _attractionRepository = attractionRepository;
             _themeParkRepository = themeParkRepository;

@@ -1,4 +1,4 @@
-﻿// <copyright file="ThemeParkStatus.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="ParkStatus.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,7 @@ namespace Owens.Application.Services.ThemeParks.Models
     /// <summary>
     /// Status result for a theme park.
     /// </summary>
-    public class ThemeParkStatus
+    public class ParkStatus
     {
         /// <summary>
         /// Gets all attraction status results.

@@ -15,10 +15,12 @@ namespace Owens.Domain.Attractions
         /// <summary>
         /// Initializes a new instance of the <see cref="Attraction"/> class.
         /// </summary>
+        /// <param name="externalId">The external identifier of the attraction.</param>
         /// <param name="description">The description for the attraction.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(string description, AttractionType attractionType)
+        public Attraction(int externalId, string description, AttractionType attractionType)
         {
+            ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
             Status = new List<QueueStatus>();
@@ -28,15 +30,22 @@ namespace Owens.Domain.Attractions
         /// Initializes a new instance of the <see cref="Attraction"/> class.
         /// </summary>
         /// <param name="id">The identifier of the root.</param>
+        /// <param name="externalId">The external identifier of the attraction.</param>
         /// <param name="description">The description for the attraction.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(Guid id, string description, AttractionType attractionType)
+        public Attraction(Guid id, int externalId, string description, AttractionType attractionType)
             : base(id)
         {
+            ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
             Status = new List<QueueStatus>();
         }
+
+        /// <summary>
+        /// Gets the external identifier. This is used to join for certain external client properties.
+        /// </summary>
+        public int ExternalId { get; }
 
         /// <inheritdoc/>
         public string Description { get; }

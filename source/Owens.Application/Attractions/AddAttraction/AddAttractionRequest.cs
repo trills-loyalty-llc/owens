@@ -24,9 +24,15 @@ namespace Owens.Application.Attractions.AddAttraction
         public AttractionType AttractionType { get; init; }
 
         /// <summary>
-        /// Gets the external scheduling identifier.
+        /// Gets the main identifier.
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         public Guid AttractionId { get; init; }
+
+        /// <summary>
+        /// Gets the external identifier.
+        /// </summary>
+        [Required]
+        public int ExternalId { get; init; }
     }
 }

@@ -12,11 +12,19 @@ namespace Owens.Application.Services.ThemeParks.Interfaces
     public interface IThemeParksService
     {
         /// <summary>
-        /// Retrieves the current status of an attraction queue.
+        /// Retrieves the status of a theme park and its attractions.
         /// </summary>
-        /// <param name="id">The identifier of teh attraction.</param>
+        /// <param name="id">An identifier for a theme park.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<ThemeParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default);
+        Task<ParkStatus> GetThemeParkStatus(Guid id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves the schedule for a theme park.
+        /// </summary>
+        /// <param name="id">An identifier for a theme park.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task<ParkSchedule> GetThemeParkSchedule(Guid id, CancellationToken cancellationToken = default);
     }
 }

@@ -1,13 +1,13 @@
-﻿// <copyright file="EntityResult.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="LiveStatusResult.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
 {
     /// <summary>
-    /// Entity data from the external client.
+    /// Live status data from the external client.
     /// </summary>
-    public class EntityResult
+    public class LiveStatusResult
     {
         /// <summary>
         /// Gets live data results.
