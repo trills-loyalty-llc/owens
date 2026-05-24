@@ -52,7 +52,6 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
             {
                 Schedules = first.Schedule
                     .Select(scheduleResult => new ThemeParkSchedule(
-                        scheduleResult.Date,
                         OperatingStatus.Operating,
                         scheduleResult.OpeningTime,
                         scheduleResult.ClosingTime,

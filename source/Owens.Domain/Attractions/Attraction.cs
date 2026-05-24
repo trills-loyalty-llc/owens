@@ -10,7 +10,7 @@ namespace Owens.Domain.Attractions
     /// <summary>
     /// Defines either a ride, entertainment, or undefined attraction.
     /// </summary>
-    public class Attraction : AggregateRoot, IDescription
+    public class Attraction : AggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Attraction"/> class.
@@ -18,11 +18,13 @@ namespace Owens.Domain.Attractions
         /// <param name="externalId">The external identifier of the attraction.</param>
         /// <param name="description">The description for the attraction.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(int externalId, string description, AttractionType attractionType)
+        /// <param name="location">The location of the attraction.</param>
+        public Attraction(int externalId, string description, AttractionType attractionType, Location location)
         {
             ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
+            Location = location;
             Status = new List<QueueStatus>();
         }
 
@@ -39,6 +41,7 @@ namespace Owens.Domain.Attractions
             ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
+            Location = Location.Empty();
             Status = new List<QueueStatus>();
         }
 
@@ -47,13 +50,20 @@ namespace Owens.Domain.Attractions
         /// </summary>
         public int ExternalId { get; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the attraction description.
+        /// </summary>
         public string Description { get; }
 
         /// <summary>
         /// Gets the type of the attraction.
         /// </summary>
         public AttractionType AttractionType { get; }
+
+        /// <summary>
+        /// Gets the attraction location.
+        /// </summary>
+        public Location Location { get; }
 
         /// <summary>
         /// Gets a series of status updates.

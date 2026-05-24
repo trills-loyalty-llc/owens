@@ -3,6 +3,7 @@
 // </copyright>
 
 using Owens.Domain.Attractions;
+using Owens.Domain.Common;
 using Owens.Domain.Operators;
 using Owens.Domain.ThemeParks;
 
@@ -30,13 +31,13 @@ namespace Owens.Infrastructure.Dependencies
             var dwarfsMineTrains = new Attraction(Guid.Parse("9d4d5229-7142-44b6-b4fb-528920969a2c"), 16767284, "Seven Dwarfs Mine Trains", AttractionType.RollerCoaster);
             var tron = new Attraction(Guid.Parse("5a43d1a7-ad53-4d25-abfe-25625f0da304"), 411504498, "Tron Lightcycle Run", AttractionType.RollerCoaster);
 
-            var magicKingdom = new ThemePark(Guid.Parse("75ea578a-adc8-4116-a54d-dccb60765ef9"), "Magic Kingdom", new Location(28.4160036778, -81.5811902834, EasternTime));
+            var magicKingdom = new ThemePark(Guid.Parse("75ea578a-adc8-4116-a54d-dccb60765ef9"), "Magic Kingdom", new Location(28.4160036778, -81.5811902834));
             magicKingdom.AppendAttraction(teaCups);
             magicKingdom.AppendAttraction(buzz);
             magicKingdom.AppendAttraction(dwarfsMineTrains);
             magicKingdom.AppendAttraction(tron);
 
-            var disneyWorld = new ResortArea("Walt Disney World");
+            var disneyWorld = new ResortArea("Walt Disney World", EasternTime);
             disneyWorld.AppendThemePark(magicKingdom);
 
             var disney = new ResortOperator("Disney Parks");

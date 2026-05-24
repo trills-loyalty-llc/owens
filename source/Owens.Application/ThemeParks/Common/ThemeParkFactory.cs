@@ -5,6 +5,7 @@
 using FactoryFoundation;
 using Owens.Application.Services.Weather.Models;
 using Owens.Application.ThemeParks.AddThemePark;
+using Owens.Domain.Common;
 using Owens.Domain.ThemeParks;
 
 namespace Owens.Application.ThemeParks.Common
@@ -34,7 +35,7 @@ namespace Owens.Application.ThemeParks.Common
             return FactoryHelpers.TryCreateValidate(() => new ThemePark(
                 Guid.NewGuid(),
                 initial.Description,
-                Location.FromMetadata(initial.Latitude, initial.Longitude, initial.TimeZoneId)));
+                Location.FromMetadata(initial.Latitude, initial.Longitude)));
         }
 
         /// <inheritdoc/>

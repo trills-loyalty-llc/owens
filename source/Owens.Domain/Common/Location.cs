@@ -5,7 +5,7 @@
 using ClearDomain.Common;
 using FluentValidation;
 
-namespace Owens.Domain.ThemeParks
+namespace Owens.Domain.Common
 {
     /// <summary>
     /// Denotes a location using latitude and longitude.
@@ -17,14 +17,12 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="latitude">A latitude value of a location.</param>
         /// <param name="longitude">A longitude value of a location.</param>
-        /// <param name="timeZoneId">The time zone identifier of a location.</param>
-        public Location(double latitude, double longitude, string timeZoneId)
+        public Location(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;
-            TimeZoneId = timeZoneId;
 
-            new LocationCoordinatesValidator().ValidateAndThrow(this);
+            new LocationValidator().ValidateAndThrow(this);
         }
 
         /// <summary>
@@ -38,20 +36,14 @@ namespace Owens.Domain.ThemeParks
         public double Longitude { get; }
 
         /// <summary>
-        /// Gets the time zone identifier.
-        /// </summary>
-        public string TimeZoneId { get; }
-
-        /// <summary>
         /// Creates a location instance from a series of values.
         /// </summary>
         /// <param name="latitude">A latitude value of a location.</param>
         /// <param name="longitude">A longitude value of a location.</param>
-        /// <param name="timeZoneId">The time zone identifier of a location.</param>
         /// <returns>A <see cref="Location"/> instance.</returns>
-        public static Location FromMetadata(double latitude, double longitude, string timeZoneId)
+        public static Location FromMetadata(double latitude, double longitude)
         {
-            return new Location(latitude, longitude, timeZoneId);
+            return new Location(latitude, longitude);
         }
 
         /// <summary>
@@ -60,7 +52,7 @@ namespace Owens.Domain.ThemeParks
         /// <returns>An empty <see cref="Location"/>.</returns>
         public static Location Empty()
         {
-            return new Location(0, 0, string.Empty);
+            return new Location(0, 0);
         }
     }
 }

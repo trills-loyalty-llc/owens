@@ -16,6 +16,8 @@ namespace Owens.Infrastructure.DataAccess.Operators
         {
             builder.Property(resortArea => resortArea.Description);
 
+            builder.Property(resortArea => resortArea.TimeZoneId);
+
             builder
                 .HasMany(resortArea => resortArea.ThemeParks)
                 .WithOne()

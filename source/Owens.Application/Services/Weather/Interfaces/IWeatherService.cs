@@ -3,7 +3,7 @@
 // </copyright>
 
 using Owens.Application.Services.Weather.Models;
-using Owens.Domain.ThemeParks;
+using Owens.Domain.Common;
 
 namespace Owens.Application.Services.Weather.Interfaces
 {

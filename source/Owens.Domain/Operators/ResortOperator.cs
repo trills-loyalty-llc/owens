@@ -3,14 +3,13 @@
 // </copyright>
 
 using ClearDomain.GuidPrimary;
-using Owens.Domain.Common;
 
 namespace Owens.Domain.Operators
 {
     /// <summary>
     /// The owner and operator of resorts, hotels, and restaurants.
     /// </summary>
-    public class ResortOperator : AggregateRoot, IDescription
+    public class ResortOperator : AggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ResortOperator"/> class.
@@ -34,7 +33,9 @@ namespace Owens.Domain.Operators
             ResortAreas = new List<ResortArea>();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the resort operator description.
+        /// </summary>
         public string Description { get; }
 
         /// <summary>

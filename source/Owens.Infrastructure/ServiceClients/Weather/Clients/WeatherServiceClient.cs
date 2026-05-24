@@ -6,7 +6,7 @@ using FactoryFoundation;
 using Microsoft.Extensions.Logging;
 using Owens.Application.Services.Weather.Interfaces;
 using Owens.Application.Services.Weather.Models;
-using Owens.Domain.ThemeParks;
+using Owens.Domain.Common;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.ServiceClients.Common;
 using Owens.Infrastructure.ServiceClients.Weather.Models;

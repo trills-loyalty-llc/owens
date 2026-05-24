@@ -11,7 +11,7 @@ namespace Owens.Domain.ThemeParks
     /// <summary>
     /// Designates a defined boundary around a series of attraction.
     /// </summary>
-    public class ThemePark : AggregateRoot, IDescription
+    public class ThemePark : AggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ThemePark"/> class.
@@ -44,7 +44,9 @@ namespace Owens.Domain.ThemeParks
             Attractions = new List<Attraction>();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the theme park description.
+        /// </summary>
         public string Description { get; }
 
         /// <summary>

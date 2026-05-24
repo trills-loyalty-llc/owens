@@ -27,11 +27,5 @@ namespace Owens.Application.ThemeParks.AddThemePark
         /// </summary>
         [Range(-180, 180)]
         public double Longitude { get; init; }
-
-        /// <summary>
-        /// Gets the time zone identifier.
-        /// </summary>
-        [Required(AllowEmptyStrings = false)]
-        public string TimeZoneId { get; init; } = string.Empty;
     }
 }

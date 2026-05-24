@@ -20,7 +20,6 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
             {
                 propertyBuilder.Property(location => location.Latitude);
                 propertyBuilder.Property(location => location.Longitude);
-                propertyBuilder.Property(location => location.TimeZoneId);
             });
 
             builder

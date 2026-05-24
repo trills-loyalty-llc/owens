@@ -14,8 +14,6 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         /// <inheritdoc/>
         protected override void ConfigureEntity(EntityTypeBuilder<ThemeParkSchedule> builder)
         {
-            builder.Property(parkSchedule => parkSchedule.OperatingDate);
-
             builder.Property(parkSchedule => parkSchedule.Operating);
 
             builder.Property(parkSchedule => parkSchedule.Opening);

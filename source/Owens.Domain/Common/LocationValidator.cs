@@ -1,18 +1,18 @@
-﻿// <copyright file="LocationCoordinatesValidator.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="LocationValidator.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using FluentValidation;
 
-namespace Owens.Domain.ThemeParks
+namespace Owens.Domain.Common
 {
     /// <inheritdoc />
-    public class LocationCoordinatesValidator : AbstractValidator<Location>
+    public class LocationValidator : AbstractValidator<Location>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LocationCoordinatesValidator"/> class.
+        /// Initializes a new instance of the <see cref="LocationValidator"/> class.
         /// </summary>
-        public LocationCoordinatesValidator()
+        public LocationValidator()
         {
             RuleFor(coordinates => coordinates.Latitude).GreaterThanOrEqualTo(-90).LessThanOrEqualTo(90);
             RuleFor(coordinates => coordinates.Longitude).GreaterThanOrEqualTo(-180).LessThanOrEqualTo(180);
