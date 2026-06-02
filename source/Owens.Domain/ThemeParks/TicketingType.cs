@@ -25,13 +25,48 @@ namespace Owens.Domain.ThemeParks
         HolidayEvent = 2,
 
         /// <summary>
-        /// Extended hours beyond the normal operating window.
+        /// A holiday event specific to Halloween.
         /// </summary>
-        ExtendedHours = 3,
+        HalloweenEvent = 3,
 
         /// <summary>
-        /// Early entry hours beyond the normal operating window.
+        /// A holiday event specific to Christmas.
         /// </summary>
-        EarlyEntry = 4,
+        ChristmasEvent = 4,
+
+        /// <summary>
+        /// Extended hours beyond the normal operating window.
+        /// </summary>
+        ExtendedHours = 5,
+
+        /// <summary>
+        /// Early entry hours for hotel guests beyond the normal operating window.
+        /// </summary>
+        EarlyHotelEntry = 6,
+
+        /// <summary>
+        /// Early entry hours for annual passes beyond the normal operating window.
+        /// </summary>
+        EarlyAnnualPassEntry = 7,
+
+        /// <summary>
+        /// The lowest or cheapest annual pass option.
+        /// </summary>
+        FirstTierAnnualPass = 8,
+
+        /// <summary>
+        /// The second tier annual pass option.
+        /// </summary>
+        SecondTierAnnualPass = 9,
+
+        /// <summary>
+        /// The third tier annual pass option.
+        /// </summary>
+        ThirdTierAnnualPass = 10,
+
+        /// <summary>
+        /// The highest or most expensive annual pass option.
+        /// </summary>
+        FourthTierAnnualPass = 11,
     }
 }

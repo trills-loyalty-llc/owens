@@ -28,7 +28,7 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
                 .IsRequired();
 
             builder
-                .HasMany(themePark => themePark.Schedules)
+                .HasMany(themePark => themePark.Admissions)
                 .WithOne()
                 .IsRequired();
 

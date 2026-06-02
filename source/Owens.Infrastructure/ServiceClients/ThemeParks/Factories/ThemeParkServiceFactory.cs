@@ -51,11 +51,10 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
             return new ParkSchedule
             {
                 Schedules = first.Schedule
-                    .Select(scheduleResult => new ThemeParkSchedule(
-                        OperatingStatus.Operating,
+                    .Select(scheduleResult => new Admission(
                         scheduleResult.OpeningTime,
                         scheduleResult.ClosingTime,
-                        Ticketing.FromTicketType(scheduleResult.Type, scheduleResult.Description)))
+                        new Ticketing(string.Empty, 0m, TicketingType.Normal)))
                     .ToList(),
             };
         }
