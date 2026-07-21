@@ -7,7 +7,4 @@
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="NodaTime" Version="3.3.3" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ThemeParks\Stores\" />
-  </ItemGroup>
 </Project>

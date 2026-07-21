@@ -37,6 +37,8 @@ namespace Owens.Infrastructure.Dependencies
             magicKingdom.AppendAttraction(dwarfsMineTrains);
             magicKingdom.AppendAttraction(tron);
 
+            var ioa = new ThemePark(Guid.Parse("267615cc-8943-4c2a-ae2c-5da728ca591f"), "Islands of Adventure", new Location(28.47225, -81.467594));
+
             var disneyWorld = new ResortArea("Walt Disney World", EasternTime);
             disneyWorld.AppendThemePark(magicKingdom);
 

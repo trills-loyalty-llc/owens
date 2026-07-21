@@ -25,7 +25,7 @@ namespace Owens.Domain.ThemeParks
             Description = description;
             Location = location;
             WeatherStatus = new List<WeatherStatus>();
-            Schedules = new List<ThemeParkSchedule>();
+            Admissions = new List<Admission>();
             Attractions = new List<Attraction>();
         }
 
@@ -40,7 +40,7 @@ namespace Owens.Domain.ThemeParks
             Description = description;
             Location = Location.Empty();
             WeatherStatus = new List<WeatherStatus>();
-            Schedules = new List<ThemeParkSchedule>();
+            Admissions = new List<Admission>();
             Attractions = new List<Attraction>();
         }
 
@@ -62,7 +62,7 @@ namespace Owens.Domain.ThemeParks
         /// <summary>
         /// Gets the schedules for a theme park.
         /// </summary>
-        public ICollection<ThemeParkSchedule> Schedules { get; }
+        public ICollection<Admission> Admissions { get; }
 
         /// <summary>
         /// Gets the attractions for a theme park.
@@ -82,9 +82,9 @@ namespace Owens.Domain.ThemeParks
         /// Appends a schedule to a theme park.
         /// </summary>
         /// <param name="schedule">A schedule update to append.</param>
-        public void AppendSchedule(ThemeParkSchedule schedule)
+        public void AppendSchedule(Admission schedule)
         {
-            Schedules.Add(schedule);
+            Admissions.Add(schedule);
         }
 
         /// <summary>

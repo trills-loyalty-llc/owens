@@ -14,6 +14,6 @@ namespace Owens.Application.Services.ThemeParks.Models
         /// <summary>
         /// Gets all schedules for a theme park.
         /// </summary>
-        public IEnumerable<ThemeParkSchedule> Schedules { get; init; } = Enumerable.Empty<ThemeParkSchedule>();
+        public IEnumerable<Admission> Schedules { get; init; } = Enumerable.Empty<Admission>();
     }
 }

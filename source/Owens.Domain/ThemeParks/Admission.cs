@@ -1,52 +1,42 @@
-﻿// <copyright file="ThemeParkSchedule.cs" company="Trills Loyalty LLC">
+﻿// <copyright file="Admission.cs" company="Trills Loyalty LLC">
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
 using ClearDomain.GuidPrimary;
-using Owens.Domain.Common;
 
 namespace Owens.Domain.ThemeParks
 {
     /// <summary>
     /// A schedule.
     /// </summary>
-    public class ThemeParkSchedule : Entity
+    public class Admission : Entity
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ThemeParkSchedule"/> class.
+        /// Initializes a new instance of the <see cref="Admission"/> class.
         /// </summary>
-        /// <param name="operating">The operation status of the park.</param>
         /// <param name="opening">The opening timestamp for the park.</param>
         /// <param name="closing">The closing timestamp for the park.</param>
         /// <param name="ticketing">The ticket pricing for the schedule.</param>
-        public ThemeParkSchedule(OperatingStatus operating, DateTimeOffset opening, DateTimeOffset closing, Ticketing ticketing)
+        public Admission(DateTimeOffset opening, DateTimeOffset closing, Ticketing ticketing)
         {
-            Operating = operating;
             Opening = opening;
             Closing = closing;
             Ticketing = ticketing;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ThemeParkSchedule"/> class.
+        /// Initializes a new instance of the <see cref="Admission"/> class.
         /// </summary>
         /// <param name="id">The identifier of the park.</param>
-        /// <param name="operating">The operation status of the park.</param>
         /// <param name="opening">The opening timestamp for the park.</param>
         /// <param name="closing">The closing timestamp for the park.</param>
-        public ThemeParkSchedule(Guid id, OperatingStatus operating, DateTimeOffset opening, DateTimeOffset closing)
+        public Admission(Guid id, DateTimeOffset opening, DateTimeOffset closing)
             : base(id)
         {
-            Operating = operating;
             Opening = opening;
             Closing = closing;
             Ticketing = Ticketing.Empty();
         }
-
-        /// <summary>
-        /// Gets get the operating status.
-        /// </summary>
-        public OperatingStatus Operating { get; }
 
         /// <summary>
         /// Gets the ticket for the schedule.
