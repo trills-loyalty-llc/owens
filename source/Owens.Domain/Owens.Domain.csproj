@@ -3,9 +3,9 @@
     <AppDesignerFolder>Operators</AppDesignerFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ClearDomain.Identity" Version="0.9.8" />
+    <PackageReference Include="ClearDomain.Identity" Version="0.9.9" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
-    <PackageReference Include="NodaTime" Version="3.3.2" />
+    <PackageReference Include="NodaTime" Version="3.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ThemeParks\Stores\" />
