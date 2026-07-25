@@ -21,7 +21,7 @@ namespace Owens.Infrastructure.HealthChecks
         }
 
         /// <inheritdoc/>
-        public async Task<HealthCheckResponse> HealthCheckAsync(HealthCheckRequest request, CancellationToken cancellationToken = default)
+        public async Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default)
         {
             var report = await _healthCheckService.CheckHealthAsync(cancellationToken);
 

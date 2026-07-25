@@ -2,6 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using Owens.Domain.ThemeParks;
 using System.Text.Json.Serialization;
 
 namespace Owens.Infrastructure.ServiceClients.Weather.Models
@@ -21,6 +22,6 @@ namespace Owens.Infrastructure.ServiceClients.Weather.Models
         /// Gets the conditions code.
         /// </summary>
         [JsonPropertyName("code")]
-        public int ConditionsCode { get; init; }
+        public WeatherConditions ConditionsCode { get; init; }
     }
 }

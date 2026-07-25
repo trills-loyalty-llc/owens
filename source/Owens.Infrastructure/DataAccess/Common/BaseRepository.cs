@@ -23,16 +23,19 @@ namespace Owens.Infrastructure.DataAccess.Common
         where TAggregateRoot : class, IAggregateRoot
     {
         private readonly IMediation _mediation;
+        private readonly Func<IQueryable<TAggregateRoot>, IQueryable<TAggregateRoot>> _includeStatement;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TAggregateRoot}"/> class.
         /// </summary>
         /// <param name="applicationContext">An instance of the <see cref="ApplicationContext"/> class.</param>
         /// <param name="mediation">An instance of the <see cref="IMediation"/> interface.</param>
-        protected BaseRepository(ApplicationContext applicationContext, IMediation mediation)
+        /// <param name="includeStatement">A <see cref="Func{TResult}"/> for the include statement.</param>
+        protected BaseRepository(ApplicationContext applicationContext, IMediation mediation, Func<IQueryable<TAggregateRoot>, IQueryable<TAggregateRoot>> includeStatement)
         {
             Context = applicationContext;
             _mediation = mediation;
+            _includeStatement = includeStatement;
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace Owens.Infrastructure.DataAccess.Common
         /// <inheritdoc/>
         public async Task<List<TAggregateRoot>> GetAllObjects(CancellationToken cancellationToken = default)
         {
-            return await ExecuteQuery(dbSet => dbSet.ToListAsync(cancellationToken));
+            return await ExecuteQuery(queryable => queryable.ToListAsync(cancellationToken: cancellationToken));
         }
 
         /// <inheritdoc/>
@@ -132,11 +135,13 @@ namespace Owens.Infrastructure.DataAccess.Common
             return 0;
         }
 
-        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<DbSet<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction)
+        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<IQueryable<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction)
         {
             try
             {
-                return await executionFunction.Invoke(Context.Set<TAggregateRoot>());
+                var afterInclude = _includeStatement.Invoke(Context.Set<TAggregateRoot>());
+
+                return await executionFunction.Invoke(afterInclude);
             }
             catch (Exception)
             {

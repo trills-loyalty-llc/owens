@@ -13,7 +13,8 @@ namespace Owens.Application.ThemeParks.Common
     public interface IThemeParkRepository :
         IAddObject<ThemePark>,
         IUpdateObject<ThemePark>,
-        IGetAllObjects<ThemePark>
+        IGetAllObjects<ThemePark>,
+        IGetObjectById<ThemePark>
     {
     }
 }

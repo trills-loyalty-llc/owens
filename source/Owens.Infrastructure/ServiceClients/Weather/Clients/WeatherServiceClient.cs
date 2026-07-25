@@ -5,8 +5,8 @@
 using FactoryFoundation;
 using Microsoft.Extensions.Logging;
 using Owens.Application.Services.Weather.Interfaces;
-using Owens.Application.Services.Weather.Models;
 using Owens.Domain.Common;
+using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.Dependencies;
 using Owens.Infrastructure.ServiceClients.Common;
 using Owens.Infrastructure.ServiceClients.Weather.Models;
@@ -32,11 +32,11 @@ namespace Owens.Infrastructure.ServiceClients.Weather.Clients
         }
 
         /// <inheritdoc/>
-        public async Task<CurrentWeather> GetWeatherAtLocation(Location coordinates, CancellationToken cancellationToken = default)
+        public async Task<WeatherStatus> GetWeatherAtLocation(Location coordinates, CancellationToken cancellationToken = default)
         {
             var uri = new Uri($"current.json?key={_options.WeatherKey}&q={coordinates.Latitude},{coordinates.Longitude}", UriKind.Relative);
 
-            return await ExecuteGet<WeatherResponseWrapper, CurrentWeather>(uri, WeatherResponseWrapper.Default(), cancellationToken);
+            return await ExecuteGet<WeatherResponseWrapper, WeatherStatus>(uri, WeatherResponseWrapper.Default(), cancellationToken);
         }
     }
 }

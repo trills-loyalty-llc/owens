@@ -2,7 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Application.Attractions.Common;
 using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.ThemeParks.Common;
 using Quartz;
@@ -18,42 +17,39 @@ namespace Owens.Infrastructure.Jobs
         public static readonly JobKey QueueStatusJobKey = JobKey.Create("QueueStatusJobKey");
 
         private readonly IThemeParksService _themeParksService;
-        private readonly IAttractionRepository _attractionRepository;
         private readonly IThemeParkRepository _themeParkRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueueStatusJob"/> class.
         /// </summary>
         /// <param name="themeParkService">An instance of the <see cref="IThemeParksService"/> interface.</param>
-        /// <param name="attractionRepository">An instance of the <see cref="IAttractionRepository"/> interface.</param>
         /// <param name="themeParkRepository">An instance of the <see cref="IThemeParkRepository"/> interface.</param>
-        public QueueStatusJob(IThemeParksService themeParkService, IAttractionRepository attractionRepository, IThemeParkRepository themeParkRepository)
+        public QueueStatusJob(IThemeParksService themeParkService, IThemeParkRepository themeParkRepository)
         {
             _themeParksService = themeParkService;
-            _attractionRepository = attractionRepository;
             _themeParkRepository = themeParkRepository;
         }
 
         /// <inheritdoc/>
         public async Task Execute(IJobExecutionContext context)
         {
-            var themeParksList = await _themeParkRepository.GetAllObjects(context.CancellationToken);
+            var themeParks = await _themeParkRepository.GetAllObjects(context.CancellationToken);
 
-            foreach (var themePark in themeParksList)
+            foreach (var themePark in themeParks)
             {
                 var themeParkStatus = await _themeParksService.GetThemeParkStatus(themePark.Id, context.CancellationToken);
 
-                foreach (var (id, status) in themeParkStatus.Attractions)
+                foreach (var attraction in themePark.Attractions)
                 {
-                    var attraction = await _attractionRepository.GetObjectById(id, context.CancellationToken);
+                    var attractionStatus = themeParkStatus.Attractions.FirstOrDefault(statusTuple => attraction.Id == statusTuple.Id).QueueStatus;
 
-                    if (attraction != null)
+                    if (attractionStatus != null)
                     {
-                        attraction.AppendStatus(status);
-
-                        await _attractionRepository.UpdateObject(attraction, context.CancellationToken);
+                        attraction.AppendStatus(attractionStatus);
                     }
                 }
+
+                await _themeParkRepository.UpdateObject(themePark, context.CancellationToken);
             }
         }
     }

@@ -19,12 +19,14 @@ namespace Owens.Domain.Attractions
         /// <param name="description">The description for the attraction.</param>
         /// <param name="attractionType">The type of the attraction.</param>
         /// <param name="location">The location of the attraction.</param>
-        public Attraction(int externalId, string description, AttractionType attractionType, Location location)
+        /// <param name="dateTimeRange">The lifecycle of the attraction.</param>
+        public Attraction(int externalId, string description, AttractionType attractionType, Location location, DateTimeRange dateTimeRange)
         {
             ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
             Location = location;
+            DateTimeRange = dateTimeRange;
             Status = new List<QueueStatus>();
         }
 
@@ -42,6 +44,7 @@ namespace Owens.Domain.Attractions
             Description = description;
             AttractionType = attractionType;
             Location = Location.Empty();
+            DateTimeRange = DateTimeRange.Empty();
             Status = new List<QueueStatus>();
         }
 
@@ -64,6 +67,11 @@ namespace Owens.Domain.Attractions
         /// Gets the attraction location.
         /// </summary>
         public Location Location { get; }
+
+        /// <summary>
+        /// Gets the life cycle of the attraction.
+        /// </summary>
+        public DateTimeRange DateTimeRange { get; }
 
         /// <summary>
         /// Gets a series of status updates.

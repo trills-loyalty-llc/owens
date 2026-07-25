@@ -20,6 +20,18 @@ namespace Owens.Infrastructure.DataAccess.Attractions
 
             builder.Property(attraction => attraction.AttractionType);
 
+            builder.ComplexProperty(attraction => attraction.Location, propertyBuilder =>
+            {
+                propertyBuilder.Property(location => location.Latitude);
+                propertyBuilder.Property(location => location.Longitude);
+            });
+
+            builder.ComplexProperty(attraction => attraction.DateTimeRange, propertyBuilder =>
+            {
+                propertyBuilder.Property(dateTimeRange => dateTimeRange.Start);
+                propertyBuilder.Property(dateTimeRange => dateTimeRange.End);
+            });
+
             builder
                 .HasMany(attraction => attraction.Status)
                 .WithOne()

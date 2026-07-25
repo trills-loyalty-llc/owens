@@ -4,6 +4,7 @@
 
 using ClearDomain.GuidPrimary;
 using Owens.Domain.Common;
+using TimeSpan = System.TimeSpan;
 
 namespace Owens.Domain.Attractions
 {

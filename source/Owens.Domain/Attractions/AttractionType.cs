@@ -48,5 +48,10 @@ namespace Owens.Domain.Attractions
         /// An attraction where most of the ride vehicle is floating for the duration of the ride.
         /// </summary>
         Water,
+
+        /// <summary>
+        /// A walk-though attraction that may include a Halloween related house, or abstract walking exhibit.
+        /// </summary>
+        Walking,
     }
 }

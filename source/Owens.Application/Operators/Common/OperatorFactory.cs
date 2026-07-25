@@ -13,7 +13,8 @@ namespace Owens.Application.Operators.Common
     /// </summary>
     public class OperatorFactory :
         ICanTranslate<AddOperatorRequest, ValidationEnvelope<ResortOperator>>,
-        ICanTranslate<ResortOperator, AddOperatorResponse>
+        ICanTranslate<ResortOperator, AddOperatorResponse>,
+        ICanTranslate<IEnumerable<ResortOperator>, IEnumerable<OperatorResponse>>
     {
         /// <inheritdoc/>
         public ValidationEnvelope<ResortOperator> TranslateTo(AddOperatorRequest initial)
@@ -25,6 +26,12 @@ namespace Owens.Application.Operators.Common
         public AddOperatorResponse TranslateTo(ResortOperator initial)
         {
             return new AddOperatorResponse(initial.Id);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<OperatorResponse> TranslateTo(IEnumerable<ResortOperator> first)
+        {
+            return first.Select(resortOperator => new OperatorResponse(resortOperator.Id, resortOperator.Description, 1));
         }
     }
 }

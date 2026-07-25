@@ -8,6 +8,7 @@ using Owens.Domain.Attractions;
 using Owens.Domain.Common;
 using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
+using TimeSpan = System.TimeSpan;
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
 {
@@ -16,7 +17,8 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
     /// </summary>
     public class ThemeParkServiceFactory :
         ICanTranslate<LiveStatusResult, ParkStatus>,
-        ICanTranslate<ScheduleResult, ParkSchedule>
+        ICanTranslate<ScheduleResult, ParkSchedule>,
+        ICanTranslate<EntityParentResult, ThemeParkParent>
     {
         private readonly TimeProvider _timeProvider;
 
@@ -56,6 +58,19 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
                         scheduleResult.ClosingTime,
                         new Ticketing(string.Empty, 0m, TicketingType.Normal)))
                     .ToList(),
+            };
+        }
+
+        /// <inheritdoc/>
+        public ThemeParkParent TranslateTo(EntityParentResult first)
+        {
+            return new ThemeParkParent
+            {
+                Children = first.Children.Select(child => new Attraction(
+                    child.Id,
+                    int.Parse(child.ExternalId.Split(';').First()),
+                    child.Name,
+                    AttractionType.Gentle)),
             };
         }
     }

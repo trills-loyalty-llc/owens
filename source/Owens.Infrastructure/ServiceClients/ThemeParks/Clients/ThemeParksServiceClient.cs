@@ -31,5 +31,11 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
         {
             return await ExecuteGet<ScheduleResult, ParkSchedule>(new Uri($"entity/{id}/schedule", UriKind.Relative), new ScheduleResult(), cancellationToken);
         }
+
+        /// <inheritdoc/>
+        public async Task<ThemeParkParent> GetThemeParkChildren(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteGet<EntityParentResult, ThemeParkParent>(new Uri($"entity/{id}/children", UriKind.Relative), new EntityParentResult(), cancellationToken);
+        }
     }
 }

@@ -14,11 +14,22 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         /// <inheritdoc/>
         protected override void ConfigureEntity(EntityTypeBuilder<WeatherStatus> builder)
         {
-            builder.Property(weatherStatus => weatherStatus.TimeStamp);
+            builder.Property(x => x.TimeStamp);
+            builder.Property(x => x.TemperatureFahrenheit);
+            builder.Property(x => x.FeelsLikeFahrenheit);
+            builder.Property(x => x.HeatIndexFahrenheit);
+            builder.Property(x => x.IsDaytime);
+            builder.Property(x => x.UltraVioletIndex);
+            builder.Property(x => x.Humidity);
+            builder.Property(x => x.WindMph);
+            builder.Property(x => x.CloudCoverage);
+            builder.Property(x => x.WillItRain);
+            builder.Property(x => x.ChanceOfRain);
+            builder.Property(x => x.InchesOfPrecipitation);
+            builder.Property(x => x.Conditions);
+            builder.Property(x => x.ConditionsSummary);
 
-            builder.Property(weatherStatus => weatherStatus.WindMph);
-
-            builder.Property(weatherStatus => weatherStatus.Conditions);
+            base.ConfigureEntity(builder);
         }
     }
 }

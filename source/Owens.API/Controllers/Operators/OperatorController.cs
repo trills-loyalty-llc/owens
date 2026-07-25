@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using NMediation.Abstractions;
 using Owens.API.Common;
 using Owens.Application.Operators.AddOperator;
+using Owens.Application.Operators.GetAllOperators;
 
 namespace Owens.API.Controllers.Operators
 {
@@ -31,6 +32,18 @@ namespace Owens.API.Controllers.Operators
         public async Task<IActionResult> AddResortOperator(AddOperatorRequest request, CancellationToken cancellationToken = default)
         {
             return await ExecuteCreated(request, cancellationToken);
+        }
+
+        /// <summary>
+        /// Returns all available theme park operators.
+        /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        [HttpGet("", Name = "GetAllOperators")]
+        [ProducesResponseType<GetAllOperatorsResponse>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllOperators(CancellationToken cancellationToken = default)
+        {
+            return await ExecuteOkObject(new GetAllOperatorsRequest(), cancellationToken);
         }
     }
 }

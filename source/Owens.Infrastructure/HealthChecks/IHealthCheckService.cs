@@ -12,9 +12,8 @@ namespace Owens.Infrastructure.HealthChecks
         /// <summary>
         /// Gets the health check for the application.
         /// </summary>
-        /// <param name="request">A <see cref="HealthCheckRequest"/> object.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task<HealthCheckResponse> HealthCheckAsync(HealthCheckRequest request, CancellationToken cancellationToken = default);
+        Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default);
     }
 }

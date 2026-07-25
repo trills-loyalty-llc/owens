@@ -3,7 +3,6 @@
 // </copyright>
 
 using FactoryFoundation;
-using Owens.Application.Services.Weather.Models;
 using Owens.Application.ThemeParks.AddThemePark;
 using Owens.Domain.Common;
 using Owens.Domain.ThemeParks;
@@ -15,18 +14,14 @@ namespace Owens.Application.ThemeParks.Common
     /// </summary>
     public class ThemeParkFactory :
         ICanTranslate<AddThemeParkRequest, ValidationEnvelope<ThemePark>>,
-        ICanTranslate<ThemePark, AddThemeParkResponse>,
-        ICanTranslate<CurrentWeather, WeatherStatus>
+        ICanTranslate<ThemePark, AddThemeParkResponse>
     {
-        private readonly TimeProvider _timeProvider;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ThemeParkFactory"/> class.
         /// </summary>
         /// <param name="timeProvider">An instance of the <see cref="TimeProvider"/> class.</param>
         public ThemeParkFactory(TimeProvider timeProvider)
         {
-            _timeProvider = timeProvider;
         }
 
         /// <inheritdoc/>
@@ -42,12 +37,6 @@ namespace Owens.Application.ThemeParks.Common
         public AddThemeParkResponse TranslateTo(ThemePark initial)
         {
             return new AddThemeParkResponse(initial.Id);
-        }
-
-        /// <inheritdoc/>
-        public WeatherStatus TranslateTo(CurrentWeather initial)
-        {
-            return new WeatherStatus(_timeProvider.GetUtcNow(), initial.WindMph, initial.Conditions);
         }
     }
 }
