@@ -8,6 +8,7 @@ using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.Services.ThemeParks.Models;
 using Owens.Infrastructure.ServiceClients.Common;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
+using Owens.Infrastructure.ServiceClients.ThemeParks.Models.Scheduling;
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Clients
 {

@@ -2,7 +2,7 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
+namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models.Scheduling
 {
     /// <summary>
     /// Ticketing schedule from the external client.
@@ -33,5 +33,10 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Models
         /// Gets the closing time for the ticket schedule.
         /// </summary>
         public DateTimeOffset ClosingTime { get; init; }
+
+        /// <summary>
+        /// Gets the purchases for a park schedule.
+        /// </summary>
+        public IEnumerable<SchedulePurchasesResult> Purchases { get; init; } = Enumerable.Empty<SchedulePurchasesResult>();
     }
 }

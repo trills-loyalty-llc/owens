@@ -18,11 +18,13 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The park identifier.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
+        /// <param name="externalId">The external identifier of the theme park.</param>
         /// <param name="location">The location for the park.</param>
-        public ThemePark(Guid id, string description, Location location)
+        public ThemePark(Guid id, string description, int externalId, Location location)
             : base(id)
         {
             Description = description;
+            ExternalId = externalId;
             Location = location;
             WeatherStatus = new List<WeatherStatus>();
             Admissions = new List<Admission>();
@@ -34,10 +36,12 @@ namespace Owens.Domain.ThemeParks
         /// </summary>
         /// <param name="id">The identifier for the park.</param>
         /// <param name="description">An alphaNumeric description for the park.</param>
-        public ThemePark(Guid id, string description)
+        /// <param name="externalId">The external identifier of the theme park.</param>
+        public ThemePark(Guid id, string description, int externalId)
             : base(id)
         {
             Description = description;
+            ExternalId = externalId;
             Location = Location.Empty();
             WeatherStatus = new List<WeatherStatus>();
             Admissions = new List<Admission>();
@@ -48,6 +52,11 @@ namespace Owens.Domain.ThemeParks
         /// Gets the theme park description.
         /// </summary>
         public string Description { get; }
+
+        /// <summary>
+        /// Gets the external id. Used to identify with certain purchases.
+        /// </summary>
+        public int ExternalId { get; }
 
         /// <summary>
         /// Gets the location coordinates of the park.

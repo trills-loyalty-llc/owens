@@ -18,6 +18,8 @@ namespace Owens.Infrastructure.DataAccess.Attractions
 
             builder.Property(attraction => attraction.Description);
 
+            builder.Property(attraction => attraction.HeightRequirementInInches);
+
             builder.Property(attraction => attraction.AttractionType);
 
             builder.ComplexProperty(attraction => attraction.Location, propertyBuilder =>

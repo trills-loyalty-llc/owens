@@ -2,8 +2,6 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
-using Owens.Domain.ThemeParks;
-
 namespace Owens.Application.Services.ThemeParks.Models
 {
     /// <summary>
@@ -12,8 +10,13 @@ namespace Owens.Application.Services.ThemeParks.Models
     public class ParkSchedule
     {
         /// <summary>
+        /// Gets the time zone for the park schedule.
+        /// </summary>
+        public string TimeZone { get; init; } = string.Empty;
+
+        /// <summary>
         /// Gets all schedules for a theme park.
         /// </summary>
-        public IEnumerable<Admission> Schedules { get; init; } = Enumerable.Empty<Admission>();
+        public IEnumerable<ParkScheduleItem> Schedules { get; init; } = Enumerable.Empty<ParkScheduleItem>();
     }
 }

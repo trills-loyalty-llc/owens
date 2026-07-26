@@ -22,6 +22,7 @@ namespace Owens.Application.Attractions.Common
                 initial.AttractionId,
                 initial.ExternalId,
                 initial.Description,
+                0,
                 initial.AttractionType));
         }
 

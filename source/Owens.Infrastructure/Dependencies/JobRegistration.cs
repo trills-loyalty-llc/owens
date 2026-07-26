@@ -4,6 +4,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Owens.Infrastructure.Jobs;
+using Owens.Infrastructure.Jobs.Scheduling;
 using Quartz;
 using Quartz.AspNetCore;
 

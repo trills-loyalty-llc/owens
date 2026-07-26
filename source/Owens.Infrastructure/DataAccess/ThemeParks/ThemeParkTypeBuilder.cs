@@ -16,6 +16,8 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
         {
             builder.Property(themePark => themePark.Description);
 
+            builder.Property(themePark => themePark.ExternalId);
+
             builder.ComplexProperty(themePark => themePark.Location, propertyBuilder =>
             {
                 propertyBuilder.Property(location => location.Latitude);

@@ -17,6 +17,12 @@ namespace Owens.Application.ThemeParks.AddThemePark
         public string Description { get; init; } = string.Empty;
 
         /// <summary>
+        /// Gets the external identifier.
+        /// </summary>
+        [Required]
+        public int ExternalId { get; init; }
+
+        /// <summary>
         /// Gets the latitude.
         /// </summary>
         [Range(-90, 90)]

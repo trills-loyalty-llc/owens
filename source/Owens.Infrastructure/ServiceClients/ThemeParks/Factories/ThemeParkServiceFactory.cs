@@ -6,8 +6,8 @@ using FactoryFoundation;
 using Owens.Application.Services.ThemeParks.Models;
 using Owens.Domain.Attractions;
 using Owens.Domain.Common;
-using Owens.Domain.ThemeParks;
 using Owens.Infrastructure.ServiceClients.ThemeParks.Models;
+using Owens.Infrastructure.ServiceClients.ThemeParks.Models.Scheduling;
 using TimeSpan = System.TimeSpan;
 
 namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
@@ -52,12 +52,26 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
         {
             return new ParkSchedule
             {
-                Schedules = first.Schedule
-                    .Select(scheduleResult => new Admission(
-                        scheduleResult.OpeningTime,
-                        scheduleResult.ClosingTime,
-                        new Ticketing(string.Empty, 0m, TicketingType.Normal)))
-                    .ToList(),
+                TimeZone = first.TimeZone,
+                Schedules = first.Schedule.Select(scheduleResult =>
+                {
+                    return new ParkScheduleItem
+                    {
+                        OpeningTime = scheduleResult.OpeningTime,
+                        ClosingTime = scheduleResult.ClosingTime,
+                        Date = scheduleResult.Date,
+                        Description = scheduleResult.Description,
+                        Type = scheduleResult.Type,
+                        Purchases = scheduleResult.Purchases.Select(purchasesResult => new ParkSchedulePurchase
+                        {
+                            Available = purchasesResult.Available,
+                            Id = purchasesResult.Id,
+                            Name = purchasesResult.Name,
+                            Type = purchasesResult.Type,
+                            Price = purchasesResult.Price.Amount,
+                        }),
+                    };
+                }),
             };
         }
 
@@ -70,6 +84,7 @@ namespace Owens.Infrastructure.ServiceClients.ThemeParks.Factories
                     child.Id,
                     int.Parse(child.ExternalId.Split(';').First()),
                     child.Name,
+                    0,
                     AttractionType.Gentle)),
             };
         }

@@ -17,16 +17,18 @@ namespace Owens.Domain.Attractions
         /// </summary>
         /// <param name="externalId">The external identifier of the attraction.</param>
         /// <param name="description">The description for the attraction.</param>
+        /// <param name="heightRequirementInInches">The height requirement in inches.</param>
         /// <param name="attractionType">The type of the attraction.</param>
         /// <param name="location">The location of the attraction.</param>
         /// <param name="dateTimeRange">The lifecycle of the attraction.</param>
-        public Attraction(int externalId, string description, AttractionType attractionType, Location location, DateTimeRange dateTimeRange)
+        public Attraction(int externalId, string description, int heightRequirementInInches, AttractionType attractionType, Location location, DateTimeRange dateTimeRange)
         {
             ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
             Location = location;
             DateTimeRange = dateTimeRange;
+            HeightRequirementInInches = heightRequirementInInches;
             Status = new List<QueueStatus>();
         }
 
@@ -36,13 +38,15 @@ namespace Owens.Domain.Attractions
         /// <param name="id">The identifier of the root.</param>
         /// <param name="externalId">The external identifier of the attraction.</param>
         /// <param name="description">The description for the attraction.</param>
+        /// <param name="heightRequirementInInches">The height requirement in inches.</param>
         /// <param name="attractionType">The type of the attraction.</param>
-        public Attraction(Guid id, int externalId, string description, AttractionType attractionType)
+        public Attraction(Guid id, int externalId, string description, int heightRequirementInInches, AttractionType attractionType)
             : base(id)
         {
             ExternalId = externalId;
             Description = description;
             AttractionType = attractionType;
+            HeightRequirementInInches = heightRequirementInInches;
             Location = Location.Empty();
             DateTimeRange = DateTimeRange.Empty();
             Status = new List<QueueStatus>();
@@ -57,6 +61,11 @@ namespace Owens.Domain.Attractions
         /// Gets the attraction description.
         /// </summary>
         public string Description { get; }
+
+        /// <summary>
+        /// Gets the height requirement of the attraction in inches.
+        /// </summary>
+        public int HeightRequirementInInches { get; }
 
         /// <summary>
         /// Gets the type of the attraction.

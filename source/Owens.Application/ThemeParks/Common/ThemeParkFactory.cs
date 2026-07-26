@@ -30,6 +30,7 @@ namespace Owens.Application.ThemeParks.Common
             return FactoryHelpers.TryCreateValidate(() => new ThemePark(
                 Guid.NewGuid(),
                 initial.Description,
+                initial.ExternalId,
                 Location.FromMetadata(initial.Latitude, initial.Longitude)));
         }
 

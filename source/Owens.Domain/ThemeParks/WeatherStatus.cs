@@ -14,20 +14,20 @@ namespace Owens.Domain.ThemeParks
         /// <summary>
         /// Initializes a new instance of the <see cref="WeatherStatus"/> class.
         /// </summary>
-        /// <param name="timeStamp"></param>
-        /// <param name="temperatureFahrenheit"></param>
-        /// <param name="feelsLikeFahrenheit"></param>
-        /// <param name="heatIndexFahrenheit"></param>
-        /// <param name="isDaytime"></param>
-        /// <param name="ultraVioletIndex"></param>
-        /// <param name="humidity"></param>
-        /// <param name="windMph"></param>
-        /// <param name="cloudCoverage"></param>
-        /// <param name="willItRain"></param>
-        /// <param name="chanceOfRain"></param>
-        /// <param name="inchesOfPrecipitation"></param>
-        /// <param name="conditions"></param>
-        /// <param name="conditionsSummary"></param>
+        /// <param name="timeStamp">A timestamp for the weather status. Always in UTC.</param>
+        /// <param name="temperatureFahrenheit">The real temperature.</param>
+        /// <param name="feelsLikeFahrenheit">A human adjusted temperature.</param>
+        /// <param name="heatIndexFahrenheit">The temperature adjusted for humidity.</param>
+        /// <param name="isDaytime">Indicates if it is daylight.</param>
+        /// <param name="ultraVioletIndex">The current UV index.</param>
+        /// <param name="humidity">The humidity level.</param>
+        /// <param name="windMph">The current wind speed.</param>
+        /// <param name="cloudCoverage">A percentage of cloud coverage.</param>
+        /// <param name="willItRain">Indicates if rain in imminent.</param>
+        /// <param name="chanceOfRain">The percentage chance of rain.</param>
+        /// <param name="inchesOfPrecipitation">The daily rate of precipitation.</param>
+        /// <param name="conditions">The conditions code.</param>
+        /// <param name="conditionsSummary">A text summary of the current conditions.</param>
         public WeatherStatus(DateTimeOffset timeStamp, int temperatureFahrenheit, int feelsLikeFahrenheit, int heatIndexFahrenheit, bool isDaytime, double ultraVioletIndex, int humidity, double windMph, int cloudCoverage, bool willItRain, int chanceOfRain, double inchesOfPrecipitation, WeatherConditions conditions, string conditionsSummary)
         {
             TimeStamp = timeStamp;
@@ -50,20 +50,20 @@ namespace Owens.Domain.ThemeParks
         /// Initializes a new instance of the <see cref="WeatherStatus"/> class.
         /// </summary>
         /// <param name="id">The identifier for the entity.</param>
-        /// <param name="timeStamp"></param>
-        /// <param name="temperatureFahrenheit"></param>
-        /// <param name="feelsLikeFahrenheit"></param>
-        /// <param name="heatIndexFahrenheit"></param>
-        /// <param name="isDaytime"></param>
-        /// <param name="ultraVioletIndex"></param>
-        /// <param name="humidity"></param>
-        /// <param name="windMph"></param>
-        /// <param name="cloudCoverage"></param>
-        /// <param name="willItRain"></param>
-        /// <param name="chanceOfRain"></param>
-        /// <param name="inchesOfPrecipitation"></param>
-        /// <param name="conditions"></param>
-        /// <param name="conditionsSummary"></param>
+        /// <param name="timeStamp">A timestamp for the weather status. Always in UTC.</param>
+        /// <param name="temperatureFahrenheit">The real temperature.</param>
+        /// <param name="feelsLikeFahrenheit">A human adjusted temperature.</param>
+        /// <param name="heatIndexFahrenheit">The temperature adjusted for humidity.</param>
+        /// <param name="isDaytime">Indicates if it is daylight.</param>
+        /// <param name="ultraVioletIndex">The current UV index.</param>
+        /// <param name="humidity">The humidity level.</param>
+        /// <param name="windMph">The current wind speed.</param>
+        /// <param name="cloudCoverage">A percentage of cloud coverage.</param>
+        /// <param name="willItRain">Indicates if rain in imminent.</param>
+        /// <param name="chanceOfRain">The percentage chance of rain.</param>
+        /// <param name="inchesOfPrecipitation">The daily rate of precipitation.</param>
+        /// <param name="conditions">The conditions code.</param>
+        /// <param name="conditionsSummary">A text summary of the current conditions.</param>
         public WeatherStatus(Guid id, DateTimeOffset timeStamp, int temperatureFahrenheit, int feelsLikeFahrenheit, int heatIndexFahrenheit, bool isDaytime, double ultraVioletIndex, int humidity, double windMph, int cloudCoverage, bool willItRain, int chanceOfRain, double inchesOfPrecipitation, WeatherConditions conditions, string conditionsSummary)
             : base(id)
         {
