@@ -62,5 +62,14 @@ namespace Owens.Domain.ThemeParks
         {
             return new Ticketing(string.Empty, 0, TicketingType.Normal);
         }
+
+        /// <summary>
+        /// Returns a normal ticket with a zero price.
+        /// </summary>
+        /// <returns>A <see cref="Ticketing"/> instance with a zero price.</returns>
+        public static Ticketing NormalAwaitingPricing()
+        {
+            return new Ticketing("Standard", 0.0m, TicketingType.Normal);
+        }
     }
 }

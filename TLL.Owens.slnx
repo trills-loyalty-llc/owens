@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="source/Owens.API/Owens.API.csproj" />
   <Project Path="source/Owens.Application/Owens.Application.csproj" />
+  <Project Path="source/Owens.Contracts/Owens.Contracts.csproj" Id="38601f73-25ba-4536-90cc-1387f20abab9" />
   <Project Path="source/Owens.Domain/Owens.Domain.csproj" />
   <Project Path="source/Owens.Infrastructure/Owens.Infrastructure.csproj" />
   <Project Path="tests/Owens.Tests/Owens.Tests.csproj" />

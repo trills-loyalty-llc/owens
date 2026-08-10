@@ -2,8 +2,10 @@
 // Copyright (c) Trills Loyalty LLC. All rights reserved.
 // </copyright>
 
+using ChainStrategy;
 using Owens.Application.Services.ThemeParks.Interfaces;
 using Owens.Application.ThemeParks.Common;
+using Owens.Infrastructure.Jobs.Scheduling.Strategy;
 using Quartz;
 
 namespace Owens.Infrastructure.Jobs.Scheduling
@@ -16,19 +18,19 @@ namespace Owens.Infrastructure.Jobs.Scheduling
         /// </summary>
         public static readonly JobKey ParkScheduleJobKey = JobKey.Create("ParkScheduleJobKey");
 
-        private readonly TimeProvider _timeProvider;
+        private readonly IStrategyFactory _strategyFactory;
         private readonly IThemeParksService _themeParksService;
         private readonly IThemeParkRepository _themeParkRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParkScheduleJob"/> class.
         /// </summary>
-        /// <param name="timeProvider">An instance of the <see cref="TimeProvider"/> class.</param>
+        /// <param name="strategyFactory">An instance of the <see cref="IStrategyFactory"/> interface.</param>
         /// <param name="themeParksService">An instance of the <see cref="IThemeParksService"/> interface.</param>
         /// <param name="themeParkRepository">An instance of the <see cref="IThemeParkRepository"/> interface.</param>
-        public ParkScheduleJob(TimeProvider timeProvider, IThemeParksService themeParksService, IThemeParkRepository themeParkRepository)
+        public ParkScheduleJob(IStrategyFactory strategyFactory, IThemeParksService themeParksService, IThemeParkRepository themeParkRepository)
         {
-            _timeProvider = timeProvider;
+            _strategyFactory = strategyFactory;
             _themeParksService = themeParksService;
             _themeParkRepository = themeParkRepository;
         }
@@ -42,17 +44,18 @@ namespace Owens.Infrastructure.Jobs.Scheduling
             {
                 var schedule = await _themeParksService.GetThemeParkSchedule(themePark.Id, context.CancellationToken);
 
-                var today = _timeProvider.GetUtcNow().Date;
+                foreach (var ticketSchedule in schedule.Schedules)
+                {
+                    var scheduleExists = await _themeParkRepository.ScheduleExists(themePark.Id, ticketSchedule.Date);
 
-                var scheduleForToday = schedule.Schedules
-                    .Where(parkScheduleItem => parkScheduleItem.Date == DateOnly.FromDateTime(today))
-                    .ToList();
+                    if (!scheduleExists)
+                    {
+                        var admission = await _strategyFactory.Execute(SchedulingStrategyPayload.Instance(ticketSchedule));
 
-                // foreach (var ticketSchedule in schedule.Schedules)
-                // {
-                //    // Check for if schedule already exists.
-                //    themePark.AppendSchedule(ticketSchedule);
-                // }
+                        themePark.AppendSchedule(admission);
+                    }
+                }
+
                 await _themeParkRepository.UpdateObject(themePark, context.CancellationToken);
             }
         }

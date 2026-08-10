@@ -135,7 +135,12 @@ namespace Owens.Infrastructure.DataAccess.Common
             return 0;
         }
 
-        private async Task<List<TAggregateRoot>> ExecuteQuery(Func<IQueryable<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction)
+        /// <summary>
+        /// Performs a query against a persistence set.
+        /// </summary>
+        /// <param name="executionFunction">A Func that will yield a result set for a given root.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        protected async Task<List<TAggregateRoot>> ExecuteQuery(Func<IQueryable<TAggregateRoot>, Task<List<TAggregateRoot>>> executionFunction)
         {
             try
             {

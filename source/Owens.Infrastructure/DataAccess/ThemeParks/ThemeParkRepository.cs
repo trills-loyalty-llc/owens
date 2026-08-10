@@ -25,5 +25,17 @@ namespace Owens.Infrastructure.DataAccess.ThemeParks
             : base(applicationContext, mediation, IncludeFunc)
         {
         }
+
+        /// <inheritdoc/>
+        public async Task<bool> ScheduleExists(Guid id, DateOnly date)
+        {
+            return await Context.ThemeParks
+                .Where(themePark => themePark.Id == id)
+                .AnyAsync(themePark => themePark.Admissions
+                    .Any(admission =>
+                        admission.Opening.Month == date.Month &&
+                        admission.Opening.Year == date.Year &&
+                        admission.Opening.Day == date.Day));
+        }
     }
 }
